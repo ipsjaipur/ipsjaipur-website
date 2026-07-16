@@ -1,0 +1,7 @@
+/* ─── App CSS ─────────────────────────────────────────────────────────────────
+   Central CSS aggregator. Import all component stylesheets here.
+   This file is imported in layout.js.
+   ─────────────────────────────────────────────────────────────────────────── */
+/* slick-carousel styles loaded globally via layout.js <link> tags instead */
+
+@import '../styles/header.css';

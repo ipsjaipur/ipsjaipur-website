@@ -1,0 +1,14 @@
+﻿[
+  {
+    "id": 1,
+    "src": "/images/home/ips-banner.webp",
+    "alt": "IPS Business School - Main Campus Banner",
+    "priority": true
+  },
+  {
+    "id": 2,
+    "src": "/images/home/Ranked-banner.webp",
+    "alt": "IPS Business School - Ranked Among The Best",
+    "priority": false
+  }
+]

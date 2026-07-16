@@ -1,0 +1,25 @@
+# *
+User-agent: *
+Allow: /
+Allow: /blog/wp-admin/admin-ajax.php
+
+# *
+User-agent: *
+Disallow: /404
+Disallow: /events/
+Disallow: /thank-you
+Disallow: /privacy-policy
+Disallow: /terms-conditions
+Disallow: /api/
+Disallow: /api-proxy/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /dashboard/
+
+# Host
+Host: https://www.ipsedu.in
+
+# Sitemaps
+Sitemap: https://www.ipsedu.in/sitemap.xml
+Sitemap: https://www.ipsedu.in/blogs-sitemap.xml
+Sitemap: https://www.ipsedu.in/news-sitemap.xml
