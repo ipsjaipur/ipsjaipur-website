@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import { getMetaDetails } from "@/_services/seoService";
 import MainAntiRagging from "@/components/courses/anti-ragging/MainAntiRagging";
 

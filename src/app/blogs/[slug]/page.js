@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import BlogDetailPage from '@/components/blogs/BlogDetailPage';
 import { notFound } from 'next/navigation';
 import { getMetaDataDynamic } from '@/_services/seoService';
