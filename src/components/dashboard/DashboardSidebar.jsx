@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
@@ -74,6 +74,11 @@ function NavItem({ item, pathname, onClose }) {
 
   const [open, setOpen] = useState(groupActive);
 
+  // Close this group automatically when it becomes inactive (user navigates away)
+  useEffect(() => {
+    if (!groupActive) setOpen(false);
+  }, [groupActive]);
+
   if (item.disabled) {
     return (
       <li>
@@ -92,9 +97,7 @@ function NavItem({ item, pathname, onClose }) {
           onClick={() => setOpen((v) => !v)}
           className={cn(
             'w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-[13px] font-medium transition-all duration-150 cursor-pointer',
-            groupActive || open
-              ? 'bg-[#eb5905]/10 text-[#eb5905]'
-              : 'text-[#4a5568] hover:bg-[#f4f6f9] hover:text-[#222222]',
+            groupActive ? 'bg-[#eb5905]/10 text-[#eb5905]' : 'text-[#4a5568] hover:bg-[#f4f6f9] hover:text-[#222222]',
           )}
         >
           <item.icon className="w-4 h-4 shrink-0" />
