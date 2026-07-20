@@ -6,18 +6,22 @@ const achieversData = [
   {
     id: 1,
     image: 'images/home/Gold_1.webp',
+    name: 'IPS Gold Achiever',
   },
   {
     id: 2,
     image: 'images/home/ayushi_kabra.webp',
+    name: 'Ayushi Kabra - IPS Achiever',
   },
   {
     id: 3,
     image: 'images/home/ayushi-sharma.webp',
+    name: 'Ayushi Sharma - IPS Achiever',
   },
   {
     id: 4,
     image: 'images/home/pooja_mondal.webp',
+    name: 'Pooja Mondal - IPS Achiever',
   },
 ];
 
@@ -106,7 +110,7 @@ export default function OurAchievers() {
                 <div className="w-full h-full">
                   <img
                     src={`${process.env.NEXT_PUBLIC_IMG_PATH}${achiever.image}`}
-                    alt="IPS Achiever"
+                    alt={achiever.name}
                     className="w-full h-full object-cover object-top"
                     loading="lazy"
                   />

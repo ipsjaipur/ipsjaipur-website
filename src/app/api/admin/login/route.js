@@ -63,7 +63,7 @@ export async function POST(request) {
     // Update last login
     await Admin.findByIdAndUpdate(admin._id, { lastLogin: new Date() });
 
-    // Sign JWT
+    // Sign JWT - always expires in 24 hours (1 day)
     const token = signToken(
       {
         id: admin._id.toString(),
@@ -71,7 +71,7 @@ export async function POST(request) {
         name: admin.name,
         role: admin.role,
       },
-      rememberMe ? '30d' : '1d'
+      '24h' // Token expires in exactly 24 hours
     );
 
     // Build response
@@ -91,8 +91,8 @@ export async function POST(request) {
       { status: 200 }
     );
 
-    // Set HTTP-only cookie
-    setAuthCookie(response, token, rememberMe);
+    // Set HTTP-only cookie (expires in 24 hours)
+    setAuthCookie(response, token, false); // rememberMe removed - always 24h expiry
 
     return response;
   } catch (error) {

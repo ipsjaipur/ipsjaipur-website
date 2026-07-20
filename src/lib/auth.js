@@ -36,7 +36,7 @@ export async function comparePassword(password, hash) {
  * @param {string} [expiresIn] - e.g. '7d', '24h'
  * @returns {string} signed token
  */
-export function signToken(payload, expiresIn = '7d') {
+export function signToken(payload, expiresIn = '24h') {
   if (!JWT_SECRET) {
     throw new Error('JWT_SECRET environment variable is not defined');
   }
@@ -68,11 +68,9 @@ export function verifyToken(token) {
  * @param {boolean} rememberMe
  */
 export function setAuthCookie(response, token, rememberMe = false) {
-  // Always set maxAge so cookie survives redirects and page navigations.
-  // rememberMe = 30 days, otherwise 1 day session
-  const maxAge = rememberMe
-    ? 60 * 60 * 24 * 30  // 30 days
-    : 60 * 60 * 24;       // 1 day
+  // maxAge controls cookie expiration in browser
+  // Always 24 hours (1 day) - cookie expires after this duration regardless of rememberMe
+  const maxAge = 60 * 60 * 24;  // 24 hours = 1 day
 
   response.cookies.set(COOKIE_NAME, token, {
     httpOnly: true,

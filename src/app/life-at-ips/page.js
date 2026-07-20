@@ -1,20 +1,10 @@
-import { getMetaDataStatic } from "@/_services/seoService";
+import { getMetaDetails } from "@/_services/seoService";
 import LifeCampus from "@/components/lifeAtCampus/LifeCampus";
 
 export async function generateMetadata() {
-    return await getMetaDataStatic({
-        title: 'Top Ranked MBA & BBA and BCA College in Rajasthan | MBA & BBA Jaipur',
-        slug: 'life-at-ips',
-        description:
-            '',
-        keywords: '',
-    });
+    return await getMetaDetails('life-at-ips');
 }
 
 export default function LifeAtIps() {
-    return (
-        <>
-            <LifeCampus />
-        </>
-    );
+    return <LifeCampus />;
 }

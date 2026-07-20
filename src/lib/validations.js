@@ -64,6 +64,50 @@ export const postUpdateSchema = postSchema.partial().extend({
     .optional(),
 });
 
+// ─── Page SEO Validations ──────────────────────────────────────────────────────
+
+export const seoSchema = z.object({
+  pageName: z
+    .string()
+    .min(1, 'Page name is required')
+    .max(100, 'Page name cannot exceed 100 characters'),
+  pageSlug: z
+    .string()
+    .min(1, 'Page slug is required')
+    .max(200, 'Page slug cannot exceed 200 characters')
+    // Allow "/" for home, or "some-path/sub-path" style slugs
+    .regex(
+      /^(\/|[a-z0-9][a-z0-9\-/]*)$/,
+      'Slug must start with "/" (home) or a lowercase letter/digit and contain only lowercase letters, numbers, hyphens, and forward slashes',
+    ),
+  metaTitle: z
+    .string()
+    .min(1, 'Meta title is required')
+    .max(70, 'Meta title cannot exceed 70 characters'),
+  metaDescription: z
+    .string()
+    .min(1, 'Meta description is required')
+    .max(160, 'Meta description cannot exceed 160 characters'),
+  metaKeywords: z.string().optional().default(''),
+  canonicalUrl: z.string().optional().default(''),
+  ogImage: z.string().optional().default(''),
+  robots: z.string().optional().default('index, follow'),
+  isActive: z.boolean().optional().default(true),
+  notes: z.string().optional().default(''),
+});
+
+export const seoUpdateSchema = seoSchema.partial().extend({
+  pageSlug: z
+    .string()
+    .min(1, 'Page slug is required')
+    .max(200, 'Page slug cannot exceed 200 characters')
+    .regex(
+      /^(\/|[a-z0-9][a-z0-9\-/]*)$/,
+      'Slug must start with "/" (home) or a lowercase letter/digit and contain only lowercase letters, numbers, hyphens, and forward slashes',
+    )
+    .optional(),
+});
+
 // ─── Image Upload Validation ───────────────────────────────────────────────────
 
 const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];

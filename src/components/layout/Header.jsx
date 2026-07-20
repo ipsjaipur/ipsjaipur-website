@@ -241,7 +241,11 @@ export default function Header() {
                     </Link>
                   ))}
                   <Link href={applyButton.href} target="_blank" className="ml-2 lg:max-w-[120px] max-w-[90px]">
-                    <img src={process.env.NEXT_PUBLIC_IMG_PATH + 'images/ap-bt.png'} className="img-fluid" />
+                    <img
+                      src={process.env.NEXT_PUBLIC_IMG_PATH + 'images/ap-bt.png'}
+                      className="img-fluid"
+                      alt="Apply Now at IPS Business School"
+                    />
                   </Link>
                 </div>
               </div>

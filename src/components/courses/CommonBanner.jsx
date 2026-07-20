@@ -13,7 +13,7 @@ export default function CommonBanner({ pageTitle, normalFont, bgImageUrl, positi
       <div className="absolute inset-0">
         <MotionImage
           src={`${process.env.NEXT_PUBLIC_IMG_PATH}${bgImageUrl}`}
-          alt="Anti Ragging Policy - IPS Business School"
+          alt={`${pageTitle} - IPS Business School`}
           fill
           priority
           sizes="100vw"

@@ -2,7 +2,6 @@ import "./globals.css";
 import "./app.css";
 import { Rubik, Montserrat, Figtree } from 'next/font/google';
 import ClientLayout from "./ClientLayout";
-import GAScripts from "@/components/GAScripts";
 import Script from 'next/script';
 
 const rubik = Rubik({

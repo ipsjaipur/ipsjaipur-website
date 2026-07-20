@@ -60,7 +60,11 @@ export default function StudentLife() {
                   </div>
                   <div className="flex flex-col gap-4 md:gap-6">
                     <div className="flex flex-col gap-4 md:gap-6" id="life-at-campus">
-                      <img src="images/student-life/campus-image.webp" className="mx-auto" alt="" />
+                      <img
+                        src="images/student-life/campus-image.webp"
+                        className="mx-auto"
+                        alt="IPS Business School Campus Life"
+                      />
                       <p className="text-[14px] rubik-font font-normal md:text-[16px] text-[#505050] text-justify">
                         The Sports Club believes in keeping Fit the Fittest. The skill development of managing a team
                         and leading from the front can be best taught by engaging a student into a sports activity.
@@ -123,7 +127,11 @@ export default function StudentLife() {
                     </div>
                     <div className="flex flex-col gap-4 md:gap-6" id="sports-club">
                       <h4 className="text-[#111111] rubik-font font-medium text-[18px] md:text-[22px]">Sports Club:</h4>
-                      <img src="images/student-life/sports-club.webp" className="mx-auto px-2" alt="" />
+                      <img
+                        src="images/student-life/sports-club.webp"
+                        className="mx-auto px-2"
+                        alt="IPS Sports Club Activities"
+                      />
                       <p className="text-[14px] rubik-font font-normal md:text-[16px] text-[#505050] text-justify">
                         The Sports Club believes in keeping Fit the Fittest. The skill development of managing a team
                         and leading from the front can be best taught by engaging a student into a sports activity.
@@ -138,7 +146,11 @@ export default function StudentLife() {
                       <h4 className="text-[#111111] rubik-font font-medium text-[18px] md:text-[22px]">
                         Indoor Games:
                       </h4>
-                      <img src="images/student-life/gym-membership.webp" className="mx-auto px-2" alt="" />
+                      <img
+                        src="images/student-life/gym-membership.webp"
+                        className="mx-auto px-2"
+                        alt="IPS Indoor Games and Gym Facilities"
+                      />
                       <p className="text-[14px] rubik-font font-normal md:text-[16px] text-[#505050] text-justify">
                         To keep up the enthusiasm of the students and the environment of the campus full of life and
                         energy we have indoor gamesactivities which includeTable Tennis, Carom, Chess, Billiards and

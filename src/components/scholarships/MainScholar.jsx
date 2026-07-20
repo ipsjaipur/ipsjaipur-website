@@ -30,7 +30,7 @@ export default function MainScholar() {
             <div>
               <div className="border border-[#e9e9e9] bg-white rounded-lg p-6 md:mx-0 mx-[16px]">
                 <div className="text-[#505050] flex flex-col gap-4 md:gap-6">
-                  <img src="/images/scholarships/IPSSCHOOLARSHIP.webp" alt="" />
+                  <img src="/images/scholarships/IPSSCHOOLARSHIP.webp" alt="IPS Business School Scholarships" />
                   <p className="text-[14px] md:text-[16px] font-normal rubik-font text-justify">
                     * All sorts of Government Scholarships are admissible at IPS BUSINESS SCHOOL for SC, ST, OBC, SBC,
                     Minority (with BPL card). Fees reimbursed as per rules of Govt. of Rajasthan.

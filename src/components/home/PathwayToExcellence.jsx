@@ -185,7 +185,7 @@ export default function PathwayToExcellence() {
               >
                 <div className="flex flex-col items-center text-center gap-3">
                   <div className="p-3 rounded-lg w-[44px]" style={{ backgroundColor: `${card.color}15` }}>
-                    <img src={`${process.env.NEXT_PUBLIC_IMG_PATH}${card.icon}`} alt="" />
+                    <img src={`${process.env.NEXT_PUBLIC_IMG_PATH}${card.icon}`} alt={card.title} />
                   </div>
                   <h3 className="font-semibold text-[12px] leading-snug figtree-font text-[#eb5905]">{card.title}</h3>
                 </div>
@@ -214,7 +214,7 @@ export default function PathwayToExcellence() {
                   >
                     <div className="flex flex-col items-center text-center gap-3">
                       <div className="p-3 rounded-lg w-[65px]" style={{ backgroundColor: `${card.color}15` }}>
-                        <img src={`${process.env.NEXT_PUBLIC_IMG_PATH}${card.icon}`} alt="" />
+                        <img src={`${process.env.NEXT_PUBLIC_IMG_PATH}${card.icon}`} alt={card.title} />
                       </div>
                       <h3 className="font-semibold text-[13px] leading-snug figtree-font text-[#eb5905]">
                         {card.title}
@@ -234,7 +234,7 @@ export default function PathwayToExcellence() {
                   >
                     <div className="flex flex-col items-center text-center gap-3">
                       <div className="p-3 rounded-lg w-[65px]" style={{ backgroundColor: `${card.color}15` }}>
-                        <img src={`${process.env.NEXT_PUBLIC_IMG_PATH}${card.icon}`} alt="" />
+                        <img src={`${process.env.NEXT_PUBLIC_IMG_PATH}${card.icon}`} alt={card.title} />
                       </div>
                       <h3 className="font-semibold text-[13px] leading-snug figtree-font text-[#eb5905]">
                         {card.title}
@@ -281,7 +281,7 @@ export default function PathwayToExcellence() {
                   >
                     <div className="flex flex-col items-center text-center gap-3">
                       <div className="p-3 rounded-lg w-[65px]" style={{ backgroundColor: `${card.color}15` }}>
-                        <img src={`${process.env.NEXT_PUBLIC_IMG_PATH}${card.icon}`} alt="" />
+                        <img src={`${process.env.NEXT_PUBLIC_IMG_PATH}${card.icon}`} alt={card.title} />
                       </div>
                       <h3 className="font-semibold text-[13px] leading-snug figtree-font text-[#eb5905]">
                         {card.title}
@@ -301,7 +301,7 @@ export default function PathwayToExcellence() {
                   >
                     <div className="flex flex-col items-center text-center gap-3">
                       <div className="p-3 rounded-lg w-[65px]" style={{ backgroundColor: `${card.color}15` }}>
-                        <img src={`${process.env.NEXT_PUBLIC_IMG_PATH}${card.icon}`} alt="" />
+                        <img src={`${process.env.NEXT_PUBLIC_IMG_PATH}${card.icon}`} alt={card.title} />
                       </div>
                       <h3 className="font-semibold text-[13px] leading-snug figtree-font text-[#eb5905]">
                         {card.title}

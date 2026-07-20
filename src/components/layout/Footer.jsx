@@ -170,7 +170,7 @@ export default function Footer() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="absolute lg:-top-16 -top-10 lg:-left-16 -left-9 z-20"
           >
-            <img src="/images/home/cap-bg.webp" alt="" className="lg:w-40 w-[96px] select-none" />
+            <img src="/images/home/cap-bg.webp" alt="Graduation Cap" className="lg:w-40 w-[96px] select-none" />
           </motion.div>
 
           <motion.div

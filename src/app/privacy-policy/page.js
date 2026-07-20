@@ -1,28 +1,8 @@
-import { getMetaDataStatic } from "@/_services/seoService";
+import { getMetaDetails } from "@/_services/seoService";
 import ComingSoon from "@/components/common/ComingSoon";
 
-
 export async function generateMetadata() {
-  const metadata = await getMetaDataStatic({
-    title: "Privacy Policy - IPS Business School | Data Protection & Privacy",
-    description: "Learn about how IPS Business School collects, uses, and protects your personal information. Our privacy policy outlines our commitment to data security.",
-    meta_keywords: "privacy policy, data protection, ips privacy, student data security",
-    slug: "privacy-policy",
-  });
-
-  // Add noindex, nofollow for coming soon pages
-  return {
-    ...metadata,
-    robots: {
-      index: false,
-      follow: false,
-      nocache: true,
-      googleBot: {
-        index: false,
-        follow: false,
-      },
-    },
-  };
+  return await getMetaDetails('privacy-policy');
 }
 
 export default function PrivacyPolicyPage() {

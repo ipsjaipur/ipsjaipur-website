@@ -8,7 +8,7 @@ import {
   LayoutDashboard,
   FileText,
   Newspaper,
-  Settings,
+  Globe,
   LogOut,
   ChevronDown,
   ChevronRight,
@@ -29,6 +29,8 @@ const NAV_ITEMS = [
   {
     label: 'Blogs',
     icon: FileText,
+    // prefix used to decide if this section owns the current path
+    prefix: '/dashboard/blogs',
     children: [
       { label: 'All Blogs', href: '/dashboard/blogs', icon: List },
       { label: 'Create Blog', href: '/dashboard/blogs/create', icon: PlusCircle },
@@ -37,23 +39,40 @@ const NAV_ITEMS = [
   {
     label: 'Campus News',
     icon: Newspaper,
+    prefix: '/dashboard/news',
     children: [
       { label: 'All News', href: '/dashboard/news', icon: List },
       { label: 'Create News', href: '/dashboard/news/create', icon: PlusCircle },
     ],
   },
+  {
+    label: 'SEO',
+    icon: Globe,
+    prefix: '/dashboard/seo',
+    children: [
+      { label: 'All Pages', href: '/dashboard/seo', icon: List },
+      { label: 'Add Page SEO', href: '/dashboard/seo/new', icon: PlusCircle },
+    ],
+  },
 ];
 
 function NavItem({ item, pathname, onClose }) {
-  const isActive = item.exact
-    ? pathname === item.href
-    : item.href && (pathname === item.href || pathname.startsWith(item.href + '/'));
-
   const hasChildren = item.children?.length > 0;
-  const childActive =
-    hasChildren && item.children.some((c) => pathname === c.href || pathname.startsWith(c.href + '/'));
 
-  const [open, setOpen] = useState(childActive);
+  // ── For simple top-level links (Dashboard) ─────────────────────────────────
+  const isActive =
+    !hasChildren &&
+    (item.exact
+      ? pathname === item.href
+      : item.href && (pathname === item.href || pathname.startsWith(item.href + '/')));
+
+  // ── For grouped items — ONLY active when pathname starts with THIS group's prefix
+  // This is the key fix: each group only claims paths under its own prefix,
+  // so /dashboard/blogs/... never activates the Blogs AND News groups simultaneously.
+  const groupActive =
+    hasChildren && item.prefix ? pathname === item.prefix || pathname.startsWith(item.prefix + '/') : false;
+
+  const [open, setOpen] = useState(groupActive);
 
   if (item.disabled) {
     return (
@@ -61,11 +80,6 @@ function NavItem({ item, pathname, onClose }) {
         <span className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[13px] font-medium text-[#77838f]/60 cursor-not-allowed select-none">
           <item.icon className="w-4 h-4 shrink-0" />
           <span className="flex-1">{item.label}</span>
-          {item.badge && (
-            <span className="text-[10px] bg-[#ff9e3d]/20 text-[#ff9e3d] font-semibold px-1.5 py-0.5 rounded">
-              {item.badge}
-            </span>
-          )}
         </span>
       </li>
     );
@@ -78,7 +92,7 @@ function NavItem({ item, pathname, onClose }) {
           onClick={() => setOpen((v) => !v)}
           className={cn(
             'w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-[13px] font-medium transition-all duration-150 cursor-pointer',
-            childActive || open
+            groupActive || open
               ? 'bg-[#eb5905]/10 text-[#eb5905]'
               : 'text-[#4a5568] hover:bg-[#f4f6f9] hover:text-[#222222]',
           )}
@@ -87,17 +101,25 @@ function NavItem({ item, pathname, onClose }) {
           <span className="flex-1 text-left">{item.label}</span>
           {open ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
         </button>
+
         {open && (
           <ul className="mt-1 ml-4 pl-3 border-l border-[#e2e8f0] space-y-0.5">
             {item.children.map((child) => {
-              // Exact match always wins
-              const isExactMatch = pathname === child.href;
-              // For prefix match, only activate if no sibling has a more specific exact/prefix match
-              const siblingOwnsPath = item.children.some(
-                (sibling) =>
-                  sibling.href !== child.href && (pathname === sibling.href || pathname.startsWith(sibling.href + '/')),
+              // Within the group, figure out which child is active.
+              // "Create" child (/dashboard/blogs/create) wins on exact match.
+              // "All" child (/dashboard/blogs) wins for everything else under the prefix.
+              const isExact = pathname === child.href;
+
+              // A sibling with a longer/more-specific href owns the path if it matches
+              const siblingOwns = item.children.some(
+                (s) =>
+                  s.href !== child.href &&
+                  s.href.length > child.href.length &&
+                  (pathname === s.href || pathname.startsWith(s.href + '/')),
               );
-              const childIsActive = isExactMatch || (!siblingOwnsPath && pathname.startsWith(child.href + '/'));
+
+              const childIsActive = isExact || (!siblingOwns && pathname.startsWith(child.href + '/'));
+
               return (
                 <li key={child.href}>
                   <Link

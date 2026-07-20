@@ -13,13 +13,14 @@ export default function DashboardShell({ children }) {
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Verify auth ONCE on mount only
+  // Verify auth on mount AND whenever the tab becomes visible again
+  // (covers the case where the user leaves the tab open for days)
   useEffect(() => {
     async function verifyAuth() {
       try {
         const res = await fetch('/api/admin/me', {
           method: 'GET',
-          credentials: 'include', // ensure cookies are sent
+          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           cache: 'no-store',
         });
@@ -38,8 +39,19 @@ export default function DashboardShell({ children }) {
       }
     }
 
+    // Run immediately on mount
     verifyAuth();
-  }, []); // ← run only once on mount
+
+    // Re-run when tab becomes visible (user switches back to this tab)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        verifyAuth();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Close sidebar on route change (mobile)
   useEffect(() => {

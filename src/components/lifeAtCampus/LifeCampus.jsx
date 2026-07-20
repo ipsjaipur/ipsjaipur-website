@@ -186,7 +186,7 @@ export default function LifeCampus() {
                 >
                   {item.images.map((src, index) => (
                     <SwiperSlide key={index} className="relative w-full h-full">
-                      <img src={src} alt={`Zephyr Fest slide ${index + 1}`} />
+                      <img src={src} alt={`${item.title} - slide ${index + 1}`} />
                     </SwiperSlide>
                   ))}
                 </Swiper>

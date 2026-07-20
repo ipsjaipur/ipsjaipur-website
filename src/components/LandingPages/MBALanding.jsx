@@ -667,7 +667,11 @@ export default function MBALanding() {
               </h2>
             </ScrollReveal>
             <ScrollReveal variants={fadeIn}>
-              <img src={`${process.env.NEXT_PUBLIC_IMG_PATH}landing/single-imag.webp`} className="w-full" />
+              <img
+                src={`${process.env.NEXT_PUBLIC_IMG_PATH}landing/single-imag.webp`}
+                className="w-full"
+                alt="Life at IPS Business School Campus"
+              />
             </ScrollReveal>
           </div>
         </section>

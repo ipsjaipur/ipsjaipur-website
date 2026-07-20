@@ -10,7 +10,8 @@ import toast from 'react-hot-toast';
 export default function AdminLoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const from = searchParams.get('from') || '/dashboard';
+  const from = searchParams.get('redirect') || searchParams.get('from') || '/dashboard';
+  const sessionExpired = searchParams.get('session') === 'expired';
 
   const [formData, setFormData] = useState({
     email: '',
@@ -19,7 +20,7 @@ export default function AdminLoginPage() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(sessionExpired ? 'Your session has expired. Please log in again.' : '');
   const [fieldErrors, setFieldErrors] = useState({});
   const [checkingAuth, setCheckingAuth] = useState(true);
 
