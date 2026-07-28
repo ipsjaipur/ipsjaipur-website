@@ -17,7 +17,6 @@ const QUERY_BATCHES = [
     fullName: 'Master of Business Administration',
     color: '#eb5905',
     batches: [
-      { label: 'MBA 2027 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
       { label: 'MBA 2026 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
       { label: 'MBA 2025 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
       { label: 'MBA 2024 Batch', url: 'https://forms.gle/XeRm9q2AjNDjv9Aa6' },
@@ -29,7 +28,6 @@ const QUERY_BATCHES = [
     fullName: 'Bachelor of Business Administration',
     color: '#2a3e61',
     batches: [
-      { label: 'MBA 2027 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
       { label: 'BBA 2026 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
       { label: 'BBA 2025 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
       { label: 'BBA 2024 Batch', url: 'https://forms.gle/XeRm9q2AjNDjv9Aa6' },
@@ -41,7 +39,6 @@ const QUERY_BATCHES = [
     fullName: 'Bachelor of Computer Applications',
     color: '#ff7a1a',
     batches: [
-      { label: 'MBA 2027 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
       { label: 'BCA 2026 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
       { label: 'BCA 2025 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
       { label: 'BCA 2024 Batch', url: 'https://forms.gle/XeRm9q2AjNDjv9Aa6' },
