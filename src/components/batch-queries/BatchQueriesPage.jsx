@@ -59,7 +59,7 @@ export default function BatchQueriesPage() {
       <Breadcrumb pageName="Batch Queries" />
 
       {/* Main content */}
-      <main className="pt-12 pb-4 px-4 min-h-screen">
+      <main className="pt-12 pb-4 px-4">
         <section className="max-w-[1202px] mx-auto">
           {/* Section heading */}
           <div className="text-center mb-10">
