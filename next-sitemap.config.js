@@ -16,9 +16,10 @@ module.exports = {
     '/dashboard/*',
     '/_next/*',
     '/events/*',
-    '/thank-you',      // Form submission page - noindex
-    '/privacy-policy', // Coming soon page - noindex
+    '/thank-you',       // Form submission page - noindex
+    '/privacy-policy',  // Coming soon page - noindex
     '/terms-conditions', // Coming soon page - noindex
+    '/batch-queries',   // Internal query page - noindex
   ],
 
   robotsTxtOptions: {
@@ -32,9 +33,10 @@ module.exports = {
         disallow: [
           '/404',
           '/events/',
-          '/thank-you',      // Form submission page
-          '/privacy-policy', // Coming soon page
+          '/thank-you',       // Form submission page
+          '/privacy-policy',  // Coming soon page
           '/terms-conditions', // Coming soon page
+          '/batch-queries',   // Internal query page
           '/api/',
           '/api-proxy/',
           '/_next/',
@@ -60,7 +62,8 @@ module.exports = {
       path.includes('/dashboard/') ||
       path === '/faq' ||
       path === '/blogs' ||
-      path === '/campus-news'
+      path === '/campus-news' ||
+      path === '/batch-queries'
     ) {
       return null;
     }
