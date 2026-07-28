@@ -19,7 +19,7 @@ const QUERY_BATCHES = [
     batches: [
       { label: 'MBA 2026 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
       { label: 'MBA 2025 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
-      { label: 'MBA 2024 Batch', url: 'https://forms.gle/XeRm9q2AjNDjv9Aa6' },
+      { label: 'MBA 2024 Batch', url: 'https://forms.gle/7C6ZEjxmReys4X6WA' },
     ],
     oldBatch: { label: 'MBA Previous Batches', url: 'https://forms.gle/XeRm9q2AjNDjv9Aa6' },
   },
@@ -30,7 +30,7 @@ const QUERY_BATCHES = [
     batches: [
       { label: 'BBA 2026 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
       { label: 'BBA 2025 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
-      { label: 'BBA 2024 Batch', url: 'https://forms.gle/XeRm9q2AjNDjv9Aa6' },
+      { label: 'BBA 2024 Batch', url: 'https://forms.gle/7C6ZEjxmReys4X6WA' },
     ],
     oldBatch: { label: 'BBA Previous Batches', url: 'https://forms.gle/XeRm9q2AjNDjv9Aa6' },
   },
@@ -41,7 +41,7 @@ const QUERY_BATCHES = [
     batches: [
       { label: 'BCA 2026 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
       { label: 'BCA 2025 Batch', url: 'https://forms.gle/Umr2kdm7K9EgJ8wM8' },
-      { label: 'BCA 2024 Batch', url: 'https://forms.gle/XeRm9q2AjNDjv9Aa6' },
+      { label: 'BCA 2024 Batch', url: 'https://forms.gle/7C6ZEjxmReys4X6WA' },
     ],
     oldBatch: { label: 'BCA Previous Batches', url: 'https://forms.gle/XeRm9q2AjNDjv9Aa6' },
   },
