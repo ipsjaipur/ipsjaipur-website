@@ -45,6 +45,9 @@ export function signToken(payload, expiresIn = '24h') {
 
 /**
  * Verify a JWT token
+ * Also enforces a hard 24-hour max-age check on the token's `iat` claim.
+ * This prevents old/stale cookies (set before expiry was properly enforced)
+ * from remaining valid indefinitely.
  * @param {string} token
  * @returns {object|null} decoded payload or null
  */
@@ -53,7 +56,19 @@ export function verifyToken(token) {
     throw new Error('JWT_SECRET environment variable is not defined');
   }
   try {
-    return jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
+
+    // Hard enforce 24-hour expiry based on `iat` (issued-at) claim.
+    // This catches old cookies that were set without a maxAge or with a longer
+    // maxAge before the 24h policy was in place.
+    const MAX_TOKEN_AGE_SECONDS = 60 * 60 * 24; // 24 hours
+    const nowSeconds = Math.floor(Date.now() / 1000);
+
+    if (decoded.iat && nowSeconds - decoded.iat > MAX_TOKEN_AGE_SECONDS) {
+      return null; // Token is older than 24 hours — reject it
+    }
+
+    return decoded;
   } catch {
     return null;
   }

@@ -13,8 +13,8 @@ export default function DashboardShell({ children }) {
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Verify auth on mount AND whenever the tab becomes visible again
-  // (covers the case where the user leaves the tab open for days)
+  // Verify auth on mount, visibility change, AND periodically every hour
+  // This ensures auto-logout even if user keeps tab open for days
   useEffect(() => {
     async function verifyAuth() {
       try {
@@ -50,7 +50,17 @@ export default function DashboardShell({ children }) {
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+
+    // 🔥 NEW: Check auth every 1 hour (3600000 ms) automatically
+    // This ensures token expiry is enforced even if tab stays open for days
+    const intervalId = setInterval(() => {
+      verifyAuth();
+    }, 3600000); // 1 hour = 60 * 60 * 1000 ms
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      clearInterval(intervalId);
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Close sidebar on route change (mobile)
