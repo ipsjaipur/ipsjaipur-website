@@ -1,8 +1,18 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
-import { Search, ChevronLeft, ChevronRight, Calendar, User, Clock, Tag } from 'lucide-react';
+import {
+  Search,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+  Calendar,
+  User,
+  Clock,
+  Tag,
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import CommonBanner from '@/components/courses/CommonBanner';
@@ -94,6 +104,7 @@ export default function BlogsListPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [debouncedSearch, setDebouncedSearch] = useState('');
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     const t = setTimeout(() => setDebouncedSearch(search), 400);
@@ -103,6 +114,16 @@ export default function BlogsListPage() {
   useEffect(() => {
     setPage(1);
   }, [debouncedSearch]);
+
+  // Scroll to the blogs section top on page change (skip on initial load)
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [page]);
 
   const fetchBlogs = useCallback(async () => {
     setLoading(true);
@@ -129,7 +150,7 @@ export default function BlogsListPage() {
     <>
       <CommonBanner pageTitle="Our Blogs" bgImageUrl="images/about/about-us.webp" position="object-center" />
 
-      <section className="py-12 px-4 min-h-[60vh]">
+      <section ref={sectionRef} className="py-12 px-4 min-h-[60vh]">
         <div className="max-w-[1202px] mx-auto">
           {/* Section header */}
           <div className="text-center mb-10">
@@ -188,33 +209,70 @@ export default function BlogsListPage() {
 
           {/* Pagination */}
           {pagination.totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-10">
+            <div className="flex items-center justify-center gap-1.5 mt-10 flex-wrap">
+              {/* Jump to first */}
+              <button
+                onClick={() => setPage(1)}
+                disabled={page === 1}
+                title="First page"
+                className="p-2 rounded-lg border border-[#e2e8f0] bg-white text-[#77838f] hover:bg-[#f4f6f9] transition disabled:opacity-40"
+              >
+                <ChevronsLeft className="w-4 h-4" />
+              </button>
+
+              {/* Prev */}
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
+                title="Previous page"
                 className="p-2 rounded-lg border border-[#e2e8f0] bg-white text-[#77838f] hover:bg-[#f4f6f9] transition disabled:opacity-40"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((p) => (
-                <button
-                  key={p}
-                  onClick={() => setPage(p)}
-                  className={`w-9 h-9 rounded-lg text-[13px] font-medium transition ${
-                    page === p
-                      ? 'bg-[#eb5905] text-white shadow-sm'
-                      : 'border border-[#e2e8f0] bg-white text-[#77838f] hover:bg-[#f4f6f9]'
-                  }`}
-                >
-                  {p}
-                </button>
-              ))}
+
+              {/* Windowed page numbers — max 5 visible */}
+              {(() => {
+                const total = pagination.totalPages;
+                const window = 5;
+                let start = Math.max(1, page - Math.floor(window / 2));
+                let end = start + window - 1;
+                if (end > total) {
+                  end = total;
+                  start = Math.max(1, end - window + 1);
+                }
+                return Array.from({ length: end - start + 1 }, (_, i) => start + i).map((p) => (
+                  <button
+                    key={p}
+                    onClick={() => setPage(p)}
+                    className={`w-9 h-9 rounded-lg text-[13px] font-medium transition ${
+                      page === p
+                        ? 'bg-[#eb5905] text-white shadow-sm'
+                        : 'border border-[#e2e8f0] cursor-pointer bg-white text-[#77838f] hover:bg-[#f4f6f9]'
+                    }`}
+                  >
+                    {p}
+                  </button>
+                ));
+              })()}
+
+              {/* Next */}
               <button
                 onClick={() => setPage((p) => Math.min(pagination.totalPages, p + 1))}
                 disabled={page === pagination.totalPages}
+                title="Next page"
                 className="p-2 rounded-lg border border-[#e2e8f0] bg-white text-[#77838f] hover:bg-[#f4f6f9] transition disabled:opacity-40"
               >
                 <ChevronRight className="w-4 h-4" />
+              </button>
+
+              {/* Jump to last */}
+              <button
+                onClick={() => setPage(pagination.totalPages)}
+                disabled={page === pagination.totalPages}
+                title="Last page"
+                className="p-2 rounded-lg border border-[#e2e8f0] bg-white text-[#77838f] hover:bg-[#f4f6f9] transition disabled:opacity-40"
+              >
+                <ChevronsRight className="w-4 h-4" />
               </button>
             </div>
           )}
