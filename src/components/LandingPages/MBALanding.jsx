@@ -284,7 +284,7 @@ export default function MBALanding() {
       {/* NoPaperForms widget script */}
       <Script src="https://widgets.in8.nopaperforms.com/emwgts.js" strategy="afterInteractive" />
 
-      <div className="min-h-screen flex flex-col font-archivo">
+      <div className="min-h-screen flex flex-col font-archivo overflow-hidden">
         {/* ───────────────── HEADER ───────────────── */}
         <header className="bg-white shadow-md z-50">
           <div className="max-w-[1240px] mx-auto px-4 py-3 flex items-center justify-between gap-4">
@@ -302,7 +302,7 @@ export default function MBALanding() {
 
             {/* Badges — AICTE + RTU */}
             <div className="flex justify-between gap-20">
-              <div className="flex items-center gap-6">
+              <div className="flex items-center lg:gap-6 gap-2">
                 {/* AICTE badge */}
                 <div className="flex items-center gap-2">
                   {/* Replace src with actual AICTE logo path */}
@@ -312,7 +312,7 @@ export default function MBALanding() {
                       alt="AICTE Approved"
                       width={118}
                       height={48}
-                      className="object-contain min-w-[90px]"
+                      className="object-contain min-w-[70px] lg:min-w-[90px]"
                     />
                   </div>
                 </div>
@@ -325,7 +325,7 @@ export default function MBALanding() {
                       alt="Affiliated with RTU"
                       width={118}
                       height={48}
-                      className="object-contain  min-w-[90px]"
+                      className="object-contain  min-w-[70px] lg:min-w-[90px]"
                     />
                   </div>
                 </div>
@@ -930,7 +930,7 @@ export default function MBALanding() {
         </footer>
       </div>
 
-      {/* ───────────────── STICKY APPLY BAR (mobile only) ───────────────── */}
+      {/* ───────────────── APPLY NOW STRIP (mobile only) ───────────────── */}
       <div
         className={`
           fixed bottom-0 left-0 right-0 z-50
@@ -949,6 +949,60 @@ export default function MBALanding() {
         >
           Apply Now
         </button>
+      </div>
+
+      {/* ───────────────── FLOATING CIRCLE BUTTONS (mobile only) ───────────────── */}
+      <div
+        className={`
+          fixed right-4 z-50 sm:hidden
+          flex flex-col gap-3
+          transition-all duration-500 ease-in-out
+          ${showStickyBar ? 'bottom-20' : 'bottom-6'}
+        `}
+      >
+        {/* Call circle */}
+        <a
+          href="tel:+918233970000"
+          aria-label="Call us"
+          className="w-13 h-13 rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform"
+          style={{ background: 'linear-gradient(135deg, #FE8C00 0%, #F83600 100%)', width: '52px', height: '52px' }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-6 h-6 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3 5a2 2 0 012-2h1.5a1 1 0 01.98.804l.74 3.698a1 1 0 01-.27.958l-1.2 1.2a16.016 16.016 0 006.6 6.6l1.2-1.2a1 1 0 01.958-.27l3.698.74A1 1 0 0121 17.5V19a2 2 0 01-2 2h-1C9.163 21 3 14.837 3 7V5z"
+            />
+          </svg>
+        </a>
+
+        {/* WhatsApp circle */}
+        <a
+          href="https://wa.me/919829016449"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp us"
+          className="w-13 h-13 rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform"
+          style={{ backgroundColor: '#25D366', width: '52px', height: '52px' }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-6 h-6 text-white"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M20.52 3.48A11.93 11.93 0 0012 0C5.37 0 0 5.37 0 12c0 2.12.55 4.17 1.6 5.99L0 24l6.18-1.62A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52zM12 22c-1.85 0-3.65-.5-5.22-1.44l-.37-.22-3.87 1.02 1.04-3.77-.24-.39A9.93 9.93 0 012 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm5.44-7.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.03 9.03 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.91-2.2-.24-.58-.48-.5-.67-.51H6.9c-.2 0-.52.07-.79.37-.27.3-1.03 1.01-1.03 2.46s1.06 2.85 1.2 3.05c.15.2 2.08 3.18 5.04 4.46.7.3 1.25.48 1.68.62.7.22 1.34.19 1.84.12.56-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.19-.57-.34z" />
+          </svg>
+        </a>
       </div>
     </>
   );
