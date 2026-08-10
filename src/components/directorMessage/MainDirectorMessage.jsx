@@ -10,7 +10,7 @@ export default function MainDirectorMessage() {
     <>
       <CommonBanner
         pageTitle="Director's Message"
-        bgImageUrl="images/about/about-us-image-3.webp"
+        bgImageUrl="images/about/director-message-img-2.webp"
         position="object-center"
       />
       <Breadcrumb pageName="Director's Message" />
