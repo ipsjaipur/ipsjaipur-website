@@ -951,13 +951,13 @@ export default function MBALanding() {
         </button>
       </div>
 
-      {/* ───────────────── FLOATING CIRCLE BUTTONS (mobile only) ───────────────── */}
+      {/* ───────────────── FLOATING CIRCLE BUTTONS ───────────────── */}
       <div
         className={`
-          fixed right-4 z-50 sm:hidden
+          fixed right-4 z-50
           flex flex-col gap-3
           transition-all duration-500 ease-in-out
-          ${showStickyBar ? 'bottom-20' : 'bottom-6'}
+          ${showStickyBar ? 'bottom-20 sm:bottom-6' : 'bottom-6'}
         `}
       >
         {/* Call circle */}
