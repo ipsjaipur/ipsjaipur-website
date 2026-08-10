@@ -68,7 +68,12 @@ const nextConfig = {
         permanent: true,
         statusCode: 301,
       },
-
+      {
+        source: '/director-message.php',
+        destination: '/director-message',
+        permanent: true,
+        statusCode: 301,
+      },
       // Course pages
       {
         source: '/mba.php',

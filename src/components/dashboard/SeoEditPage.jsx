@@ -53,6 +53,34 @@ function SerpPreview({ title, description, slug }) {
   );
 }
 
+// Field component
+function Field({ label, name, required, hint, children, errors, form }) {
+  return (
+    <div className="space-y-1">
+      <div className="flex items-center justify-between">
+        <label className="text-[13px] font-semibold text-[#222222]">
+          {label}
+          {required && <span className="text-red-500 ml-0.5">*</span>}
+        </label>
+        {FIELD_LIMITS[name] && <CharCount value={form[name]} max={FIELD_LIMITS[name]} />}
+      </div>
+      {children}
+      {hint && !errors[name] && (
+        <p className="text-[11px] text-[#77838f] flex items-start gap-1">
+          <Info className="w-3 h-3 shrink-0 mt-0.5" />
+          {hint}
+        </p>
+      )}
+      {errors[name] && (
+        <p className="text-[11px] text-red-500 flex items-start gap-1">
+          <AlertCircle className="w-3 h-3 shrink-0 mt-0.5" />
+          {errors[name][0]}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export default function SeoEditPage({ id }) {
   const router = useRouter();
   const isNew = !id;
@@ -174,32 +202,6 @@ export default function SeoEditPage({ id }) {
     );
   }
 
-  // ── Field component ───────────────────────────────────────────────────────
-  const Field = ({ label, name, required, hint, children }) => (
-    <div className="space-y-1">
-      <div className="flex items-center justify-between">
-        <label className="text-[13px] font-semibold text-[#222222]">
-          {label}
-          {required && <span className="text-red-500 ml-0.5">*</span>}
-        </label>
-        {FIELD_LIMITS[name] && <CharCount value={form[name]} max={FIELD_LIMITS[name]} />}
-      </div>
-      {children}
-      {hint && !errors[name] && (
-        <p className="text-[11px] text-[#77838f] flex items-start gap-1">
-          <Info className="w-3 h-3 shrink-0 mt-0.5" />
-          {hint}
-        </p>
-      )}
-      {errors[name] && (
-        <p className="text-[11px] text-red-500 flex items-start gap-1">
-          <AlertCircle className="w-3 h-3 shrink-0 mt-0.5" />
-          {errors[name][0]}
-        </p>
-      )}
-    </div>
-  );
-
   const inputCls = (name) =>
     cn(
       'w-full px-3 py-2 rounded-lg border text-[13px] text-[#222222] bg-white placeholder:text-[#bbb] focus:outline-none focus:ring-2 transition',
@@ -246,6 +248,8 @@ export default function SeoEditPage({ id }) {
                   name="pageName"
                   required
                   hint="Human-readable label shown in admin (e.g. About Us)"
+                  form={form}
+                  errors={errors}
                 >
                   <input
                     type="text"
@@ -261,6 +265,8 @@ export default function SeoEditPage({ id }) {
                   name="pageSlug"
                   required
                   hint='Use "/" for home, or "about", "mba/overview" etc.'
+                  form={form}
+                  errors={errors}
                 >
                   <input
                     type="text"
@@ -284,6 +290,8 @@ export default function SeoEditPage({ id }) {
                 name="metaTitle"
                 required
                 hint="Ideal length 50–60 characters. Shown as the clickable blue link in Google."
+                form={form}
+                errors={errors}
               >
                 <input
                   type="text"
@@ -299,6 +307,8 @@ export default function SeoEditPage({ id }) {
                 name="metaDescription"
                 required
                 hint="Ideal length 120–158 characters. Shown as the snippet below the title in Google."
+                form={form}
+                errors={errors}
               >
                 <textarea
                   value={form.metaDescription}
@@ -313,6 +323,8 @@ export default function SeoEditPage({ id }) {
                 label="Meta Keywords"
                 name="metaKeywords"
                 hint="Comma-separated. Minor ranking signal but helpful for internal categorisation."
+                form={form}
+                errors={errors}
               >
                 <input
                   type="text"
@@ -334,6 +346,8 @@ export default function SeoEditPage({ id }) {
                 label="Canonical URL"
                 name="canonicalUrl"
                 hint="Leave blank to auto-derive from site URL + slug. Override only when needed."
+                form={form}
+                errors={errors}
               >
                 <input
                   type="url"
@@ -348,6 +362,8 @@ export default function SeoEditPage({ id }) {
                 label="OG Image URL"
                 name="ogImage"
                 hint="Open Graph image shown when the page is shared on social media. Recommended: 1200×630px."
+                form={form}
+                errors={errors}
               >
                 <input
                   type="url"
@@ -358,7 +374,13 @@ export default function SeoEditPage({ id }) {
                 />
               </Field>
 
-              <Field label="Robots" name="robots" hint="Controls how search engines crawl and index this page.">
+              <Field
+                label="Robots"
+                name="robots"
+                hint="Controls how search engines crawl and index this page."
+                form={form}
+                errors={errors}
+              >
                 <select value={form.robots} onChange={set('robots')} className={inputCls('robots')}>
                   {ROBOTS_OPTIONS.map((opt) => (
                     <option key={opt} value={opt}>
@@ -368,7 +390,13 @@ export default function SeoEditPage({ id }) {
                 </select>
               </Field>
 
-              <Field label="Admin Notes" name="notes" hint="Internal notes — not rendered on the page.">
+              <Field
+                label="Admin Notes"
+                name="notes"
+                hint="Internal notes — not rendered on the page."
+                form={form}
+                errors={errors}
+              >
                 <textarea
                   value={form.notes}
                   onChange={set('notes')}
