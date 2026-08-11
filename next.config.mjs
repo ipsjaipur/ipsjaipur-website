@@ -74,6 +74,18 @@ const nextConfig = {
         permanent: true,
         statusCode: 301,
       },
+      {
+        source: '/ips-sutra.php',
+        destination: '/ips-sutra',
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: '/mission-vision.php',
+        destination: '/mission-vision',
+        permanent: true,
+        statusCode: 301,
+      },
       // Course pages
       {
         source: '/mba.php',

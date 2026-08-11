@@ -80,6 +80,8 @@ module.exports = {
     } else if (
       path.includes('/about') ||
       path.includes('/director-message') ||
+      path.includes('/ips-sutra') ||
+      path.includes('/mission-vision') ||
       path.includes('/placements')
     ) {
       priority = 0.8;
@@ -108,6 +110,8 @@ module.exports = {
       { path: '/', priority: 1.0, changefreq: 'daily' },
       { path: '/about', priority: 0.8, changefreq: 'monthly' },
       { path: '/director-message', priority: 0.8, changefreq: 'monthly' },
+      { path: '/ips-sutra', priority: 0.8, changefreq: 'monthly' },
+      { path: '/mission-vision', priority: 0.8, changefreq: 'monthly' },
       { path: '/mba', priority: 0.9, changefreq: 'weekly' },
       { path: '/bba', priority: 0.9, changefreq: 'weekly' },
       { path: '/bca', priority: 0.9, changefreq: 'weekly' },

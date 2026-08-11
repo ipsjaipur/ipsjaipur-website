@@ -10,6 +10,7 @@ Disallow: /events/
 Disallow: /thank-you
 Disallow: /privacy-policy
 Disallow: /terms-conditions
+Disallow: /batch-queries
 Disallow: /api/
 Disallow: /api-proxy/
 Disallow: /_next/
