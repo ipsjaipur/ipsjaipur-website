@@ -68,7 +68,7 @@ export default function IpsSutraContentSection() {
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
           {/* Left Side - Content */}
-          <motion.div className="lg:col-span-7 order-2 lg:order-1" variants={slideInLeftVariants}>
+          <motion.div className="lg:col-span-7" variants={slideInLeftVariants}>
             <div className="flex flex-col gap-4">
               {/* Main Heading with Background Text */}
               <motion.div variants={fadeInUpVariants} className="relative">
@@ -121,7 +121,7 @@ export default function IpsSutraContentSection() {
           </motion.div>
 
           {/* Right Side - Image */}
-          <motion.div className="lg:col-span-5 order-1 lg:order-2" variants={slideInRightVariants}>
+          <motion.div className="lg:col-span-5" variants={slideInRightVariants}>
             <div className="relative w-full max-w-[550px] mx-auto lg:mx-0 lg:ml-auto md:p-0 p-2">
               {/* Animated Gradient Glow Background */}
               <motion.div
