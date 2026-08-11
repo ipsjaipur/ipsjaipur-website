@@ -11,7 +11,7 @@ export default function MainBoardOfAdvisors() {
       <CommonBanner
         pageTitle="Board of Advisors"
         bgImageUrl="images/about/board-of-advisor-img.webp"
-        position="object-bottom"
+        position="object-center"
       />
       <Breadcrumb pageName="Board of Advisors" />
       <BoardOfAdvisorsSection />
