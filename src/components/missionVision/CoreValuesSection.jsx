@@ -136,7 +136,7 @@ export default function CoreValuesSection() {
               <motion.div key={value.id} variants={cardVariants} className="group">
                 <motion.div
                   className={`relative h-full bg-gradient-to-br ${value.bgGradient} backdrop-blur-sm border-2 ${value.borderColor} ${value.hoverBorder} rounded-2xl p-6 md:p-8 transition-all duration-500 overflow-hidden`}
-                  whileHover={{ y: -8, scale: 1.02 }}
+                  whileHover={{ y: -4 }}
                   transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   {/* Content */}
