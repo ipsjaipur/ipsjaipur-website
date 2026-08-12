@@ -63,7 +63,7 @@ export default function MbaFeatures() {
   return (
     <section
       aria-label="MBA Features"
-      className="relative overflow-hidden py-[50px] md:py-[70px] lg:py-[90px] px-[16px] bg-gradient-to-b from-white to-gray-50"
+      className="relative overflow-hidden py-[50px] md:py-[70px] lg:py-[90px] px-[16px]"
     >
       <div className="relative w-full max-w-330 mx-auto">
         <motion.div
@@ -78,7 +78,7 @@ export default function MbaFeatures() {
               key={feature.id}
               variants={cardVariants}
               whileHover={{
-                y: -8,
+                y: -4,
                 transition: { duration: 0.3, ease: 'easeOut' },
               }}
               className="group relative"
@@ -97,7 +97,7 @@ export default function MbaFeatures() {
                 <div className="relative z-10 p-8 md:p-10 flex flex-col items-center text-center gap-5 md:gap-6">
                   {/* Icon Container with Enhanced Design */}
                   <motion.div transition={{ duration: 0.6, ease: 'easeInOut' }} className="relative">
-                    <div className="p-5 bg-white md:p-6 rounded-2xl w-[85px] h-[85px] md:w-[95px] md:h-[95px] flex items-center justify-center shadow-md border border-gray-100 backdrop-blur-sm transition-all duration-300 group-hover:shadow-xl">
+                    <div className="p-5 bg-white md:p-6 rounded-2xl w-[85px] h-[85px] md:w-[95px] md:h-[95px] flex items-center justify-center shadow-md border border-gray-100 backdrop-blur-sm transition-all duration-300 ">
                       <feature.icon
                         className="w-[45px] h-[45px] md:w-[50px] md:h-[50px]"
                         style={{ color: feature.color }}

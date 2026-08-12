@@ -82,6 +82,8 @@ module.exports = {
       path.includes('/director-message') ||
       path.includes('/ips-sutra') ||
       path.includes('/mission-vision') ||
+      path.includes('/board-of-advisors') ||
+      path.includes('/mba-vs-pgdm') ||
       path.includes('/placements')
     ) {
       priority = 0.8;
@@ -112,9 +114,11 @@ module.exports = {
       { path: '/director-message', priority: 0.8, changefreq: 'monthly' },
       { path: '/ips-sutra', priority: 0.8, changefreq: 'monthly' },
       { path: '/mission-vision', priority: 0.8, changefreq: 'monthly' },
+      { path: '/board-of-advisors', priority: 0.8, changefreq: 'monthly' },
       { path: '/mba', priority: 0.9, changefreq: 'weekly' },
       { path: '/bba', priority: 0.9, changefreq: 'weekly' },
       { path: '/bca', priority: 0.9, changefreq: 'weekly' },
+      { path: '/mba-vs-pgdm', priority: 0.8, changefreq: 'monthly' },
       { path: '/placements', priority: 0.8, changefreq: 'weekly' },
       { path: '/contact', priority: 0.6, changefreq: 'monthly' },
       { path: '/career-ips-business-school', priority: 0.7, changefreq: 'weekly' },

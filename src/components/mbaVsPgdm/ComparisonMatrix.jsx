@@ -98,7 +98,7 @@ export default function ComparisonMatrix() {
         </motion.div>
 
         {/* Desktop Table View */}
-        <motion.div variants={fadeInUpVariants} className="overflow-hidden rounded-2xl shadow-xl">
+        <motion.div variants={fadeInUpVariants} className="overflow-hidden rounded-2xl shadow-md">
           <div className="overflow-x-auto">
             <table className="w-full bg-white border-collapse">
               <thead>
