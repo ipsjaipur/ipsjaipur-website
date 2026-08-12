@@ -168,7 +168,10 @@ export default function IpsAdvantagesSection() {
             Apply Now
           </motion.a>
         </motion.div>
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5" variants={containerVariants}>
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5"
+          variants={containerVariants}
+        >
           {advantages.map((advantage, index) => {
             const IconComponent = advantage.icon;
             return (
