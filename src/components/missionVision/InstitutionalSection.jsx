@@ -100,7 +100,7 @@ export default function InstitutionalSection() {
 
               {/* Content Paragraphs with Card Design */}
               <motion.div className="md:space-y-8 space-y-4" variants={fadeInUpVariants}>
-                <div className="bg-gradient-to-r from-orange-50/50 to-white transition-all duration-300">
+                <div className="transition-all duration-300">
                   <p className="text-[14px] md:text-[18px] text-gray-700 leading-[1.8] rubik-fonts">
                     As one of Rajasthan's leading Business Schools, IPS BUSINESS SCHOOL brings together people, cultures
                     and ideas to change lives and to transform organizations. A global perspective and cultural
@@ -108,7 +108,7 @@ export default function InstitutionalSection() {
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-r from-blue-50/50 to-white transition-all duration-300">
+                <div className="transition-all duration-300">
                   <p className="text-[14px] md:text-[18px] text-gray-700 leading-[1.8] rubik-fonts">
                     For over 18 years, IPS has been at the forefront of Management Education, developing and inspiring
                     business leaders who strive to make a deep, positive and lasting impact on the people, companies,

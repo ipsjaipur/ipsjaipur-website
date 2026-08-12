@@ -49,7 +49,7 @@ export const mainNav = [
       { label: 'Director Message', href: '/director-message' },
       { label: 'Mission & Vision', href: '/mission-vision' },
       { label: 'Board of Advisors', href: '/board-of-advisors' },
-      { label: 'IPS Sutra', href: '/ips-sutra' },
+      { label: 'आईपीएस सूत्र', href: '/ips-sutra' },
       { label: 'Faculty', href: '/faculty' },
       { label: 'Infrastructure', href: '/infrastructure' },
       { label: 'Student Life', href: '/student-life' },

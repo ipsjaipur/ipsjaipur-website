@@ -10,12 +10,12 @@ export default function MainIpsSutra() {
   return (
     <>
       <CommonBanner
-        pageTitle="IPS Sutra"
+        pageTitle="आईपीएस सूत्र"
         bgImageUrl="images/about/ips-sutra-banner-img-2.webp"
         position="object-center"
       />
       {/* <ApprovalsAffiliations /> */}
-      <Breadcrumb pageName="IPS Sutra" />
+      <Breadcrumb pageName="आईपीएस सूत्र" />
       <IpsSutraContentSection />
       <IpsAdvantagesSection />
     </>
