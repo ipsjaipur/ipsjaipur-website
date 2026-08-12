@@ -55,7 +55,7 @@ export default function InstitutionalSection() {
   return (
     <section className="px-[16px] lg:py-[84px] py-[40px] bg-gradient-to-br from-white via-orange-50/20 to-blue-50/20 relative overflow-hidden">
       <motion.div
-        className="w-full max-w-[1320px] mx-auto"
+        className="w-full max-w-330 mx-auto"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}

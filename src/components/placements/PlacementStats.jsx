@@ -83,7 +83,7 @@ export default function PlacementStats() {
   return (
     <section className="relative px-[16px] overflow-hidden pb-[64px]">
       <motion.div
-        className="relative w-full max-w-[1320px] mx-auto"
+        className="relative w-full max-w-330 mx-auto"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}

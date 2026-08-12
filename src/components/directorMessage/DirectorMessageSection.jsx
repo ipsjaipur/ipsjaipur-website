@@ -30,7 +30,7 @@ export default function DirectorMessageSection() {
   return (
     <section className="px-[16px] lg:py-[84px] py-[40px]">
       <motion.div
-        className="w-full max-w-[1320px] mx-auto"
+        className="w-full max-w-330 mx-auto"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}

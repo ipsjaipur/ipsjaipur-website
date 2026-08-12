@@ -100,7 +100,7 @@ export default function CoreValuesSection() {
     <section className="relative px-[16px] py-[60px] lg:py-[100px]  overflow-hidden">
       {/* Decorative Background Elements */}
       <motion.div
-        className="w-full max-w-[1320px] mx-auto"
+        className="w-full max-w-330 mx-auto"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}

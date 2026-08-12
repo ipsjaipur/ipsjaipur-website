@@ -90,7 +90,7 @@ export default function ResumeBook() {
     <>
       <section className="py-[64px] px-[16px] bg-[#f1f183]">
         <motion.div
-          className="w-full max-w-[1320px] mx-auto"
+          className="w-full max-w-330 mx-auto"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}

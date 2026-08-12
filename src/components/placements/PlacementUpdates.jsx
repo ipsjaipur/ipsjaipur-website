@@ -208,7 +208,7 @@ export default function PlacementUpdates() {
 
   return (
     <section className="px-[16px] py-[64px] bg-linear-to-b from-white to-gray-50">
-      <motion.div className="w-full max-w-[1320px] mx-auto relative ">
+      <motion.div className="w-full max-w-330 mx-auto relative ">
         {/* Section Title */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}

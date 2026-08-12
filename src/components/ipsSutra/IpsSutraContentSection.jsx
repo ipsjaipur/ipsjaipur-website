@@ -60,7 +60,7 @@ export default function IpsSutraContentSection() {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-blue-100/20 to-transparent rounded-full blur-3xl -z-10"></div>
 
       <motion.div
-        className="w-full max-w-[1320px] mx-auto"
+        className="w-full max-w-330 mx-auto"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}

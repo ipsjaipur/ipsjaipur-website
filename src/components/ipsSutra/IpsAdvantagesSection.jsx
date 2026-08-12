@@ -137,7 +137,7 @@ export default function IpsAdvantagesSection() {
   return (
     <section className="px-[16px] lg:py-[84px] py-[40px] bg-gradient-to-br from-slate-50 via-white to-orange-50/30 relative overflow-hidden">
       <motion.div
-        className="w-full max-w-[1320px] mx-auto"
+        className="w-full max-w-330 mx-auto"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}

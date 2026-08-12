@@ -163,7 +163,7 @@ export default function LifeCampus() {
           position="object-center"
         />
         <Breadcrumb pageName="Life@ips" />
-        <div className="flex flex-col gap-8 md:gap-12 justify-center py-6 md:py-12 px-6 max-w-[1320px] mx-auto w-full ">
+        <div className="flex flex-col gap-8 md:gap-12 justify-center py-6 md:py-12 px-6 max-w-330 mx-auto w-full ">
           {sectionsData.map((item, index) => (
             <div key={index} className="grid grid-cols md:grid-cols-2 items-center gap-8 lg:gap-14">
               <div

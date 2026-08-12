@@ -77,7 +77,7 @@ export default function ExcellenceNarrativeSection() {
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-to-br from-orange-100/20 via-transparent to-transparent rounded-full blur-3xl -z-10"></div>
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-to-tl from-blue-100/20 via-transparent to-transparent rounded-full blur-3xl -z-10"></div>
       <motion.div
-        className="w-full max-w-[1320px] mx-auto"
+        className="w-full max-w-330 mx-auto"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}

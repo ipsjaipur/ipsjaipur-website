@@ -63,7 +63,7 @@ export default function StrategicExcellence() {
   return (
     <section className="px-[16px] py-[40px] lg:py-[64px] bg-gradient-to-b from-gray-50 to-white">
       <motion.div
-        className="w-full max-w-[1320px] mx-auto"
+        className="w-full max-w-330 mx-auto"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
