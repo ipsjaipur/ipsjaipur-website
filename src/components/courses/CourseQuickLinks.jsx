@@ -12,32 +12,6 @@ export default function CourseQuickLinks({ videoUrls = [] }) {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [activeVideoUrl, setActiveVideoUrl] = useState('');
 
-  // Listen for form submission from nopaperforms
-  React.useEffect(() => {
-    const handleFormSubmit = (event) => {
-      // Check if the event is from nopaperforms iframe
-      if (event.data && typeof event.data === 'string') {
-        try {
-          const data = JSON.parse(event.data);
-          // Detect successful form submission
-          if (data.type === 'npf_form_submit' || data.event === 'form_submit' || data.status === 'success') {
-            // Redirect to thank you page
-            window.location.href = '/thank-you';
-          }
-        } catch (e) {
-          // Ignore parsing errors
-        }
-      }
-      // Alternative: Check for specific messages from the form
-      if (event.data === 'npf_form_submitted' || event.data === 'form_submitted') {
-        window.location.href = '/thank-you';
-      }
-    };
-
-    window.addEventListener('message', handleFormSubmit);
-    return () => window.removeEventListener('message', handleFormSubmit);
-  }, []);
-
   const openVideoPopup = (url) => {
     const autoplayUrl = url.includes('?') ? `${url}&autoplay=1` : `${url}?autoplay=1`;
     setActiveVideoUrl(autoplayUrl);

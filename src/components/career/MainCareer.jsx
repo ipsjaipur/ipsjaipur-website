@@ -16,31 +16,6 @@ export default function MainCareer() {
     },
   ];
 
-  React.useEffect(() => {
-    const handleFormSubmit = (event) => {
-      // Check if the event is from nopaperforms iframe
-      if (event.data && typeof event.data === 'string') {
-        try {
-          const data = JSON.parse(event.data);
-          // Detect successful form submission
-          if (data.type === 'npf_form_submit' || data.event === 'form_submit' || data.status === 'success') {
-            // Redirect to thank you page
-            window.location.href = '/thank-you';
-          }
-        } catch (e) {
-          // Ignore parsing errors
-        }
-      }
-      // Alternative: Check for specific messages from the form
-      if (event.data === 'npf_form_submitted' || event.data === 'form_submitted') {
-        window.location.href = '/thank-you';
-      }
-    };
-
-    window.addEventListener('message', handleFormSubmit);
-    return () => window.removeEventListener('message', handleFormSubmit);
-  }, []);
-
   return (
     <>
       <div className="flex flex-col gap-2 justify-center">
