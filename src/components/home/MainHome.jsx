@@ -13,7 +13,6 @@ import ApplyNow from './ApplyNow';
 import CampusNews from './CampusNews';
 
 export default function MainHome({ placementsNews = [], ipsNews = [], blogs = [] }) {
-  console.log('blogs', blogs);
   return (
     <>
       <HomeBanner />

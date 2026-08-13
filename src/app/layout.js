@@ -61,6 +61,21 @@ export default function RootLayout({ children }) {
           />
         </noscript>
         {/* End Google Tag Manager (noscript) */}
+
+        {/* NPF Dynamic Tracking Code - Lead Source Attribution */}
+        <Script id="npf-tracking" strategy="afterInteractive">
+          {`
+            var npf_d='https://admissions.ipsedu.in';
+            var npf_c='5578';
+            var npf_m='1';
+            var s=document.createElement("script");
+            s.type="text/javascript";
+            s.async=true;
+            s.src="https://track.nopaperforms.com/js/track.js";
+            document.body.appendChild(s);
+          `}
+        </Script>
+        {/* End NPF Tracking Code */}
         <ClientLayout>
           {children}
         </ClientLayout>
