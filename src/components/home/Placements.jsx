@@ -230,8 +230,11 @@ export default function Placements() {
           </motion.div>
 
           {/* Stats Section */}
-          <motion.div className="grid grid-cols-3 sm:grid-cols-3 gap-4 w-full lg:w-auto" variants={fadeInRightVariants}>
-            <motion.div className="bg-white rounded-xl px-2 sm:px-6 py-4 min-w-[120px] sm:min-w-[150px] text-center shadow-lg">
+          <motion.div
+            className="grid grid-cols-3 sm:grid-cols-3 sm:gap-4 gap-2 w-full lg:w-auto"
+            variants={fadeInRightVariants}
+          >
+            <motion.div className="bg-white rounded-xl px-2 sm:px-6 py-4 min-w-[100px] sm:min-w-[150px] text-center shadow-lg">
               <div className="text-[#FF6B00] text-[18px] sm:text-[32px] font-extrabold figtree-font leading-none">
                 26 LPA+
               </div>
@@ -239,7 +242,7 @@ export default function Placements() {
                 Highest Package Offered
               </div>
             </motion.div>
-            <motion.div className="bg-white rounded-xl px-2 sm:px-6 py-4 min-w-[120px] sm:min-w-[150px] text-center shadow-lg">
+            <motion.div className="bg-white rounded-xl px-2 sm:px-6 py-4 min-w-[100px] sm:min-w-[150px] text-center shadow-lg">
               <div className="text-[#FF6B00] text-[18px] sm:text-[32px] font-extrabold figtree-font leading-none">
                 5.5 LPA+
               </div>
@@ -247,7 +250,7 @@ export default function Placements() {
                 Average Package Offered
               </div>
             </motion.div>
-            <motion.div className="bg-white rounded-xl px-2 sm:px-6 py-4 min-w-[120px] sm:min-w-[150px] text-center shadow-lg">
+            <motion.div className="bg-white rounded-xl px-2 sm:px-6 py-4 min-w-[100px] sm:min-w-[150px] text-center shadow-lg">
               <div className="text-[#FF6B00] text-[18px] sm:text-[32px] font-extrabold figtree-font leading-none">
                 100+
               </div>

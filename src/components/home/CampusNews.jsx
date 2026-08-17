@@ -210,10 +210,10 @@ export default function CampusNews({ placementsNews = [], ipsNews = [], blogs = 
                   <Link
                     key={news._id || news.id}
                     href={newsLink}
-                    className="rounded-xl overflow-hidden hover:shadow-lg transition-shadow group bg-white border border-gray-200 flex flex-col flex-1"
+                    className="rounded-xl overflow-hidden hover:shadow-lg md:max-h-[180px] h-full transition-shadow group bg-white border border-gray-200 flex flex-col flex-1"
                   >
                     {imageUrl && (
-                      <div className="relative w-full flex-1 min-h-[120px]">
+                      <div className="relative w-full flex-1 min-h-[190px] md:min-h-[120px]">
                         {isStatic ? (
                           <img
                             src={imageUrl}

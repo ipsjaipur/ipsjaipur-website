@@ -68,16 +68,13 @@ export default function NewsDetailPage({ news, related = [] }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-
       <CommonBanner
         pageTitle={news.title}
         normalFont
         bgImageUrl="images/about/about-us.webp"
         position="object-center"
       />
-
       <Breadcrumb pageName={news.title} detailPage={[{ slug: 'campus-news', title: 'Campus News' }]} />
-
       <article className="py-10 px-4 min-h-screen">
         <div className="max-w-[1202px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -90,7 +87,7 @@ export default function NewsDetailPage({ news, related = [] }) {
                 className="bg-white rounded-2xl overflow-hidden shadow-sm border border-[#e2e8f0]"
               >
                 {news.featuredImage?.url && (
-                  <div className="relative w-full h-full lg:max-h-[434px] overflow-hidden">
+                  <div className="relative w-full h-full lg:max-h-[484px] overflow-hidden">
                     <img
                       src={heroImage(news.featuredImage.url)}
                       alt={news.featuredImage.alt || news.title}

@@ -149,7 +149,7 @@ export default function CampusNewsListPage() {
               <button
                 key={cat.value}
                 onClick={() => setActiveCategory(cat.value)}
-                className={`px-4 py-2 rounded-full text-[13px] font-semibold transition-all duration-200 cursor-pointer ${
+                className={`sm:px-4 px-3 py-2 rounded-full text-[12px] sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer ${
                   activeCategory === cat.value
                     ? 'bg-[#2a3e61] text-white shadow-md'
                     : 'bg-white text-[#2a3e61] border border-[#2a3e61]/30 hover:bg-[#2a3e61]/10'
