@@ -191,7 +191,7 @@ export default function Header() {
                     href={'https://admissions.ipsedu.in/'}
                     className="sm:text-[16px] text-[14px] px-[190px] font-montserrat text-ips-orange"
                   >
-                    Admissions Open for MBA | BBA | BCA 2026 - 27
+                    Admissions closing soon for MBA | BBA | BCA 2026 - 27
                   </Link>
                 </Marquee>
               </div>
