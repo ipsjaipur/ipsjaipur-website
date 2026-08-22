@@ -961,7 +961,7 @@ export default function MBALanding() {
         `}
       >
         {/* Call circle */}
-        <a
+        {/* <a
           href="tel:+918233970000"
           aria-label="Call us"
           className="w-13 h-13 rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform"
@@ -982,7 +982,7 @@ export default function MBALanding() {
               d="M3 5a2 2 0 012-2h1.5a1 1 0 01.98.804l.74 3.698a1 1 0 01-.27.958l-1.2 1.2a16.016 16.016 0 006.6 6.6l1.2-1.2a1 1 0 01.958-.27l3.698.74A1 1 0 0121 17.5V19a2 2 0 01-2 2h-1C9.163 21 3 14.837 3 7V5z"
             />
           </svg>
-        </a>
+        </a> */}
 
         {/* WhatsApp circle */}
         <a
