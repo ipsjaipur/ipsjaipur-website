@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 const SLIDES = [
   {
     id: 1,
-    src: `images/home/ips-banner.webp`,
+    src: `images/home/ips-home-img-2.webp`,
     alt: 'IPS Business School - Main Campus Banner',
     priority: true,
   },
