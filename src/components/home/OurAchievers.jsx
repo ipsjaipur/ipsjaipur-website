@@ -51,7 +51,7 @@ export default function OurAchievers() {
             transition={{ duration: 0.3, ease: 'easeOut' }}
             className="absolute left-[50%] lg:top-[-90%] top-[-30%] translate-x-[-50%] font-bold leading-tight figtree-font mb-4 text-[64px] lg:text-[156px]"
           >
-            <span className="text-white/10 font-extrabold block">ACHIEVERS</span>
+            <span className="text-white/10 font-extrabold block">ACHIEVER</span>
           </motion.p>
 
           {/* Main Title */}
