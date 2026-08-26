@@ -34,12 +34,24 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.ipsedu.in',
       },
+
     ],
   },
 
   // Redirects from old PHP pages to new pages
   async redirects() {
     return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'ipsedu.in',
+          },
+        ],
+        destination: 'https://www.ipsedu.in/:path*',
+        permanent: true,
+      },
       // About pages
       {
         source: '/about.php',
