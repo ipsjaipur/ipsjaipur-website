@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import Breadcrumb from '@/components/common/Breadcrumb';
 import CommonBanner from '@/components/courses/CommonBanner';
 import { heroImage, thumbImage } from '@/_utils/cloudinaryImage';
-import parse from 'html-react-parser';
+import parse, { domToReact } from 'html-react-parser';
 
 // ─── Query Batches Data ───────────────────────────────────────────────────────
 // To add a new batch (e.g. 27), just push a new object into the batches array.
@@ -90,7 +90,21 @@ export default function BlogDetailPage({ blog, related = [] }) {
     window.open(links[platform], '_blank', 'width=600,height=400');
   };
 
-  // JSON-LD Article schema
+  // Parser options: wrap tables in a scrollable div and strip inline min-width
+  const parseOptions = {
+    replace(domNode) {
+      if (domNode.name === 'table') {
+        // Strip style entirely — CSS handles sizing; spreading a string style crashes React
+        const { style: _style, ...safeAttribs } = domNode.attribs || {};
+        return (
+          <div className="blog-table-wrap">
+            <table {...safeAttribs}>{domToReact(domNode.children, parseOptions)}</table>
+          </div>
+        );
+      }
+    },
+  };
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -190,7 +204,9 @@ export default function BlogDetailPage({ blog, related = [] }) {
                   )}
 
                   {/* Content */}
-                  <div className="blog-content prose prose-sm max-w-none">{parse(blog.content || '')}</div>
+                  <div className="blog-content prose prose-sm max-w-none">
+                    {parse(blog.content || '', parseOptions)}
+                  </div>
 
                   {/* Tags */}
                   {blog.tags?.length > 0 && (
@@ -433,6 +449,10 @@ export default function BlogDetailPage({ blog, related = [] }) {
 
       {/* Content styles */}
       <style jsx global>{`
+        .blog-content,
+        p {
+          text-align: unset !important;
+        }
         .blog-content h1 {
           font-size: 1.75rem;
           font-weight: 700;
@@ -505,6 +525,7 @@ export default function BlogDetailPage({ blog, related = [] }) {
           width: 100%;
           border-collapse: collapse;
           margin: 1rem 0;
+          min-width: unset !important;
         }
         .blog-content th,
         .blog-content td {
@@ -517,6 +538,19 @@ export default function BlogDetailPage({ blog, related = [] }) {
           background: #f4f6f9;
           font-weight: 600;
           color: #222;
+        }
+        /* Responsive table wrapper — injected via JS below */
+        .blog-table-wrap {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          margin: 1rem 0;
+          border-radius: 6px;
+        }
+        .blog-table-wrap table {
+          margin: 0;
+        }
+        .blog-table-wrap td {
+          min-width: 190px;
         }
         .blog-content hr {
           border: none;
