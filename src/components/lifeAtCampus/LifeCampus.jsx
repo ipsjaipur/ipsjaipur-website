@@ -9,7 +9,7 @@ import CommonBanner from '../courses/CommonBanner';
 export default function LifeCampus() {
   const sectionsData = [
     {
-      title: 'ZEPHYR Hosted by IPS COLLEGEss',
+      title: 'ZEPHYR Hosted by IPS COLLEGE',
       images: [
         '/images/life-at-ips/1.webp',
         '/images/life-at-ips/2.webp',
