@@ -38,6 +38,47 @@ const nextConfig = {
     ],
   },
 
+  // Security headers to improve Best Practices score
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          // Prevent MIME type sniffing
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          // Clickjacking protection — allows same origin iframes only
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          // Stop sending referrer to cross-origin sites
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          // Force HTTPS for 1 year (safe since site is already on HTTPS)
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains',
+          },
+          // Cross-Origin Opener Policy — isolates browsing context
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin-allow-popups',
+          },
+          // Permissions Policy — disable unused browser features
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(self), interest-cohort=()',
+          },
+        ],
+      },
+    ];
+  },
+
   // Redirects from old PHP pages to new pages
   async redirects() {
     return [
