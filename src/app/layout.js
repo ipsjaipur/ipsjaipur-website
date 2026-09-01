@@ -62,6 +62,21 @@ export default function RootLayout({ children }) {
         </noscript>
         {/* End Google Tag Manager (noscript) */}
 
+        {/* Google Analytics 4 */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-S21HMSXXW9"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-S21HMSXXW9');
+          `}
+        </Script>
+        {/* End Google Analytics 4 */}
+
         {/* NPF Dynamic Tracking Code - Lead Source Attribution */}
         <Script id="npf-tracking" strategy="afterInteractive">
           {`
