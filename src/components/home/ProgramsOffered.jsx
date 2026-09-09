@@ -3,89 +3,101 @@ import { Clock, User, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
 
-export default function ProgramsOffered() {
+// ── Static fallback ────────────────────────────────────────────────────────────
+const FALLBACK_PROGRAMS = [
+  {
+    id: 1,
+    badge: 'MBA',
+    title: 'MBA Dual Major Specialization',
+    image: 'images/home/mba.webp',
+    description:
+      'MBA at IPS Business College empowers future leaders with industry-focused learning, Practical exposure, and strong placement support',
+    hoverTitle: 'MBA Dual Major Specialization',
+    features: [
+      'Master of Business Administration (MBA) Degree with Dual Specialization.',
+      "Realtime Corporate Experience through Regular OJT's (On Job Training) & Live Projects.",
+      'Additional AI/Business Analytics Course.',
+      'Additional Digital Marketing Course.',
+      '3 Months International, Trainings & Exchange Program (Sponsored / Optional)*.',
+      'Best Placements.',
+    ],
+    approvals: [
+      { name: 'AICTE', logo: 'images/home/aicte.webp' },
+      { name: 'RTU', logo: 'images/home/rtu.webp' },
+    ],
+    duration: '2 years',
+    eligibility: 'Check Eligibility',
+    buttonText: 'Read More',
+    link: '/mba',
+  },
+  {
+    id: 2,
+    badge: 'BBA',
+    title: 'Bachelor of Business Administration',
+    image: 'images/home/bba.webp',
+    description:
+      'BBA at IPS Business College builds strong business foundations with practical exposure and industry-oriented learning.',
+    hoverTitle: 'Bachelor of Business Administration',
+    features: [
+      "Bachelor of Business Administration (BBA) Degree with Work Experience (with Regular On Job Training's - OJT's).",
+      'Additional AI/Business Analytics Course.',
+      'Additional Digital Marketing Course.',
+      'Advanced Excel Course.',
+      'Industry Specialized Certifications*.',
+      'Best Placements.',
+      '3 Months International, Trainings & Exchange Program (Sponsored / Optional)*.',
+    ],
+    approvals: [
+      { name: 'AICTE', logo: 'images/home/aicte.webp' },
+      { name: 'RTU', logo: 'images/home/rtu.webp' },
+    ],
+    duration: '3 years',
+    eligibility: 'Check Eligibility',
+    buttonText: 'Read More',
+    link: '/bba',
+  },
+  {
+    id: 3,
+    badge: 'BCA',
+    title: 'Bachelor of Computer Applications',
+    image: 'images/home/bca.webp',
+    description:
+      'BCA at IPS Business College equips students with cutting-edge IT skills, programming expertise, and real-world project experience',
+    hoverTitle: 'Bachelor of Computer Applications',
+    features: [
+      'Bachelor of Computer Application (BCA) Degree with Work Experience (with Regular On Job Training - OJT).',
+      'Additional AI/Data Analytics Course.',
+      'Additional Digital Marketing Course.',
+      'Additional Cyber Security Course.',
+      'Additional Cloud Computing Course.',
+      'Live Industry Projects*.',
+      'Best Placements.',
+      '3 Months International, Trainings & Exchange Program (Sponsored / Optional)*.',
+    ],
+    approvals: [
+      { name: 'AICTE', logo: 'images/home/aicte.webp' },
+      { name: 'RTU', logo: 'images/home/rtu.webp' },
+    ],
+    duration: '3 years',
+    eligibility: 'Check Eligibility',
+    buttonText: 'Read More',
+    link: '/bca',
+  },
+];
+
+export default function ProgramsOffered({ data }) {
   const [hoveredCard, setHoveredCard] = useState(null);
 
-  const programs = [
-    {
-      id: 1,
-      badge: 'MBA',
-      title: 'MBA Dual Major Specialization',
-      image: 'images/home/mba.webp',
-      description:
-        'MBA at IPS Business College empowers future leaders with industry-focused learning, Practical exposure, and strong placement support',
-      hoverTitle: 'MBA Dual Major Specialization',
-      features: [
-        'Master of Business Administration (MBA) Degree with Dual Specialization.',
-        "Realtime Corporate Experience through Regular OJT's (On Job Training) & Live Projects.",
-        'Additional AI/Business Analytics Course.',
-        'Additional Digital Marketing Course.',
-        '3 Months International, Trainings & Exchange Program (Sponsored / Optional)*.',
-        'Best Placements.',
-      ],
-      approvals: [
-        { name: 'AICTE', logo: 'images/home/aicte.webp' },
-        { name: 'RTU', logo: 'images/home/rtu.webp' },
-      ],
-      duration: '2 years',
-      eligibility: 'Check Eligibility',
-      buttonText: 'Read More',
-      link: '/mba',
-    },
-    {
-      id: 2,
-      badge: 'BBA',
-      title: 'Bachelor of Business Administration',
-      image: 'images/home/bba.webp',
-      description:
-        'BBA at IPS Business College builds strong business foundations with practical exposure and industry-oriented learning.',
-      hoverTitle: 'Bachelor of Business Administration',
-      features: [
-        "Bachelor of Business Administration (BBA) Degree with Work Experience (with Regular On Job Training's - OJT's).",
-        'Additional AI/Business Analytics Course.',
-        'Additional Digital Marketing Course.',
-        'Advanced Excel Course.',
-        'Industry Specialized Certifications*.',
-        'Best Placements.',
-        '3 Months International, Trainings & Exchange Program (Sponsored / Optional)*.',
-      ],
-      approvals: [
-        { name: 'AICTE', logo: 'images/home/aicte.webp' },
-        { name: 'RTU', logo: 'images/home/rtu.webp' },
-      ],
-      duration: '3 years',
-      eligibility: 'Check Eligibility',
-      buttonText: 'Read More',
-      link: '/bba',
-    },
-    {
-      id: 3,
-      badge: 'BCA',
-      title: 'Bachelor of Computer Applications',
-      image: 'images/home/bca.webp',
-      description:
-        'BCA at IPS Business College equips students with cutting-edge IT skills, programming expertise, and real-world project experience',
-      hoverTitle: 'Bachelor of Computer Applications',
-      features: [
-        'Bachelor of Computer Application (BCA) Degree with Work Experience (with Regular On Job Training - OJT).',
-        'Additional AI/Data Analytics Course.',
-        'Additional Digital Marketing Course.',
-        'Additional Cyber Security Course.',
-        'Additional Cloud Computing Course.',
-        'Live Industry Projects*.',
-        'Best Placements.',
-        '3 Months International, Trainings & Exchange Program (Sponsored / Optional)*.',
-      ],
-      approvals: [
-        { name: 'AICTE', logo: 'images/home/aicte.webp' },
-        { name: 'RTU', logo: 'images/home/rtu.webp' },
-      ],
-      duration: '3 years',
-      eligibility: 'Check Eligibility',
-      buttonText: 'Read More',
-      link: '/bca',
-    },
-  ];
+  const heading = data?.programsHeading || 'Programs Offered';
+  const subHeading = data?.programsSubHeading || 'Discover Your Perfect Program';
+  const programs =
+    data?.programs?.length > 0
+      ? [...data.programs].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+      : FALLBACK_PROGRAMS.map((p) => ({
+          ...p,
+          image: `${process.env.NEXT_PUBLIC_IMG_PATH}${p.image}`,
+          approvals: p.approvals.map((a) => ({ ...a, logo: `${process.env.NEXT_PUBLIC_IMG_PATH}${a.logo}` })),
+        }));
 
   return (
     <section
@@ -104,28 +116,28 @@ export default function ProgramsOffered() {
       <div className="relative w-full max-w-[1202px] mx-auto">
         {/* Section Header */}
         <div className="text-center mb-[60px]">
-          <h2 className="text-[#FF9E3D]  font-bold leading-tight figtree-font text-[32px] md:text-[42px] lg:text-[48px]">
-            Programs Offered
+          <h2 className="text-[#FF9E3D] font-bold leading-tight figtree-font text-[32px] md:text-[42px] lg:text-[48px]">
+            {heading}
           </h2>
           <div className="text-gray-600 relative font-medium text-[14px] md:text-[16px] figtree-font">
-            Discover Your Perfect Program
+            {subHeading}
             <div className="absolute bottom-[-10px] left-[50%] translate-x-[-50%] w-[60px] h-px border-b border-dashed border-[#ff9e3d]"></div>
           </div>
         </div>
 
         {/* Programs Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {programs.map((program) => (
+          {programs.map((program, idx) => (
             <div
-              key={program.id}
+              key={program._id || program.id || idx}
               className="relative bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl flex flex-col h-full group"
-              onMouseEnter={() => setHoveredCard(program.id)}
+              onMouseEnter={() => setHoveredCard(program._id || program.id || idx)}
               onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Card Image */}
               <div className="relative h-[200px] overflow-hidden">
                 <img
-                  src={`${process.env.NEXT_PUBLIC_IMG_PATH}${program.image}`}
+                  src={program.image}
                   alt={program.title}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
@@ -139,7 +151,7 @@ export default function ProgramsOffered() {
               <div className="relative p-4 flex flex-col flex-grow">
                 <div
                   className={`transition-all duration-500 ${
-                    hoveredCard === program.id
+                    hoveredCard === (program._id || program.id || idx)
                       ? 'opacity-0 -translate-y-4 pointer-events-none'
                       : 'opacity-100 translate-y-0'
                   }`}
@@ -155,33 +167,35 @@ export default function ProgramsOffered() {
                 {/* Bottom Section - Default State */}
                 <div
                   className={`mt-auto ${
-                    hoveredCard === program.id ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                    hoveredCard === (program._id || program.id || idx) ? 'opacity-0 pointer-events-none' : 'opacity-100'
                   } transition-opacity duration-300`}
                 >
                   {/* Approvals */}
-                  <div className="grid grid-cols-2 items-center lg:gap-4 gap-2 mb-4 border-t border-gray-200 pt-4">
-                    <div className="flex w-full items-center gap-2 border border-dashed p-3 rounded-xl">
-                      <img
-                        src={`${process.env.NEXT_PUBLIC_IMG_PATH}${program.approvals[0].logo}`}
-                        alt={program.approvals[0].name}
-                        className="h-[30px] w-[30px] object-contain"
-                      />
-                      <div className="lg:text-[12px] text-[10px] font-semibold text-gray-700 figtree-font">
-                        Approved by <span className="block text-(--color-ips-orange)">AICTE</span>
+                  {program.approvals?.length >= 2 && (
+                    <div className="grid grid-cols-2 items-center lg:gap-4 gap-2 mb-4 border-t border-gray-200 pt-4">
+                      <div className="flex w-full items-center gap-2 border border-dashed p-3 rounded-xl">
+                        <img
+                          src={program.approvals[0].logo}
+                          alt={program.approvals[0].name}
+                          className="h-[30px] w-[30px] object-contain"
+                        />
+                        <div className="lg:text-[12px] text-[10px] font-semibold text-gray-700 figtree-font">
+                          Approved by <span className="block text-(--color-ips-orange)">AICTE</span>
+                        </div>
+                      </div>
+                      <div className="flex w-full items-center gap-2 border border-dashed rounded-3 p-3 rounded-xl">
+                        <img
+                          src={program.approvals[1].logo}
+                          alt={program.approvals[1].name}
+                          className="h-[30px] w-[30px] object-contain"
+                        />
+                        <div className="lg:text-[12px] text-[10px] font-semibold text-gray-700 figtree-font">
+                          Affiliated with
+                          <span className="block text-(--color-ips-orange)"> RTU</span>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex w-full items-center gap-2 border border-dashed rounded-3 p-3 rounded-xl">
-                      <img
-                        src={`${process.env.NEXT_PUBLIC_IMG_PATH}${program.approvals[1].logo}`}
-                        alt={program.approvals[1].name}
-                        className="h-[30px] w-[30px] object-contain"
-                      />
-                      <div className="lg:text-[12px] text-[10px] font-semibold text-gray-700 figtree-font">
-                        Affiliated with
-                        <span className="block text-(--color-ips-orange)"> RTU</span>
-                      </div>
-                    </div>
-                  </div>
+                  )}
 
                   {/* Action Buttons */}
                   <div className="grid grid-cols-3 justify-between gap-1">
@@ -210,10 +224,10 @@ export default function ProgramsOffered() {
                 </div>
               </div>
 
-              {/* Hover Overlay - Covers Entire Card */}
+              {/* Hover Overlay */}
               <div
                 className={`absolute inset-0 bg-white rounded-xl p-6 flex flex-col transition-all duration-500 ${
-                  hoveredCard === program.id
+                  hoveredCard === (program._id || program.id || idx)
                     ? 'opacity-100 translate-y-0 pointer-events-auto z-30'
                     : 'opacity-0 translate-y-4 pointer-events-none z-20'
                 }`}
@@ -223,14 +237,16 @@ export default function ProgramsOffered() {
                     {program.hoverTitle}
                   </h3>
                   <ul className="space-y-2 mb-4">
-                    {program.features.map((feature, index) => (
+                    {(program.features || []).map((feature, fIdx) => (
                       <li
-                        key={index}
+                        key={fIdx}
                         className="flex items-start gap-2 text-[10px] md:text-[12px] text-gray-600 figtree-font transition-all duration-300"
                         style={{
-                          opacity: hoveredCard === program.id ? 1 : 0,
-                          transform: hoveredCard === program.id ? 'translateX(0)' : 'translateX(-10px)',
-                          transitionDelay: hoveredCard === program.id ? `${index * 50}ms` : '0ms',
+                          opacity: hoveredCard === (program._id || program.id || idx) ? 1 : 0,
+                          transform:
+                            hoveredCard === (program._id || program.id || idx) ? 'translateX(0)' : 'translateX(-10px)',
+                          transitionDelay:
+                            hoveredCard === (program._id || program.id || idx) ? `${fIdx * 50}ms` : '0ms',
                         }}
                       >
                         <span className="text-[#FF6B00] flex-shrink-0 mt-[-2px]">●</span>
@@ -242,7 +258,6 @@ export default function ProgramsOffered() {
                   </ul>
                 </div>
 
-                {/* Bottom Section in Hover State */}
                 <div className="mt-auto border-t border-gray-200 pt-4">
                   <div className="flex items-center justify-between gap-3">
                     <Link

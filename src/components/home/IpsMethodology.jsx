@@ -5,7 +5,54 @@ import Link from 'next/link';
 import Script from 'next/script';
 import React from 'react';
 
-export default function IpsMethodology() {
+// ── Icon map — icons are stored by name string in DB ──────────────────────────
+const ICON_MAP = { FlaskConical, BookOpen, Users, Briefcase };
+
+// ── Static fallback ────────────────────────────────────────────────────────────
+const FALLBACK = {
+  sectionLabel: 'START TODAY',
+  heading: 'About IPS Business School',
+  description:
+    'IPS Business School is a centre of technical management and computer education. It is one of the top business schools in Jaipur, shaping business practices and transforming careers across the globe. It has been trusted by students for the last two decades because of its close-knitted placement network and top-notch infrastructure. Here are other reasons students choose IPS:',
+  features: [
+    {
+      iconName: 'FlaskConical',
+      title: 'Research Excellence',
+      text: 'Our panel includes part-time distinguished research professors and entrepreneurs who encourage our students to engage in research and innovation.',
+    },
+    {
+      iconName: 'BookOpen',
+      title: 'Teaching Excellence',
+      text: 'Our teaching faculty consists of world-class researchers, entrepreneurs, and professors of Practice who have witnessed it firsthand, and transfer their insights and aid practical learning in the classroom.',
+    },
+    {
+      iconName: 'Users',
+      title: 'Producing the Most Valuable Graduates',
+      text: 'We are listed among the top B schools in Jaipur because we turn our students into fantastic graduates with a thirst for learning and a rounded approach to life & work.',
+    },
+    {
+      iconName: 'Briefcase',
+      title: 'On-the-Job Training',
+      text: 'On-the-job training is fundamental to our teaching methodology at IPS, where students work with top corporate and multinationals while studying.',
+    },
+  ],
+  ctaText: 'Read More',
+  ctaLink: '/about',
+};
+
+export default function IpsMethodology({ data }) {
+  const sectionLabel = data?.methodologySectionLabel || FALLBACK.sectionLabel;
+  const heading = data?.methodologyHeading || FALLBACK.heading;
+  const description = data?.methodologyDescription || FALLBACK.description;
+  const features =
+    data?.methodologyFeatures?.length > 0
+      ? [...data.methodologyFeatures].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+      : FALLBACK.features;
+  const ctaText = data?.methodologyCTAText || FALLBACK.ctaText;
+  const ctaLink = data?.methodologyCTALink || FALLBACK.ctaLink;
+
+  const delays = [0.3, 0.38, 0.46, 0.54];
+
   return (
     <section
       aria-label="IPS Methodology"
@@ -32,7 +79,7 @@ export default function IpsMethodology() {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.3, ease: 'easeOut', delay: 0.2 }}
           >
-            START TODAY
+            {sectionLabel}
           </motion.p>
 
           {/* Main Heading */}
@@ -43,7 +90,7 @@ export default function IpsMethodology() {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.3, ease: 'easeOut', delay: 0.3 }}
           >
-            About IPS Business School
+            {heading}
           </motion.h2>
 
           {/* Description */}
@@ -53,59 +100,33 @@ export default function IpsMethodology() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.3, ease: 'easeOut', delay: 0.3 }}
-          >
-            IPS Business School is a centre of technical management and computer education. It is one of the{' '}
-            <strong>top business schools in Jaipur</strong>, shaping business practices and transforming careers across
-            the globe. It has been trusted by students for the last two decades because of its close-knitted placement
-            network and top-notch infrastructure. Here are other reasons students choose IPS:
-          </motion.p>
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
 
           {/* Feature List */}
           <ul className="space-y-3 md:space-y-4 mb-6 md:mb-8 figtree-font">
-            {[
-              {
-                icon: FlaskConical,
-                title: 'Research Excellence',
-                text: 'Our panel includes part-time distinguished research professors and entrepreneurs who encourage our students to engage in research and innovation.',
-                delay: 0.3,
-              },
-              {
-                icon: BookOpen,
-                title: 'Teaching Excellence',
-                text: 'Our teaching faculty consists of world-class researchers, entrepreneurs, and professors of Practice who have witnessed it firsthand, and transfer their insights and aid practical learning in the classroom.',
-                delay: 0.38,
-              },
-              {
-                icon: Users,
-                title: 'Producing the Most Valuable Graduates',
-                text: 'We are listed among the top B schools in Jaipur because we turn our students into fantastic graduates with a thirst for learning and a rounded approach to life & work.',
-                delay: 0.46,
-              },
-              {
-                icon: Briefcase,
-                title: 'On-the-Job Training',
-                text: 'On-the-job training is fundamental to our teaching methodology at IPS, where students work with top corporate and multinationals while studying.',
-                delay: 0.54,
-              },
-            ].map((item, index) => (
-              <motion.li
-                key={index}
-                className="flex items-start gap-3 text-[#77838F] text-[13px] md:text-[14px] lg:text-[15px] figtree-font"
-                initial={{ opacity: 0, x: -15 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.2, ease: 'easeOut', delay: item.delay }}
-              >
-                <item.icon className="text-[#FF6B00] mt-[2px] shrink-0" size={18} />
-                <span>
-                  <strong className="text-[#444] font-semibold">{item.title}:</strong> {item.text}
-                </span>
-              </motion.li>
-            ))}
+            {features.map((item, index) => {
+              const IconComponent = ICON_MAP[item.iconName] || FlaskConical;
+              return (
+                <motion.li
+                  key={item._id || index}
+                  className="flex items-start gap-3 text-[#77838F] text-[13px] md:text-[14px] lg:text-[15px] figtree-font"
+                  initial={{ opacity: 0, x: -15 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ duration: 0.2, ease: 'easeOut', delay: delays[index] || 0.3 + index * 0.08 }}
+                >
+                  <IconComponent className="text-[#FF6B00] mt-[2px] shrink-0" size={18} />
+                  <span>
+                    <strong className="text-[#444] font-semibold">{item.title}:</strong> {item.text}
+                  </span>
+                </motion.li>
+              );
+            })}
           </ul>
 
           {/* Read More Button */}
-          <Link href="/about">
+          <Link href={ctaLink}>
             <motion.button
               type="button"
               className="bg-[#FF6B00] cursor-pointer text-white font-semibold px-6 md:px-8 py-2.5 md:py-3 rounded-md hover:bg-[#E55A00] transition-all duration-300 text-[14px] md:text-[15px] lg:text-[16px] montserrat-font hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
@@ -114,7 +135,7 @@ export default function IpsMethodology() {
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.2, ease: 'easeOut', delay: 0.3 }}
             >
-              Read More
+              {ctaText}
             </motion.button>
           </Link>
         </motion.div>

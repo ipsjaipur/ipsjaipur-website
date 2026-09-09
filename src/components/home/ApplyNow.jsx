@@ -41,15 +41,6 @@ export default function ApplyNow() {
               <Download className="h-4 w-4 shrink-0" />
               Download Brochure
             </a>
-            {/* <a
-              href="/images/brochure/ips-brochure.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="apply-cta-btn inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#C8501F]/30 bg-white/40 sm:px-6 px-4 py-3.5 text-sm font-semibold text-[#1B2E4A] backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#C8501F] hover:bg-white/70 sm:text-base"
-            >
-              <Download className="h-4 w-4 shrink-0" />
-              Download Brochure
-            </a> */}
           </div>
         </div>
       </div>

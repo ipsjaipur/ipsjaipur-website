@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard,
@@ -15,6 +14,9 @@ import {
   X,
   PlusCircle,
   List,
+  Layers,
+  Home,
+  BookOpen,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import toast from 'react-hot-toast';
@@ -26,10 +28,25 @@ const NAV_ITEMS = [
     icon: LayoutDashboard,
     exact: true,
   },
+  // ── Page Content group ────────────────────────────────────────────────────
+  {
+    label: 'Page Content',
+    icon: Layers,
+    prefix: '/dashboard/page-content',
+    children: [
+      {
+        label: 'Home Page',
+        href: '/dashboard/page-content/home',
+        icon: Home,
+      },
+      // Future pages will be added here, e.g.:
+      // { label: 'About Page', href: '/dashboard/page-content/about', icon: BookOpen },
+    ],
+  },
+  // ── Blog & News ────────────────────────────────────────────────────────────
   {
     label: 'Blogs',
     icon: FileText,
-    // prefix used to decide if this section owns the current path
     prefix: '/dashboard/blogs',
     children: [
       { label: 'All Blogs', href: '/dashboard/blogs', icon: List },
@@ -59,22 +76,17 @@ const NAV_ITEMS = [
 function NavItem({ item, pathname, onClose }) {
   const hasChildren = item.children?.length > 0;
 
-  // ── For simple top-level links (Dashboard) ─────────────────────────────────
   const isActive =
     !hasChildren &&
     (item.exact
       ? pathname === item.href
       : item.href && (pathname === item.href || pathname.startsWith(item.href + '/')));
 
-  // ── For grouped items — ONLY active when pathname starts with THIS group's prefix
-  // This is the key fix: each group only claims paths under its own prefix,
-  // so /dashboard/blogs/... never activates the Blogs AND News groups simultaneously.
   const groupActive =
     hasChildren && item.prefix ? pathname === item.prefix || pathname.startsWith(item.prefix + '/') : false;
 
   const [open, setOpen] = useState(groupActive);
 
-  // Close this group automatically when it becomes inactive (user navigates away)
   useEffect(() => {
     if (!groupActive) setOpen(false);
   }, [groupActive]);
@@ -108,19 +120,13 @@ function NavItem({ item, pathname, onClose }) {
         {open && (
           <ul className="mt-1 ml-4 pl-3 border-l border-[#e2e8f0] space-y-0.5">
             {item.children.map((child) => {
-              // Within the group, figure out which child is active.
-              // "Create" child (/dashboard/blogs/create) wins on exact match.
-              // "All" child (/dashboard/blogs) wins for everything else under the prefix.
               const isExact = pathname === child.href;
-
-              // A sibling with a longer/more-specific href owns the path if it matches
               const siblingOwns = item.children.some(
                 (s) =>
                   s.href !== child.href &&
                   s.href.length > child.href.length &&
                   (pathname === s.href || pathname.startsWith(s.href + '/')),
               );
-
               const childIsActive = isExact || (!siblingOwns && pathname.startsWith(child.href + '/'));
 
               return (

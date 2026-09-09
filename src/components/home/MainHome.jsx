@@ -12,20 +12,26 @@ import StudentTestimonials from './StudentTestimonials';
 import ApplyNow from './ApplyNow';
 import CampusNews from './CampusNews';
 
-export default function MainHome({ placementsNews = [], ipsNews = [], blogs = [] }) {
+export default function MainHome({
+  // Campus News (existing dynamic data from DB)
+  placementsNews = [],
+  ipsNews = [],
+  blogs = [],
+  // Home page section content from HomePageContent collection
+  homeContent = {},
+}) {
   return (
     <>
-      <HomeBanner />
-      <ApprovalsAffiliations />
-      <IpsMethodology />
-      <PathwayToExcellence />
-      <ProgramsOffered />
-      <Placements />
-      <VideoGallery />
-      <OurAchievers />
-      <StudentTestimonials />
+      <HomeBanner data={homeContent.banner} />
+      <ApprovalsAffiliations data={homeContent.approvals} />
+      <IpsMethodology data={homeContent.methodology} />
+      <PathwayToExcellence data={homeContent.pathway} />
+      <ProgramsOffered data={homeContent.programs} />
+      <Placements data={homeContent.placements} />
+      <VideoGallery data={homeContent.videoGallery} />
+      <OurAchievers data={homeContent.achievers} />
+      <StudentTestimonials data={homeContent.testimonials} />
       <ApplyNow />
-      {/* <CampusNewsStatic /> */}
       <CampusNews placementsNews={placementsNews} ipsNews={ipsNews} blogs={blogs} />
     </>
   );

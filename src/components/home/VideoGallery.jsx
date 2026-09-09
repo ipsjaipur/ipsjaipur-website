@@ -3,19 +3,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Autoplay, Pagination } from 'swiper/modules';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-const videoData = [
-  {
-    thumbnail: 'images/home/thumb-10.webp',
-    url: 'https://www.instagram.com/reel/C7WDKsxsSef/?igsh=aTYzZ2x6b2s1aTZw',
-  },
-  {
-    thumbnail: 'images/home/thumb-11.webp',
-    url: 'https://www.instagram.com/reel/DLCOt4XSp-j/?igsh=YmU1ZWFpZWVxdXRl',
-  },
-  {
-    thumbnail: 'images/home/thumb-12.webp',
-    url: 'https://www.instagram.com/reel/DLJz3VeOddn/?igsh=N3dqNmM5aGZicXY0',
-  },
+
+// ── Static fallback ────────────────────────────────────────────────────────────
+const FALLBACK_VIDEOS = [
+  { thumbnail: 'images/home/thumb-10.webp', url: 'https://www.instagram.com/reel/C7WDKsxsSef/?igsh=aTYzZ2x6b2s1aTZw' },
+  { thumbnail: 'images/home/thumb-11.webp', url: 'https://www.instagram.com/reel/DLCOt4XSp-j/?igsh=YmU1ZWFpZWVxdXRl' },
+  { thumbnail: 'images/home/thumb-12.webp', url: 'https://www.instagram.com/reel/DLJz3VeOddn/?igsh=N3dqNmM5aGZicXY0' },
   {
     thumbnail: 'images/home/thumb-18.webp',
     url: 'https://www.instagram.com/reel/DLmb3ZehEjI/?igsh=MTQ5MXl3YXRsdWlkMg==',
@@ -24,10 +17,7 @@ const videoData = [
     thumbnail: 'images/home/thumb-19.webp',
     url: 'https://www.instagram.com/reel/DLjYvVeB8hD/?igsh=MTZldWFjOWI4NG41Yw==',
   },
-  {
-    thumbnail: 'images/home/thumb-16.webp',
-    url: 'https://www.instagram.com/reel/DLUM0hlO86L/?igsh=cTFtN3J5bWJwODdp',
-  },
+  { thumbnail: 'images/home/thumb-16.webp', url: 'https://www.instagram.com/reel/DLUM0hlO86L/?igsh=cTFtN3J5bWJwODdp' },
   {
     thumbnail: 'images/home/thumb-1.webp',
     url: 'https://www.instagram.com/reel/DGubqWIMt31/?igsh=MTd1ZnoydmduZDhqMA==',
@@ -40,10 +30,7 @@ const videoData = [
     thumbnail: 'images/home/thumb-3.webp',
     url: 'https://www.instagram.com/reel/DFumty9Bnpn/?igsh=MTgzc251eTI4MXc0dg==',
   },
-  {
-    thumbnail: 'images/home/thumb-4.webp',
-    url: 'https://www.instagram.com/reel/DFZ3nhuvUA1/?igsh=amFjN2QwbXhhenU5',
-  },
+  { thumbnail: 'images/home/thumb-4.webp', url: 'https://www.instagram.com/reel/DFZ3nhuvUA1/?igsh=amFjN2QwbXhhenU5' },
   {
     thumbnail: 'images/home/thumb-5.webp',
     url: 'https://www.instagram.com/reel/DAiVFkYs3_b/?igsh=MWR3bzFuaWhmbTlqdg==',
@@ -52,51 +39,34 @@ const videoData = [
     thumbnail: 'images/home/thumb-6.webp',
     url: 'https://www.instagram.com/reel/C_9mxoDvmFY/?igsh=MTZ6aHM3ODU0OTExcA==',
   },
-  {
-    thumbnail: 'images/home/thumb-7.webp',
-    url: 'https://www.instagram.com/reel/C-mqI3mt-qs/?igsh=aGRvOGFvNDN6YnUw',
-  },
+  { thumbnail: 'images/home/thumb-7.webp', url: 'https://www.instagram.com/reel/C-mqI3mt-qs/?igsh=aGRvOGFvNDN6YnUw' },
   {
     thumbnail: 'images/home/thumb-8.webp',
     url: 'https://www.instagram.com/reel/C73L0-TtJHH/?igsh=MWx2dm1vaG50NDU1Mg==',
   },
-  {
-    thumbnail: 'images/home/thumb-9.webp',
-    url: 'https://www.instagram.com/reel/C7oLXWOyl6_/?igsh=YnJzMGVkcGtiZ3Bs',
-  },
+  { thumbnail: 'images/home/thumb-9.webp', url: 'https://www.instagram.com/reel/C7oLXWOyl6_/?igsh=YnJzMGVkcGtiZ3Bs' },
 ];
 
-// Background "GALLERY" text — soft scale-in
 const bgTextVariants = {
   hidden: { opacity: 0, scale: 0.85 },
-  visible: {
-    opacity: 0.2,
-    scale: 1,
-    transition: { duration: 0.2, ease: 'easeOut' },
-  },
+  visible: { opacity: 0.2, scale: 1, transition: { duration: 0.2, ease: 'easeOut' } },
 };
-
-// "Video Gallery" heading — fade up
 const headingVariants = {
   hidden: { opacity: 0, y: -16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.3, ease: 'easeOut', delay: 0.15 },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: 'easeOut', delay: 0.15 } },
 };
-
-// Slider entrance
 const sliderVariants = {
   hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: 'easeOut', delay: 0.25 },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut', delay: 0.25 } },
 };
 
-export default function VideoGallery() {
+export default function VideoGallery({ data }) {
+  const heading = data?.videoGalleryHeading || 'Video Gallery';
+  const videos =
+    data?.videos?.length > 0
+      ? [...data.videos].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+      : FALLBACK_VIDEOS.map((v) => ({ ...v, thumbnail: `${process.env.NEXT_PUBLIC_IMG_PATH}${v.thumbnail}` }));
+
   return (
     <section
       aria-label="Video Gallery"
@@ -144,18 +114,15 @@ export default function VideoGallery() {
             speed={1500}
             autoplay={{ delay: 1000, disableOnInteraction: false, pauseOnMouseEnter: true }}
             allowTouchMove
-            coverflowEffect={{
-              rotate: 0,
-              stretch: 0,
-              depth: 100,
-              modifier: 1,
-              slideShadows: false,
-            }}
+            coverflowEffect={{ rotate: 0, stretch: 0, depth: 100, modifier: 1, slideShadows: false }}
             pagination={{ clickable: true }}
             className="video-coverflow-slider"
           >
-            {videoData.map((item, i) => (
-              <SwiperSlide key={i} className="!w-[180px] sm:!w-[210px] md:!w-[240px] lg:!w-[273px] rounded-2xl">
+            {videos.map((item, i) => (
+              <SwiperSlide
+                key={item._id || i}
+                className="!w-[180px] sm:!w-[210px] md:!w-[240px] lg:!w-[273px] rounded-2xl"
+              >
                 <Link
                   href={item.url}
                   target="_blank"
@@ -163,7 +130,7 @@ export default function VideoGallery() {
                   className="relative block aspect-[9/16] overflow-hidden rounded-2xl group"
                 >
                   <img
-                    src={`${process.env.NEXT_PUBLIC_IMG_PATH}${item.thumbnail}`}
+                    src={item.thumbnail}
                     alt={`Video reel ${i + 1}`}
                     className="h-full w-full object-cover transition-transform duration-500 ease-out will-change-transform"
                     loading="lazy"
@@ -182,33 +149,18 @@ export default function VideoGallery() {
         </motion.div>
       </div>
 
-      {/* Pagination bullet styling, scoped to this slider */}
       <style>
         {`
-        .video-coverflow-slider {
-          padding-bottom: 40px;
-          }
+        .video-coverflow-slider { padding-bottom: 40px; }
         .video-coverflow-slider .swiper-pagination-bullet {
-          width: 8px;
-          height: 8px;
-          background: rgba(26, 35, 126, 0.3);
-          opacity: 1;
+          width: 8px; height: 8px;
+          background: rgba(26, 35, 126, 0.3); opacity: 1;
         }
-       .video-coverflow-slider .swiper-pagination-horizontal {
-        bottom: 0px !important; 
-        }
-        .video-coverflow-slider .swiper-pagination-bullet-active {
-          background: #ff9e3d;
-        }
-        
-        /* Hide pagination dots on mobile */
+        .video-coverflow-slider .swiper-pagination-horizontal { bottom: 0px !important; }
+        .video-coverflow-slider .swiper-pagination-bullet-active { background: #ff9e3d; }
         @media (max-width: 768px) {
-          .video-coverflow-slider .swiper-pagination {
-            display: none !important;
-          }
-          .video-coverflow-slider {
-            padding-bottom: 20px;
-          }
+          .video-coverflow-slider .swiper-pagination { display: none !important; }
+          .video-coverflow-slider { padding-bottom: 20px; }
         }
       `}
       </style>

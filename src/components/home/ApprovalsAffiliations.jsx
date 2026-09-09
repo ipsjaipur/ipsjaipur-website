@@ -1,25 +1,32 @@
 'use client';
+
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-const AFFILIATIONS = [
+// ── Static fallback ────────────────────────────────────────────────────────────
+const IMG = process.env.NEXT_PUBLIC_IMG_PATH || '/';
+
+const FALLBACK_AFFILIATIONS = [
   {
-    id: 1,
     label: 'Approved by',
     name: 'All India Council for Technical Education',
-    logo: `images/home/aicte.webp`,
+    logo: `${IMG}images/home/aicte.webp`,
     alt: 'AICTE Logo',
   },
   {
-    id: 2,
     label: 'Affiliated with',
     name: 'Rajasthan Technical University (RTU)',
-    logo: `images/home/rtu.webp`,
+    logo: `${IMG}images/home/rtu.webp`,
     alt: 'RTU Logo',
   },
 ];
 
-export default function ApprovalsAffiliations() {
+export default function ApprovalsAffiliations({ data }) {
+  const affiliations =
+    data?.affiliations?.length > 0
+      ? [...data.affiliations].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+      : FALLBACK_AFFILIATIONS;
+
   return (
     <section
       aria-label="Approvals and Affiliations"
@@ -67,41 +74,29 @@ export default function ApprovalsAffiliations() {
 
         {/* ── Right: Affiliations Cards ─────────────────────────── */}
         <div className="flex flex-row flex-1 w-full md:max-w-[747px] gap-[16px] sm:gap-[20px]">
-          {AFFILIATIONS.map((item, index) => (
+          {affiliations.map((item, index) => (
             <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 30 }}
+              key={item._id || index}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.3,
-                delay: 0.2 + index * 0.15,
-                ease: 'easeOut',
-              }}
-              className="md:flex items-center gap-3 sm:gap-4 p-[12px] sm:p-[14px] w-full justify-start border border-dashed border-[#7b7b7b] rounded-[20px] hover:border-[#a89968] hover:bg-white/5 transition-colors duration-300"
+              transition={{ duration: 0.3, delay: 0.1 + index * 0.1, ease: 'easeOut' }}
+              className="flex flex-1 flex-col sm:flex-row items-center gap-3 sm:gap-4 rounded-xl bg-white/10 backdrop-blur-sm p-4 sm:p-5 border border-white/20"
             >
-              {/* Logo */}
-              <div className="shrink-0 relative w-[48px] mb-4 md:mb-0 mx-auto md:mx-0 h-[48px] sm:w-[75px] sm:h-[75px]">
+              <div className="relative w-[56px] h-[56px] sm:w-[64px] sm:h-[64px] flex-shrink-0 bg-white rounded-lg p-2">
                 <Image
-                  src={process.env.NEXT_PUBLIC_IMG_PATH + item.logo}
-                  alt={item.alt}
+                  src={item.logo}
+                  alt={item.alt || item.name}
                   fill
-                  className="object-contain"
-                  sizes="(max-width: 640px) 65px, 75px"
+                  className="object-contain p-1"
+                  sizes="64px"
                   unoptimized
                 />
               </div>
-
-              {/* Text */}
-              <div className="relative flex-1 min-w-0 text-center md:text-start">
-                <div className="md:block hidden absolute top-[50%] translate-y-[-50%] w-px h-[30px] sm:h-[35px] left-0 bg-[#7b7b7b]"></div>
-                <div className="md:pl-[16px]">
-                  <p className="text-(--color-ips-amber) figtree-font font-bold mb-0.5 text-[11px] sm:text-[12px] md:text-[13px]">
-                    {item.label}
-                  </p>
-                  <p className="text-white leading-snug font-bold text-[13px] sm:text-[14px] md:text-[15px] break-words">
-                    {item.name}
-                  </p>
-                </div>
+              <div className="text-center sm:text-left">
+                <p className="text-white/70 text-[11px] sm:text-[12px] font-medium uppercase tracking-wide mb-0.5">
+                  {item.label}
+                </p>
+                <p className="text-white font-semibold text-[13px] sm:text-[14px] leading-snug">{item.name}</p>
               </div>
             </motion.div>
           ))}

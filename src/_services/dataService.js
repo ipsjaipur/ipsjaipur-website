@@ -1,6 +1,7 @@
 import connectDB from '@/lib/mongodb';
 import News from '@/models/News';
 import Blog from '@/models/Blog';
+import HomePageContent from '@/models/HomePageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -104,4 +105,38 @@ export async function getNewsWithRelated(slug) {
     news: JSON.parse(JSON.stringify(news)),
     related: JSON.parse(JSON.stringify(related)),
   };
+}
+
+/**
+ * Fetch all home page section documents and return as a keyed object.
+ * Falls back to an empty object so components use their static defaults.
+ */
+export async function getHomePageContent() {
+  try {
+    await connectDB();
+    const docs = await HomePageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET HOME PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single home page section document.
+ * @param {string} section - e.g. 'banner', 'approvals', etc.
+ */
+export async function getHomeSection(section) {
+  try {
+    await connectDB();
+    const doc = await HomePageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET HOME SECTION ERROR] ${section}:`, error);
+    return null;
+  }
 }

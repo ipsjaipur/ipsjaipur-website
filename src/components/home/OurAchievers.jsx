@@ -2,30 +2,22 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { motion } from 'framer-motion';
-const achieversData = [
-  {
-    id: 1,
-    image: 'images/home/Gold_1.webp',
-    name: 'IPS Gold Achiever',
-  },
-  {
-    id: 2,
-    image: 'images/home/ayushi_kabra.webp',
-    name: 'Ayushi Kabra - IPS Achiever',
-  },
-  {
-    id: 3,
-    image: 'images/home/ayushi-sharma.webp',
-    name: 'Ayushi Sharma - IPS Achiever',
-  },
-  {
-    id: 4,
-    image: 'images/home/pooja_mondal.webp',
-    name: 'Pooja Mondal - IPS Achiever',
-  },
+
+// ── Static fallback ────────────────────────────────────────────────────────────
+const FALLBACK_ACHIEVERS = [
+  { name: 'IPS Gold Achiever', image: 'images/home/Gold_1.webp' },
+  { name: 'Ayushi Kabra - IPS Achiever', image: 'images/home/ayushi_kabra.webp' },
+  { name: 'Ayushi Sharma - IPS Achiever', image: 'images/home/ayushi-sharma.webp' },
+  { name: 'Pooja Mondal - IPS Achiever', image: 'images/home/pooja_mondal.webp' },
 ];
 
-export default function OurAchievers() {
+export default function OurAchievers({ data }) {
+  const heading = data?.achieversHeading || 'Our Achievers';
+  const achievers =
+    data?.achievers?.length > 0
+      ? [...data.achievers].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+      : FALLBACK_ACHIEVERS.map((a) => ({ ...a, image: `${process.env.NEXT_PUBLIC_IMG_PATH}${a.image}` }));
+
   return (
     <section
       aria-label="Our Achievers"
@@ -37,13 +29,9 @@ export default function OurAchievers() {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      {/* Dark overlay */}
-
-      {/* Content Container */}
       <div className="relative w-full max-w-[1202px] mx-auto">
         {/* Section Header */}
         <div className="text-center mb-[24px] md:mb-[40px] relative">
-          {/* Background Text */}
           <motion.p
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -54,7 +42,6 @@ export default function OurAchievers() {
             <span className="text-white/10 font-extrabold block">ACHIEVERS</span>
           </motion.p>
 
-          {/* Main Title */}
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -63,7 +50,7 @@ export default function OurAchievers() {
             className="relative"
           >
             <span className="text-white text-[32px] md:text-[40px] lg:text-[48px] font-bold figtree-font">
-              Our Achievers
+              {heading}
             </span>
           </motion.h2>
         </div>
@@ -74,42 +61,24 @@ export default function OurAchievers() {
           spaceBetween={15}
           centeredSlides={false}
           loop={true}
-          autoplay={{
-            delay: 1500,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          pagination={{
-            clickable: true,
-          }}
+          autoplay={{ delay: 1500, disableOnInteraction: false, pauseOnMouseEnter: true }}
+          pagination={{ clickable: true }}
           navigation={false}
           grabCursor={true}
           breakpoints={{
-            320: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 12,
-            },
-            768: {
-              slidesPerView: 2,
-              spaceBetween: 15,
-            },
-            1024: {
-              slidesPerView: 2,
-              spaceBetween: 15,
-            },
+            320: { slidesPerView: 1, spaceBetween: 10 },
+            640: { slidesPerView: 2, spaceBetween: 12 },
+            768: { slidesPerView: 2, spaceBetween: 15 },
+            1024: { slidesPerView: 2, spaceBetween: 15 },
           }}
           className="achievers-slider"
         >
-          {achieversData.map((achiever) => (
-            <SwiperSlide key={achiever.id}>
+          {achievers.map((achiever, idx) => (
+            <SwiperSlide key={achiever._id || idx}>
               <div className="bg-white rounded-[20px] overflow-hidden shadow-lg h-[100%] sm:h-[190px] md:h-[100%] lg:h-[320px]">
                 <div className="w-full h-full">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_IMG_PATH}${achiever.image}`}
+                    src={achiever.image}
                     alt={achiever.name}
                     className="w-full h-full object-cover object-top"
                     loading="lazy"
@@ -121,7 +90,6 @@ export default function OurAchievers() {
         </Swiper>
       </div>
 
-      {/* Slider styling */}
       <style jsx>{`
         :global(.achievers-slider) {
           padding-bottom: 60px;
