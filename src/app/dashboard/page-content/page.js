@@ -8,7 +8,6 @@ const PAGES = [
     href: '/dashboard/page-content/home',
     icon: Home,
     color: '#eb5905',
-    sections: ['Hero Banner', 'Approvals', 'About / Methodology', 'Pathway', 'Programs', 'Placements', 'Video Gallery', 'Achievers', 'Testimonials', 'Apply Now CTA'],
   },
   {
     label: 'MBA Course Page',
@@ -16,7 +15,6 @@ const PAGES = [
     href: '/dashboard/page-content/mba',
     icon: BookOpen,
     color: '#8B5CF6',
-    sections: ['Banner Slides', 'Overview & Highlights', 'Syllabus', 'Specializations', 'Eligibility', 'Admission Process', 'Documents Required', 'Selection Procedure', 'Fee Structure', 'FAQ', 'Sidebar Videos'],
   },
   {
     label: 'BBA Course Page',
@@ -24,7 +22,6 @@ const PAGES = [
     href: '/dashboard/page-content/bba',
     icon: GraduationCap,
     color: '#10B981',
-    sections: ['Banner Slides', 'Overview & Highlights', 'Syllabus', 'Specializations', 'Eligibility', 'Admission Process', 'Documents Required', 'Selection Procedure', 'Fee Structure', 'FAQ', 'Sidebar Videos'],
   },
 ];
 
@@ -72,16 +69,8 @@ export default function PageContentIndexPage() {
                     {page.sections.length} sections
                   </span>
                 </div>
-                <p className="text-[13px] text-[#77838f] mb-3">{page.description}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {page.sections.map((s) => (
-                    <span key={s} className="text-[11px] bg-[#f4f6f9] text-[#4a5568] px-2 py-0.5 rounded-full font-medium">
-                      {s}
-                    </span>
-                  ))}
-                </div>
+                <p className="text-[13px] text-[#77838f] mb-0">{page.description}</p>
               </div>
-
               <ChevronRight className="w-5 h-5 text-[#aab4bf] group-hover:text-[#eb5905] shrink-0 mt-1 transition-colors" />
             </Link>
           );
