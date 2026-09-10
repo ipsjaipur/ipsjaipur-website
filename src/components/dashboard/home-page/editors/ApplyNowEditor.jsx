@@ -1,6 +1,7 @@
 'use client';
 
 import SectionEditorShell from '../SectionEditorShell';
+import PdfUpload from '../PdfUpload';
 
 function Field({ label, value, onChange, placeholder, hint }) {
   return (
@@ -67,13 +68,7 @@ export default function ApplyNowEditor() {
                     onChange={set('brochureButtonText')}
                     placeholder="Download Brochure"
                   />
-                  <Field
-                    label="Brochure URL / Path"
-                    value={data?.brochureUrl}
-                    onChange={set('brochureUrl')}
-                    placeholder="/images/brochure/ips-brochure.pdf"
-                    hint="Can be a local path or Cloudinary URL"
-                  />
+                  <PdfUpload label="Brochure PDF" value={data?.brochureUrl} onChange={set('brochureUrl')} />
                 </div>
               </div>
             </div>

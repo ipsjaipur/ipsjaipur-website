@@ -17,6 +17,7 @@ import {
   Layers,
   Home,
   BookOpen,
+  GraduationCap,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import toast from 'react-hot-toast';
@@ -39,8 +40,16 @@ const NAV_ITEMS = [
         href: '/dashboard/page-content/home',
         icon: Home,
       },
-      // Future pages will be added here, e.g.:
-      // { label: 'About Page', href: '/dashboard/page-content/about', icon: BookOpen },
+      {
+        label: 'MBA Course',
+        href: '/dashboard/page-content/mba',
+        icon: BookOpen,
+      },
+      {
+        label: 'BBA Course',
+        href: '/dashboard/page-content/bba',
+        icon: GraduationCap,
+      },
     ],
   },
   // ── Blog & News ────────────────────────────────────────────────────────────

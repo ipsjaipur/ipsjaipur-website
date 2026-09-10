@@ -2,6 +2,8 @@ import connectDB from '@/lib/mongodb';
 import News from '@/models/News';
 import Blog from '@/models/Blog';
 import HomePageContent from '@/models/HomePageContent';
+import MBAPageContent from '@/models/MBAPageContent';
+import BBAPageContent from '@/models/BBAPageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -137,6 +139,74 @@ export async function getHomeSection(section) {
     return doc || null;
   } catch (error) {
     console.error(`[GET HOME SECTION ERROR] ${section}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch all MBA page section documents and return as a keyed object.
+ * Falls back to an empty object so components use their static defaults.
+ */
+export async function getMBAPageContent() {
+  try {
+    await connectDB();
+    const docs = await MBAPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET MBA PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single MBA page section document.
+ * @param {string} section - e.g. 'banner', 'overview', 'faq', etc.
+ */
+export async function getMBASection(section) {
+  try {
+    await connectDB();
+    const doc = await MBAPageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET MBA SECTION ERROR] ${section}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch all BBA page section documents and return as a keyed object.
+ * Falls back to an empty object so the page calls notFound().
+ */
+export async function getBBAPageContent() {
+  try {
+    await connectDB();
+    const docs = await BBAPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET BBA PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single BBA page section document.
+ * @param {string} section - e.g. 'banner', 'overview', 'faq', etc.
+ */
+export async function getBBASection(section) {
+  try {
+    await connectDB();
+    const doc = await BBAPageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET BBA SECTION ERROR] ${section}:`, error);
     return null;
   }
 }

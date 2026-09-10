@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, Info, Users, ChevronRight } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight } from 'lucide-react';
 
 const PAGES = [
   {
@@ -10,8 +10,22 @@ const PAGES = [
     color: '#eb5905',
     sections: ['Hero Banner', 'Approvals', 'About / Methodology', 'Pathway', 'Programs', 'Placements', 'Video Gallery', 'Achievers', 'Testimonials', 'Apply Now CTA'],
   },
-  // Add more pages here in the future, e.g.:
-  // { label: 'About Page', href: '/dashboard/page-content/about', icon: Info, color: '#3B82F6', ... }
+  {
+    label: 'MBA Course Page',
+    description: 'Edit all sections of the MBA course page — banner, highlights, syllabus, specializations, admission, documents, selection, fee structure, FAQ, and sidebar.',
+    href: '/dashboard/page-content/mba',
+    icon: BookOpen,
+    color: '#8B5CF6',
+    sections: ['Banner Slides', 'Overview & Highlights', 'Syllabus', 'Specializations', 'Eligibility', 'Admission Process', 'Documents Required', 'Selection Procedure', 'Fee Structure', 'FAQ', 'Sidebar Videos'],
+  },
+  {
+    label: 'BBA Course Page',
+    description: 'Edit all sections of the BBA course page — banner, highlights, syllabus, specializations, admission, documents, selection, fee structure, FAQ, and sidebar.',
+    href: '/dashboard/page-content/bba',
+    icon: GraduationCap,
+    color: '#10B981',
+    sections: ['Banner Slides', 'Overview & Highlights', 'Syllabus', 'Specializations', 'Eligibility', 'Admission Process', 'Documents Required', 'Selection Procedure', 'Fee Structure', 'FAQ', 'Sidebar Videos'],
+  },
 ];
 
 export const metadata = {

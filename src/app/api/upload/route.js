@@ -40,14 +40,27 @@ export async function POST(request) {
     const base64 = buffer.toString('base64');
     const dataUri = `data:${file.type};base64,${base64}`;
 
+    // Sanitise original filename → use as public_id so the URL is readable.
+    // Spaces → hyphens, special chars removed, extension stripped.
+    // e.g. "About Us Banner.webp" → "about-us-banner"
+    const originalName = file.name || 'image';
+    const cleanName = originalName
+      .replace(/\.[^/.]+$/, '')          // strip extension
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '-')              // spaces → hyphens
+      .replace(/[^a-z0-9-]/g, '')        // remove any remaining special chars
+      .replace(/-{2,}/g, '-')            // collapse multiple hyphens
+      .replace(/^-+|-+$/g, '');          // trim leading/trailing hyphens
+
     // Upload to Cloudinary
     const result = await cloudinary.uploader.upload(dataUri, {
       folder: 'ips-edu',
       resource_type: 'image',
-      // Auto-generate a unique public_id
-      use_filename: true,
-      unique_filename: true,
-      overwrite: false,
+      public_id: cleanName,
+      use_filename: false,
+      unique_filename: false,
+      overwrite: true,                   // overwrite if same name re-uploaded
     });
 
     return NextResponse.json(

@@ -73,7 +73,7 @@ export default function CourseBannerSlider({ slides = [], courseName = null, pos
                 variants={imageVariants}
               >
                 <img
-                  src={process.env.NEXT_PUBLIC_IMG_PATH + slide.src}
+                  src={slide.src}
                   alt={slide.alt}
                   className={`object-cover ${(position && position) || ' object-top'} w-full h-full`}
                   style={{ filter: improveContrast && 'contrast(105%)' }}
