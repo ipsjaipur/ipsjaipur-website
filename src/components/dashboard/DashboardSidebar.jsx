@@ -50,6 +50,11 @@ const NAV_ITEMS = [
         href: '/dashboard/page-content/bba',
         icon: GraduationCap,
       },
+      {
+        label: 'BCA Course',
+        href: '/dashboard/page-content/bca',
+        icon: GraduationCap,
+      },
     ],
   },
   // ── Blog & News ────────────────────────────────────────────────────────────

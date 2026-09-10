@@ -3,40 +3,12 @@ import CourseBannerSlider from '../CourseBannerSlider';
 import Breadcrumb from '@/components/common/Breadcrumb';
 import BCACourseDetail from './BCACourseDetail';
 
-// ── BCA Slider Images ────────────────────────────────────────────────────
-const BCA_SLIDES = [
-  {
-    id: 1,
-    src: 'images/courses/bca-image-1.webp',
-    alt: 'BCA Program - IPS Business School',
-    priority: true,
-  },
-  {
-    id: 2,
-    src: 'images/courses/bca-image-2.webp',
-    alt: 'BCA Program - IPS Business School',
-    priority: true,
-  },
-  {
-    id: 2,
-    src: 'images/courses/bca-image-4.webp',
-    alt: 'BCA Program - IPS Business School',
-    priority: true,
-  },
-  {
-    id: 2,
-    src: 'images/courses/bca-image-3.webp',
-    alt: 'BCA Program - IPS Business School',
-    priority: true,
-  },
-];
-
-export default function MainBCACourse() {
+export default function MainBCACourse({ bcaContent = {} }) {
   return (
     <>
-      <CourseBannerSlider slides={BCA_SLIDES} courseName="BCA" position="center" />
+      <CourseBannerSlider slides={bcaContent?.banner?.bannerSlides} />
       <Breadcrumb pageName="BCA" />
-      <BCACourseDetail />
+      <BCACourseDetail bcaContent={bcaContent} />
     </>
   );
 }

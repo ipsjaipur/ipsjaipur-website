@@ -4,6 +4,7 @@ import Blog from '@/models/Blog';
 import HomePageContent from '@/models/HomePageContent';
 import MBAPageContent from '@/models/MBAPageContent';
 import BBAPageContent from '@/models/BBAPageContent';
+import BCAPageContent from '@/models/BCAPageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -207,6 +208,40 @@ export async function getBBASection(section) {
     return doc || null;
   } catch (error) {
     console.error(`[GET BBA SECTION ERROR] ${section}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch all BCA page section documents and return as a keyed object.
+ * Falls back to an empty object so the page calls notFound().
+ */
+export async function getBCAPageContent() {
+  try {
+    await connectDB();
+    const docs = await BCAPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET BCA PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single BCA page section document.
+ * @param {string} section - e.g. 'banner', 'overview', 'faq', etc.
+ */
+export async function getBCASection(section) {
+  try {
+    await connectDB();
+    const doc = await BCAPageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET BCA SECTION ERROR] ${section}:`, error);
     return null;
   }
 }
