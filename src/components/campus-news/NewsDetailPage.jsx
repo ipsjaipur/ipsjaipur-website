@@ -64,16 +64,12 @@ export default function NewsDetailPage({ news, related = [] }) {
     datePublished: news.publishedAt,
     dateModified: news.updatedAt,
   };
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/about-us.webp';
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <CommonBanner
-        pageTitle={news.title}
-        normalFont
-        bgImageUrl="images/about/about-us.webp"
-        position="object-center"
-      />
+      <CommonBanner pageTitle={news.title} normalFont bgImageUrl={bannerImageUrl} position="object-center" />
       <Breadcrumb pageName={news.title} detailPage={[{ slug: 'campus-news', title: 'Campus News' }]} />
       <article className="py-10 px-4 min-h-screen">
         <div className="max-w-[1202px] mx-auto">

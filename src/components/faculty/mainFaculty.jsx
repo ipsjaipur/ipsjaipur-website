@@ -29,10 +29,11 @@ export default function MainFaculty() {
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
   };
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/faculty-img.webp';
 
   return (
     <div className="flex flex-col justify-center">
-      <CommonBanner pageTitle="Faculty" bgImageUrl="images/about/faculty-img.webp" />
+      <CommonBanner pageTitle="Faculty" bgImageUrl={bannerImageUrl} />
       <Breadcrumb pageName="Faculty" />
       <div className="max-w-[1400px] mx-auto md:px-[16px] w-full md:pt-[24px] pb-[64px]">
         <div className="flex flex-col xl:flex-row gap-6 md:gap-8 justify-center ">

@@ -11,9 +11,11 @@ import PlacementFAQ from './PlacementFAQ';
 import CommonBanner from '../courses/CommonBanner';
 
 export default function MainPlacement() {
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/courses/placement-bg2.webp';
+
   return (
     <>
-      <CommonBanner pageTitle="Placements" bgImageUrl="images/courses/placement-bg2.webp" position="object-bottom" />
+      <CommonBanner pageTitle="Placements" bgImageUrl={bannerImageUrl} position="object-bottom" />
       <Breadcrumb pageName={'Placements'} />
       <StudentPlacements />
       <PlacementStats />

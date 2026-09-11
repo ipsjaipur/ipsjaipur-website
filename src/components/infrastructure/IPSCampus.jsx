@@ -44,13 +44,11 @@ export default function MainFaculty() {
     { id: 'hostels', label: 'Hostels + PGs' },
   ];
 
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/infrastructure-img-2.webp';
+
   return (
     <>
-      <CommonBanner
-        pageTitle="Infrastructure"
-        bgImageUrl="images/about/infrastructure-img-2.webp"
-        position="objec-bottom"
-      />
+      <CommonBanner pageTitle="Infrastructure" bgImageUrl={bannerImageUrl} position="objec-bottom" />
       <Breadcrumb pageName="Infrastructure" />
       <section className="max-w-[1400px] mx-auto md:px-[16px] w-full md:pt-[24px] pb-[64px]">
         <div className="flex flex-col xl:flex-row gap-6">

@@ -18,6 +18,7 @@ import {
   Home,
   BookOpen,
   GraduationCap,
+  Sparkles,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import toast from 'react-hot-toast';
@@ -34,28 +35,7 @@ const NAV_ITEMS = [
     label: 'Page Content',
     icon: Layers,
     prefix: '/dashboard/page-content',
-    children: [
-      {
-        label: 'Home Page',
-        href: '/dashboard/page-content/home',
-        icon: Home,
-      },
-      {
-        label: 'MBA Course',
-        href: '/dashboard/page-content/mba',
-        icon: BookOpen,
-      },
-      {
-        label: 'BBA Course',
-        href: '/dashboard/page-content/bba',
-        icon: GraduationCap,
-      },
-      {
-        label: 'BCA Course',
-        href: '/dashboard/page-content/bca',
-        icon: GraduationCap,
-      },
-    ],
+    href: '/dashboard/page-content',
   },
   // ── Blog & News ────────────────────────────────────────────────────────────
   {

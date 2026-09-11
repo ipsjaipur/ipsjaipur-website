@@ -128,9 +128,11 @@ export default function CampusNewsListPage() {
     fetchNews();
   }, [fetchNews]);
 
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/student-life.webp';
+
   return (
     <>
-      <CommonBanner pageTitle="Campus News" bgImageUrl="images/about/student-life.webp" position="object-center" />
+      <CommonBanner pageTitle="Campus News" bgImageUrl={bannerImageUrl} position="object-center" />
 
       <section className="py-12 px-4  min-h-[60vh]">
         <div className="max-w-[1202px] mx-auto">

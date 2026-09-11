@@ -1,23 +1,23 @@
-'use client';
 import React from 'react';
 import Breadcrumb from '../common/Breadcrumb';
 import CommonBanner from '../courses/CommonBanner';
-import ApprovalsAffiliations from '../home/ApprovalsAffiliations';
 import IpsSutraContentSection from './IpsSutraContentSection';
 import IpsAdvantagesSection from './IpsAdvantagesSection';
 
-export default function MainIpsSutra() {
+export default function MainIpsSutra({ ipsSutraContent }) {
+  const contentData = ipsSutraContent?.content || {};
+  const advantagesData = ipsSutraContent?.advantages || {};
+
+  const bannerTitle = contentData?.bannerTitle || 'आईपीएस सूत्र';
+  const bannerImageUrl =
+    contentData?.bannerImageUrl || process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/ips-sutra-banner-img-2.webp';
+
   return (
     <>
-      <CommonBanner
-        pageTitle="आईपीएस सूत्र"
-        bgImageUrl="images/about/ips-sutra-banner-img-2.webp"
-        position="object-center"
-      />
-      {/* <ApprovalsAffiliations /> */}
-      <Breadcrumb pageName="आईपीएस सूत्र" />
-      <IpsSutraContentSection />
-      <IpsAdvantagesSection />
+      <CommonBanner pageTitle={bannerTitle} bgImageUrl={bannerImageUrl} position="object-center" />
+      <Breadcrumb pageName={bannerTitle} />
+      <IpsSutraContentSection contentData={contentData} />
+      <IpsAdvantagesSection advantagesData={advantagesData} />
     </>
   );
 }

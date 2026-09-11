@@ -45,15 +45,12 @@ const QUERY_BATCHES = [
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function BatchQueriesPage() {
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/about-us.webp';
+
   return (
     <>
       {/* Common banner — same pattern as all other pages */}
-      <CommonBanner
-        pageTitle="Batch Queries"
-        normalFont
-        bgImageUrl="images/about/about-us.webp"
-        position="object-center"
-      />
+      <CommonBanner pageTitle="Batch Queries" normalFont bgImageUrl={bannerImageUrl} position="object-center" />
 
       {/* Breadcrumb */}
       <Breadcrumb pageName="Batch Queries" />

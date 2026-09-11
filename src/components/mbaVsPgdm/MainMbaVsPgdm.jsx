@@ -7,13 +7,11 @@ import MbaFeatures from './MbaFeatures';
 import ComparisonMatrix from './ComparisonMatrix';
 
 export default function MainMbaVsPgdm() {
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/mba-vs-pgdm-bg-2.webp';
+
   return (
     <>
-      <CommonBanner
-        pageTitle="MBA vs. PGDM"
-        bgImageUrl="images/about/mba-vs-pgdm-bg-2.webp"
-        position=" object-[50%_35%]"
-      />
+      <CommonBanner pageTitle="MBA vs. PGDM" bgImageUrl={bannerImageUrl} position=" object-[50%_35%]" />
       <Breadcrumb pageName="MBA vs. PGDM" />
       <MbaVsPgdmContentSection />
       <ComparisonMatrix />

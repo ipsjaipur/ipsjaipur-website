@@ -27,12 +27,13 @@ export default function StudentLife() {
       url: 'https://www.youtube.com/embed/4aq02tSiXd4?si=AawJvooDzO8Pflx0',
     },
   ];
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/student-img-2.webp';
 
   return (
     <>
       <div className="flex flex-col gap-2 justify-center">
         {/* <PageBanner title="Student Life" bgImageUrl="/images/about/image_2.webp" /> */}
-        <CommonBanner pageTitle="Student Life" bgImageUrl="images/about/student-img-2.webp" position="object-top" />
+        <CommonBanner pageTitle="Student Life" bgImageUrl={bannerImageUrl} position="object-top" />
         <Breadcrumb pageName="Student Life" />
       </div>
       <section className="max-w-[1400px] mx-auto md:px-[16px] w-full md:pt-[24px] pb-[64px]">

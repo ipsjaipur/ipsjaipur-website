@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles } from 'lucide-react';
 
 const PAGES = [
   {
@@ -25,6 +25,14 @@ const PAGES = [
     icon: GraduationCap,
     color: '#10B981',
     sections: ['Banner Slides', 'Overview & Highlights', 'Syllabus', 'Specializations', 'Eligibility', 'Admission Process', 'Documents Required', 'Selection Procedure', 'Fee Structure', 'FAQ', 'Sidebar Videos'],
+  },
+  {
+    label: 'IPS Sutra Page',
+    description: 'Edit the IPS Sutra (IPS Ideology) page — banner, main heading, Hindi paragraphs, CTA button, side image, and IPS Advantages cards.',
+    href: '/dashboard/page-content/ips-sutra',
+    icon: Sparkles,
+    color: '#F59E0B',
+    sections: ['Page Content', 'IPS Advantages'],
   },
 ];
 
@@ -54,7 +62,7 @@ export default function PageContentIndexPage() {
             <Link
               key={page.href}
               href={page.href}
-              className="group flex items-start gap-5 bg-white border border-[#e2e8f0] rounded-2xl p-6 hover:border-[#eb5905]/50 hover:shadow-lg transition-all duration-200"
+              className="group flex items-start gap-5 bg-white border border-[#e2e8f0] rounded-2xl p-4 hover:border-[#eb5905]/50 hover:shadow-lg transition-all duration-200"
             >
               <div
                 className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110"

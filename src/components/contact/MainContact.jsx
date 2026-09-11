@@ -63,9 +63,11 @@ export default function MainContact() {
     }),
   };
 
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/about-us-image-new.webp';
+
   return (
     <>
-      <CommonBanner pageTitle="Contact Us" bgImageUrl="images/about/about-us-image-new.webp" position="object-center" />
+      <CommonBanner pageTitle="Contact Us" bgImageUrl={bannerImageUrl} position="object-center" />
 
       <div className="flex flex-col gap-2 justify-center">
         <Breadcrumb pageName="Contact Us" />

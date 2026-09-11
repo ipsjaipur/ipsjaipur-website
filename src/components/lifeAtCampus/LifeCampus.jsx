@@ -153,15 +153,12 @@ export default function LifeCampus() {
     },
   ];
 
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/life-of-ips-img.webp';
+
   return (
     <>
       <div className="flex flex-col justify-center">
-        <CommonBanner
-          pageTitle="Life@ips"
-          normalFont={true}
-          bgImageUrl="images/about/life-of-ips-img.webp"
-          position="object-center"
-        />
+        <CommonBanner pageTitle="Life@ips" normalFont={true} bgImageUrl={bannerImageUrl} position="object-center" />
         <Breadcrumb pageName="Life@ips" />
         <div className="flex flex-col gap-8 md:gap-12 justify-center py-6 md:py-12 px-6 max-w-330 mx-auto w-full ">
           {sectionsData.map((item, index) => (

@@ -15,14 +15,11 @@ export default function MainScholar() {
       url: 'https://www.youtube.com/embed/4aq02tSiXd4?si=AawJvooDzO8Pflx0',
     },
   ];
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/scollarship-bg-img-2.webp';
 
   return (
     <>
-      <CommonBanner
-        pageTitle="Scholarships"
-        bgImageUrl="images/about/scollarship-bg-img-2.webp"
-        position="object-center"
-      />
+      <CommonBanner pageTitle="Scholarships" bgImageUrl={bannerImageUrl} position="object-center" />
       <div className="flex flex-col gap-2 justify-center">
         <Breadcrumb pageName="Scholarships" />
         <div className="max-w-[1400px] mx-auto md:px-[16px] w-full md:pt-[24px] pb-[64px]">

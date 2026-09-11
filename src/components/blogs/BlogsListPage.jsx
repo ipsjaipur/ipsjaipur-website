@@ -146,9 +146,11 @@ export default function BlogsListPage() {
     fetchBlogs();
   }, [fetchBlogs]);
 
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/about-us.webp';
+
   return (
     <>
-      <CommonBanner pageTitle="Our Blogs" bgImageUrl="images/about/about-us.webp" position="object-center" />
+      <CommonBanner pageTitle="Our Blogs" bgImageUrl={bannerImageUrl} position="object-center" />
 
       <section ref={sectionRef} className="py-12 px-4 min-h-[60vh]">
         <div className="max-w-[1202px] mx-auto">

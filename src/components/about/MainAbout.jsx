@@ -14,9 +14,11 @@ export default function About() {
     },
   ];
 
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/about-us-image-3.webp';
+
   return (
     <div className="flex flex-col gap-2 justify-center">
-      <CommonBanner pageTitle="IPS Ideology" bgImageUrl="images/about/about-us-image-3.webp" position="object-bottom" />
+      <CommonBanner pageTitle="IPS Ideology" bgImageUrl={bannerImageUrl} position="object-bottom" />
       <Breadcrumb pageName="IPS Ideology" />
       <div className="max-w-[1400px] mx-auto md:px-[16px] w-full md:pt-[24px] pb-[64px]">
         <div className="flex flex-col xl:flex-row gap-6">

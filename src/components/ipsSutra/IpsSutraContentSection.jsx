@@ -5,52 +5,41 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
-export default function IpsSutraContentSection() {
+export default function IpsSutraContentSection({ contentData = {} }) {
+  const heading = contentData.contentHeading || 'आईपीएस सूत्र';
+  const paragraphs = contentData.contentParagraphs || [];
+  const ctaText = contentData.ctaText || 'Start Journey Today';
+  const ctaHref = contentData.ctaHref || 'https://admissions.ipsedu.in/';
+  const sideImage = contentData.sideImageUrl || `${process.env.NEXT_PUBLIC_IMG_PATH}images/about/bba-ab.webp`;
+  const sideAlt = contentData.sideImageAlt || 'IPS Sutra - Skill Development Program';
+
+  // Normalise image path: if it doesn't start with http or /, prepend the img base
+  const resolvedImage =
+    sideImage.startsWith('http') || sideImage.startsWith('/')
+      ? sideImage
+      : `${process.env.NEXT_PUBLIC_IMG_PATH}${sideImage}`;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
     },
   };
 
   const fadeInUpVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
   };
 
   const slideInLeftVariants = {
     hidden: { opacity: 0, x: -60 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.25, 0.4, 0.25, 1],
-      },
-    },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.25, 0.4, 0.25, 1] } },
   };
 
   const slideInRightVariants = {
     hidden: { opacity: 0, x: 60 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.25, 0.4, 0.25, 1],
-      },
-    },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.25, 0.4, 0.25, 1] } },
   };
 
   return (
@@ -70,50 +59,61 @@ export default function IpsSutraContentSection() {
           {/* Left Side - Content */}
           <motion.div className="lg:col-span-7" variants={slideInLeftVariants}>
             <div className="flex flex-col gap-4">
-              {/* Main Heading with Background Text */}
+              {/* Main Heading */}
               <motion.div variants={fadeInUpVariants} className="relative">
                 <h2 className="relative text-[20px] md:text-[22px] lg:text-[24px] font-bold text-gray-900 rubik-fonts leading-tight">
-                  आईपीएस सूत्र
+                  {heading}
                 </h2>
               </motion.div>
 
-              {/* Content Section */}
+              {/* Paragraphs */}
               <motion.div className="space-y-2" variants={fadeInUpVariants}>
-                <p className="text-[14px] md:text-[18px] text-gray-500 leading-[1.9] rubik-fonts mb-4">
-                  <strong>आईपीएस बिज़नेस स्कूल का बीबीए प्रोग्राम </strong> एक <strong>UGC </strong>द्वारा प्रदान किया
-                  जाने वाला 3 वर्षीय <strong>Degree Program</strong> है जिसके अंतर्गत विद्यार्थी के व्यक्तित्व के
-                  सम्पूर्ण विकास के लिए शिक्षा वर्ग के विद्वानों और व्यापार जगत के सफल व्यक्तियों द्वारा specialized
-                  session लिए जाते है |
-                </p>
-
-                <p className="text-[14px] md:text-[18px] text-gray-500 leading-[1.9] rubik-fonts mb-4">
-                  व्यापार जगत को एक कमी कई वर्षो से महसूस होती रही है कि रोजगार के लिए उपलब्द्ध विध्यार्थी शैक्षणिक
-                  दृष्टिकोण से तो उपयुक्त होते है किन्तु व्यापारिक परिदृश्य में परिपक्व नहीं होते |
-                </p>
-
-                <p className="text-[14px] md:text-[18px] text-gray-500 leading-[1.9] rubik-fonts mb-4">
-                  <strong> आईपीएस बिज़नेस स्कूल </strong> में इस विसंगति को दूर करने के लिए एक अनूठे 3 वर्षीय{' '}
-                  <strong> बीबीए प्रोग्राम </strong> की शुरुआत की है इसके अंतर्गत विध्यार्थी को <strong> बीबीए </strong>{' '}
-                  की शिक्षा के साथ – साथ व्यापार जगत में कार्य करने का अनुभव भी मिलता है |
-                </p>
-
-                <p className="text-[14px] md:text-[18px] text-gray-500 leading-[1.9] rubik-fonts mb-4">
-                  शिक्षा और व्यवसायिक अनुभव के इस अनोखे संगम से विद्यार्थी को प्रबंधन की जानकारी और व्यापार जगत में
-                  <strong> experience </strong> करने का अवसर मिलता है, जिसके फलस्वरूप <strong> बीबीए प्रोग्राम </strong>{' '}
-                  को पूर्ण करने की पश्चात व्यापार जगत को एक ऐसा प्रबंधक मिलता है जो व्यापारिक प्रबंधन के द्रिस्टीकोण से
-                  एक निपुण प्रबंधक होता है और वह व्यापार के बारीकियों और उतार – चढ़ाव का अनुभव ले चुका होता है, और वह
-                  व्यापार जगत की जिम्मेदारियों और चुनोतियो का सामना करने के लिए पूर्ण रूप से तैयार होता है |
-                </p>
+                {paragraphs.length > 0 ? (
+                  paragraphs.map((para, i) => (
+                    <p
+                      key={i}
+                      className="text-[14px] md:text-[18px] text-gray-500 leading-[1.9] rubik-fonts mb-4"
+                      dangerouslySetInnerHTML={{ __html: para }}
+                    />
+                  ))
+                ) : (
+                  // Fallback: original static paragraphs if DB is empty
+                  <>
+                    <p className="text-[14px] md:text-[18px] text-gray-500 leading-[1.9] rubik-fonts mb-4">
+                      <strong>आईपीएस बिज़नेस स्कूल का बीबीए प्रोग्राम </strong> एक <strong>UGC </strong>द्वारा प्रदान
+                      किया जाने वाला 3 वर्षीय <strong>Degree Program</strong> है जिसके अंतर्गत विद्यार्थी के व्यक्तित्व
+                      के सम्पूर्ण विकास के लिए शिक्षा वर्ग के विद्वानों और व्यापार जगत के सफल व्यक्तियों द्वारा
+                      specialized session लिए जाते है |
+                    </p>
+                    <p className="text-[14px] md:text-[18px] text-gray-500 leading-[1.9] rubik-fonts mb-4">
+                      व्यापार जगत को एक कमी कई वर्षो से महसूस होती रही है कि रोजगार के लिए उपलब्द्ध विध्यार्थी शैक्षणिक
+                      दृष्टिकोण से तो उपयुक्त होते है किन्तु व्यापारिक परिदृश्य में परिपक्व नहीं होते |
+                    </p>
+                    <p className="text-[14px] md:text-[18px] text-gray-500 leading-[1.9] rubik-fonts mb-4">
+                      <strong> आईपीएस बिज़नेस स्कूल </strong> में इस विसंगति को दूर करने के लिए एक अनूठे 3 वर्षीय{' '}
+                      <strong> बीबीए प्रोग्राम </strong> की शुरुआत की है इसके अंतर्गत विध्यार्थी को{' '}
+                      <strong> बीबीए </strong> की शिक्षा के साथ – साथ व्यापार जगत में कार्य करने का अनुभव भी मिलता है |
+                    </p>
+                    <p className="text-[14px] md:text-[18px] text-gray-500 leading-[1.9] rubik-fonts mb-4">
+                      शिक्षा और व्यवसायिक अनुभव के इस अनोखे संगम से विद्यार्थी को प्रबंधन की जानकारी और व्यापार जगत में{' '}
+                      <strong> experience </strong> करने का अवसर मिलता है, जिसके फलस्वरूप{' '}
+                      <strong> बीबीए प्रोग्राम </strong> को पूर्ण करने की पश्चात व्यापार जगत को एक ऐसा प्रबंधक मिलता है
+                      जो व्यापारिक प्रबंधन के द्रिस्टीकोण से एक निपुण प्रबंधक होता है और वह व्यापार के बारीकियों और उतार
+                      – चढ़ाव का अनुभव ले चुका होता है, और वह व्यापार जगत की जिम्मेदारियों और चुनोतियो का सामना करने के
+                      लिए पूर्ण रूप से तैयार होता है |
+                    </p>
+                  </>
+                )}
               </motion.div>
 
               {/* CTA Button */}
               <motion.div variants={fadeInUpVariants}>
                 <Link
-                  href="https://admissions.ipsedu.in/"
+                  href={ctaHref}
                   target="_blank"
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-xl font-bold text-[16px] rubik-fonts hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl group"
                 >
-                  Start Journey Today
+                  {ctaText}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
@@ -126,15 +126,8 @@ export default function IpsSutraContentSection() {
               {/* Animated Gradient Glow Background */}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-orange-300/30 via-purple-300/20 to-blue-300/30 rounded-[3rem] blur-2xl"
-                animate={{
-                  scale: [1, 1.08, 1],
-                  rotate: [0, 3, -3, 0],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
+                animate={{ scale: [1, 1.08, 1], rotate: [0, 3, -3, 0] }}
+                transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
               ></motion.div>
 
               {/* Main Image Container */}
@@ -155,21 +148,14 @@ export default function IpsSutraContentSection() {
                   {/* Shimmer Effect */}
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent z-20"
-                    animate={{
-                      x: ['-100%', '200%'],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      repeatDelay: 2,
-                      ease: 'easeInOut',
-                    }}
+                    animate={{ x: ['-100%', '200%'] }}
+                    transition={{ duration: 3, repeat: Infinity, repeatDelay: 2, ease: 'easeInOut' }}
                   ></motion.div>
 
                   <div className="relative w-full" style={{ aspectRatio: '4/5' }}>
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_IMG_PATH}images/about/bba-ab.webp`}
-                      alt="IPS Sutra - Skill Development Program"
+                      src={resolvedImage}
+                      alt={sideAlt}
                       fill
                       className="object-cover object-center"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 550px"

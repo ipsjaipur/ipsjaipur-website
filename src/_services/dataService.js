@@ -5,6 +5,7 @@ import HomePageContent from '@/models/HomePageContent';
 import MBAPageContent from '@/models/MBAPageContent';
 import BBAPageContent from '@/models/BBAPageContent';
 import BCAPageContent from '@/models/BCAPageContent';
+import IpsSutraPageContent from '@/models/IpsSutraPageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -242,6 +243,40 @@ export async function getBCASection(section) {
     return doc || null;
   } catch (error) {
     console.error(`[GET BCA SECTION ERROR] ${section}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch all IPS Sutra page section documents and return as a keyed object.
+ * Falls back to an empty object so the page calls notFound().
+ */
+export async function getIpsSutraPageContent() {
+  try {
+    await connectDB();
+    const docs = await IpsSutraPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET IPS SUTRA PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single IPS Sutra page section document.
+ * @param {string} section - 'content' | 'advantages'
+ */
+export async function getIpsSutraSection(section) {
+  try {
+    await connectDB();
+    const doc = await IpsSutraPageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET IPS SUTRA SECTION ERROR] ${section}:`, error);
     return null;
   }
 }

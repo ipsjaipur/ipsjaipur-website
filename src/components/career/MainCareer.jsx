@@ -15,6 +15,7 @@ export default function MainCareer() {
       url: 'https://www.youtube.com/embed/4aq02tSiXd4?si=AawJvooDzO8Pflx0',
     },
   ];
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/career-img.webp';
 
   return (
     <>
@@ -23,7 +24,7 @@ export default function MainCareer() {
         <CommonBanner
           pageTitle="Career @ IPS BUSINESS SCHOOL"
           normalFont={true}
-          bgImageUrl="images/about/career-img.webp"
+          bgImageUrl={bannerImageUrl}
           position="center"
         />
         <Breadcrumb pageName="Career @ IPS BUSINESS SCHOOL" />

@@ -12,7 +12,7 @@ export default function CommonBanner({ pageTitle, normalFont, bgImageUrl, positi
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <MotionImage
-          src={`${process.env.NEXT_PUBLIC_IMG_PATH}${bgImageUrl}`}
+          src={`${bgImageUrl}`}
           alt={`${pageTitle} - IPS Business School`}
           fill
           priority

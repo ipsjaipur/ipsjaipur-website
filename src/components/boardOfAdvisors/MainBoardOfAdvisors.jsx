@@ -6,13 +6,11 @@ import BoardOfAdvisorsSection from './BoardOfAdvisorsSection';
 import BridgingTheorySection from './BridgingTheorySection';
 
 export default function MainBoardOfAdvisors() {
+  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/board-of-advisor-img.webp';
+
   return (
     <>
-      <CommonBanner
-        pageTitle="Board of Advisors"
-        bgImageUrl="images/about/board-of-advisor-img.webp"
-        position="object-center"
-      />
+      <CommonBanner pageTitle="Board of Advisors" bgImageUrl={bannerImageUrl} position="object-center" />
       <Breadcrumb pageName="Board of Advisors" />
       <BoardOfAdvisorsSection />
       <BridgingTheorySection />
