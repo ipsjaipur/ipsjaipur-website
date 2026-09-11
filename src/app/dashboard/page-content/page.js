@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck } from 'lucide-react';
 
 const PAGES = [
   {
@@ -9,6 +9,22 @@ const PAGES = [
     icon: Home,
     color: '#eb5905',
     sections: ['Hero Banner', 'Approvals', 'About / Methodology', 'Pathway', 'Programs', 'Placements', 'Video Gallery', 'Achievers', 'Testimonials', 'Apply Now CTA'],
+  },
+  {
+    label: 'About Page',
+    description: 'Edit the About (IPS Ideology) page — banner, page heading, opening quote, description paragraphs, Why Choose IPS items, and sidebar videos.',
+    href: '/dashboard/page-content/about',
+    icon: Info,
+    color: '#06B6D4',
+    sections: ['Page Content', 'Sidebar Videos'],
+  },
+  {
+    label: 'Board of Advisors Page',
+    description: 'Edit the Board of Advisors page — banner, advisor profile cards, and the Bridging Theory CTA section.',
+    href: '/dashboard/page-content/board-of-advisors',
+    icon: UserCheck,
+    color: '#8B5CF6',
+    sections: ['Banner', 'Advisors', 'Bridging Theory CTA'],
   },
   {
     label: 'MBA Course Page',

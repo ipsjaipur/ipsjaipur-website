@@ -110,7 +110,7 @@ export default function ImageUpload({
                   type="button"
                   onClick={() => inputRef.current?.click()}
                   disabled={uploading}
-                  className="w-full flex items-center justify-center gap-1.5 bg-white text-[#222] text-[11px] font-semibold px-3 py-2 rounded-lg hover:bg-[#f4f6f9] transition cursor-pointer shadow"
+                  className="w-full flex items-center max-w-[200px] w-full justify-center gap-1.5 bg-white text-[#222] text-[11px] font-semibold px-3 py-2 rounded-lg hover:bg-[#f4f6f9] transition cursor-pointer shadow"
                 >
                   {uploading ? <Loader2 className="w-3 h-3 animate-spin" /> : <Upload className="w-3 h-3" />}
                   Replace
@@ -119,7 +119,7 @@ export default function ImageUpload({
                   type="button"
                   onClick={() => onChange('')}
                   disabled={uploading}
-                  className="w-full flex items-center justify-center gap-1.5 bg-red-500 text-white text-[11px] font-semibold px-3 py-2 rounded-lg hover:bg-red-600 transition cursor-pointer shadow"
+                  className="w-full flex items-center max-w-[200px] w-full justify-center gap-1.5 bg-red-500 text-white text-[11px] font-semibold px-3 py-2 rounded-lg hover:bg-red-600 transition cursor-pointer shadow"
                 >
                   <X className="w-3 h-3" />
                   Remove

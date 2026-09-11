@@ -6,6 +6,8 @@ import MBAPageContent from '@/models/MBAPageContent';
 import BBAPageContent from '@/models/BBAPageContent';
 import BCAPageContent from '@/models/BCAPageContent';
 import IpsSutraPageContent from '@/models/IpsSutraPageContent';
+import AboutPageContent from '@/models/AboutPageContent';
+import BoardOfAdvisorsPageContent from '@/models/BoardOfAdvisorsPageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -278,5 +280,58 @@ export async function getIpsSutraSection(section) {
   } catch (error) {
     console.error(`[GET IPS SUTRA SECTION ERROR] ${section}:`, error);
     return null;
+  }
+}
+
+/**
+ * Fetch all About page section documents and return as a keyed object.
+ * Falls back to an empty object so the page calls notFound().
+ */
+export async function getAboutPageContent() {
+  try {
+    await connectDB();
+    const docs = await AboutPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET ABOUT PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single About page section document.
+ * @param {string} section - 'content' | 'sidebar'
+ */
+export async function getAboutSection(section) {
+  try {
+    await connectDB();
+    const doc = await AboutPageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET ABOUT SECTION ERROR] ${section}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch all Board of Advisors page section documents and return as a keyed object.
+ * Falls back to an empty object so the page calls notFound().
+ */
+export async function getBoardOfAdvisorsPageContent() {
+  try {
+    await connectDB();
+    const docs = await BoardOfAdvisorsPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET BOARD OF ADVISORS PAGE CONTENT ERROR]:', error);
+    return {};
   }
 }

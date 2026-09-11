@@ -1,9 +1,35 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Briefcase, GraduationCap, Users, TrendingUp } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
-export default function BridgingTheorySection() {
+export default function BridgingTheorySection({ bridgingData = {} }) {
+  // ── Pull fields with exact static defaults as fallbacks ───────────────────
+  const heading = bridgingData.bridgingHeading || 'Bridging Classroom Theory & Corporate Reality';
+  const paragraph =
+    bridgingData.bridgingParagraph ||
+    'Our Board of Advisors conducts periodic curriculum reviews, delivers executive masterclasses, and facilitates direct On Job Training (OJT) opportunities with Fortune 500 companies and leading Indian MNCs.';
+  const buttonText = bridgingData.bridgingButtonText || 'Explore Placements';
+  const buttonHref = bridgingData.bridgingButtonHref || '/placements';
+
+  // ── Split heading for the orange-gradient highlight on "Classroom Theory" ──
+  // Original static: "Bridging" plain, "Classroom Theory" orange, "& Corporate Reality" plain
+  // We detect the pattern by looking for "Classroom Theory" in the heading.
+  // If the admin customises the heading and removes that phrase, we render the
+  // whole heading as plain text so nothing breaks.
+  const HIGHLIGHT_PHRASE = 'Classroom Theory';
+  const highlightIdx = heading.indexOf(HIGHLIGHT_PHRASE);
+
+  let headingBefore = heading;
+  let headingHighlight = '';
+  let headingAfter = '';
+
+  if (highlightIdx !== -1) {
+    headingBefore = heading.slice(0, highlightIdx);
+    headingHighlight = heading.slice(highlightIdx, highlightIdx + HIGHLIGHT_PHRASE.length);
+    headingAfter = heading.slice(highlightIdx + HIGHLIGHT_PHRASE.length);
+  }
+
   return (
     <section className="relative py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       {/* Decorative Background Elements */}
@@ -18,24 +44,28 @@ export default function BridgingTheorySection() {
             <div className="lg:flex justify-between items-center">
               <div className="lg:space-y-4 space-y-6 w-full max-w-[800px]">
                 <h2 className="lg:text-start text-center text-2xl md:text-2xl lg:text-3xl font-bold text-gray-900 leading-medium">
-                  Bridging{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-600">
-                    Classroom Theory
-                  </span>{' '}
-                  & Corporate Reality
+                  {headingHighlight ? (
+                    <>
+                      {headingBefore}
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-600">
+                        {headingHighlight}
+                      </span>
+                      {headingAfter}
+                    </>
+                  ) : (
+                    heading
+                  )}
                 </h2>
                 <p className="lg:text-start text-center text-base md:text-lg text-gray-600 leading-relaxed">
-                  Our Board of Advisors conducts periodic curriculum reviews, delivers executive masterclasses, and
-                  facilitates direct On Job Training (OJT) opportunities with Fortune 500 companies and leading Indian
-                  MNCs.
+                  {paragraph}
                 </p>
               </div>
               <div className="lg:text-start text-center lg:pt-0 pt-6">
                 <Link
-                  href="/placements"
+                  href={buttonHref}
                   className="group lg:text-[16px] text-[14px] inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 bg-size-200 bg-pos-0 hover:bg-pos-100 text-white font-semibold lg:px-8 px-6 lg:py-4 py-4 rounded-full shadow-lg hover:shadow-2xl hover:shadow-orange-500/50 transition-all duration-500 transform hover:scale-105"
                 >
-                  <span>Explore Placements</span>
+                  <span>{buttonText}</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                 </Link>
               </div>
