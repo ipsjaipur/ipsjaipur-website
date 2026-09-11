@@ -10,6 +10,7 @@ export default function LifeCampus() {
   const sectionsData = [
     {
       title: 'ZEPHYR Hosted by IPS COLLEGE',
+      delay: 2500,
       images: [
         '/images/life-at-ips/1.webp',
         '/images/life-at-ips/2.webp',
@@ -172,7 +173,26 @@ export default function LifeCampus() {
                   slidesPerView={1}
                   loop={true}
                   autoplay={{
-                    delay: 3000,
+                    delay:
+                      index === 0
+                        ? 2500
+                        : index === 1
+                          ? 4000
+                          : index === 2
+                            ? 3000
+                            : index === 3
+                              ? 5000
+                              : index === 4
+                                ? 2500
+                                : index === 5
+                                  ? 3500
+                                  : index === 6
+                                    ? 4000
+                                    : index === 7
+                                      ? 2000
+                                      : index === 8
+                                        ? 3500
+                                        : 4000,
                     disableOnInteraction: false,
                   }}
                   pagination={{
