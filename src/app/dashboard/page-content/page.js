@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor } from 'lucide-react';
 
 const PAGES = [
   {
@@ -9,6 +9,14 @@ const PAGES = [
     icon: Home,
     color: '#eb5905',
     sections: ['Hero Banner', 'Approvals', 'About / Methodology', 'Pathway', 'Programs', 'Placements', 'Video Gallery', 'Achievers', 'Testimonials', 'Apply Now CTA'],
+  },
+  {
+    label: 'Placements Page',
+    description: 'Edit all sections of the placements page — sector-wise stats, placement updates grid, resume book videos, FAQ, and coordinator contact.',
+    href: '/dashboard/page-content/placements',
+    icon: TrendingUp,
+    color: '#EF4444',
+    sections: ['Placement Stats', 'Coordinator Contact', 'Placement Updates', 'Resume Book', 'Industry FAQ'],
   },
   {
     label: 'About Page',
@@ -40,6 +48,14 @@ const PAGES = [
     href: '/dashboard/page-content/bba',
     icon: GraduationCap,
     color: '#10B981',
+    sections: ['Banner Slides', 'Overview & Highlights', 'Syllabus', 'Specializations', 'Eligibility', 'Admission Process', 'Documents Required', 'Selection Procedure', 'Fee Structure', 'FAQ', 'Sidebar Videos'],
+  },
+  {
+    label: 'BCA Course Page',
+    description: 'Edit all sections of the BCA course page — banner, highlights, syllabus, specializations, admission, documents, selection, fee structure, FAQ, and sidebar.',
+    href: '/dashboard/page-content/bca',
+    icon: Monitor,
+    color: '#0EA5E9',
     sections: ['Banner Slides', 'Overview & Highlights', 'Syllabus', 'Specializations', 'Eligibility', 'Admission Process', 'Documents Required', 'Selection Procedure', 'Fee Structure', 'FAQ', 'Sidebar Videos'],
   },
   {

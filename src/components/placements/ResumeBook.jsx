@@ -3,9 +3,27 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import VideoPlayer from '../courses/VideoPlayer';
 
-export default function ResumeBook() {
+/**
+ * ResumeBook — YouTube video-résumé grid.
+ * Hidden entirely if no videoResumes in CMS.
+ *
+ * Props:
+ *  data — placements-page CMS `resumeBook` section doc
+ */
+export default function ResumeBook({ data }) {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [activeVideoUrl, setActiveVideoUrl] = useState('');
+
+  const videoResumes =
+    data?.videoResumes?.length > 0 ? [...data.videoResumes].sort((a, b) => (a.order ?? 0) - (b.order ?? 0)) : [];
+
+  // Hide section if no videos
+  if (videoResumes.length === 0) return null;
+
+  const heading = data?.resumeBookHeading || 'Resume Book';
+  const description = data?.resumeBookDescription || '';
+  const ctaText = data?.resumeBookCTAText || 'View More....';
+  const ctaLink = data?.resumeBookCTALink || '#';
 
   const openVideoPopup = (url) => {
     const autoplayUrl = url.includes('?') ? `${url}&autoplay=1` : `${url}?autoplay=1`;
@@ -18,72 +36,17 @@ export default function ResumeBook() {
     setIsVideoOpen(false);
   };
 
-  const videoResumes = [
-    {
-      id: 1,
-      title: 'Nidhi Tiwari (MBA 2020-22)',
-      videoUrl: 'https://www.youtube.com/embed/q1V_IjL_PbM',
-      thumbnailUrl: 'https://img.youtube.com/vi/q1V_IjL_PbM/hqdefault.jpg',
-    },
-    {
-      id: 2,
-      title: 'Nisha Vyas (MBA 2020-22)',
-      videoUrl: 'https://www.youtube.com/embed/qXcFj-_SUIk',
-      thumbnailUrl: 'https://img.youtube.com/vi/qXcFj-_SUIk/hqdefault.jpg',
-    },
-    {
-      id: 3,
-      title: 'Prerna Kheshwani (BBA 2020-23)',
-      videoUrl: 'https://www.youtube.com/embed/JuXA0cJMuqM',
-      thumbnailUrl: 'https://img.youtube.com/vi/JuXA0cJMuqM/hqdefault.jpg',
-    },
-    {
-      id: 4,
-      title: 'Durjoy Sarkar (MBA 2020-22)',
-      videoUrl: 'https://www.youtube.com/embed/bgwGTrhWvSs',
-      thumbnailUrl: 'https://img.youtube.com/vi/bgwGTrhWvSs/hqdefault.jpg',
-    },
-  ];
-
-  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
   };
-
   const titleVariants = {
     hidden: { opacity: 0, y: -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.3,
-        ease: 'easeOut',
-      },
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: 'easeOut' } },
   };
-
   const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      scale: 0.95,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.2,
-        ease: 'easeOut',
-      },
-    },
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.2, ease: 'easeOut' } },
   };
 
   return (
@@ -96,22 +59,21 @@ export default function ResumeBook() {
           viewport={{ once: true, amount: 0.15 }}
           variants={containerVariants}
         >
-          {/* Section Header */}
+          {/* Header */}
           <motion.div className="text-center mb-8" variants={titleVariants}>
             <h2 className="text-gray-900 font-bold rubik-fonts text-[28px] md:text-[32px] lg:text-[36px] mb-4">
-              Resume Book
+              {heading}
             </h2>
-            <p className="text-gray-700 text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
-              The Classes of MBA Resume Books are now available. Search our database of IPS BUSINESS SCHOOL MBA students
-              or alumni to find talented candidates for your openings.
-            </p>
+            {description && (
+              <p className="text-gray-700 text-base md:text-lg max-w-3xl mx-auto leading-relaxed">{description}</p>
+            )}
           </motion.div>
 
           {/* Video Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {videoResumes.map((video, index) => (
               <motion.div
-                key={video.id}
+                key={video._id || index}
                 variants={cardVariants}
                 className="group cursor-pointer"
                 onClick={() => openVideoPopup(video.videoUrl)}
@@ -126,7 +88,6 @@ export default function ResumeBook() {
                 aria-label={`Play video resume of ${video.title}`}
               >
                 <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                  {/* Video Thumbnail */}
                   <div className="relative aspect-video w-full overflow-hidden bg-gray-900">
                     <iframe
                       src={video.videoUrl}
@@ -137,8 +98,6 @@ export default function ResumeBook() {
                       tabIndex="-1"
                     />
                   </div>
-
-                  {/* Video Info */}
                   <div className="p-4">
                     <h3 className="text-gray-900 font-semibold text-sm md:text-base line-clamp-2 group-hover:text-[#e87816] transition-colors duration-300">
                       {video.title}
@@ -149,21 +108,22 @@ export default function ResumeBook() {
             ))}
           </div>
 
-          {/* View More Button */}
-          <motion.div className="text-center" variants={cardVariants}>
-            <a
-              href="https://www.youtube.com/channel/UCDAbHzu7iO893x7IyT5JttQ"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-8 py-3 bg-[#C8501F] hover:bg-[#A83F18] text-white font-semibold rounded-md shadow-[0_8px_20px_-6px_rgba(200,80,31,0.45)] hover:shadow-[0_12px_26px_-6px_rgba(200,80,31,0.5)] transition-all duration-300 transform hover:-translate-y-0.5"
-            >
-              View More....
-            </a>
-          </motion.div>
+          {/* CTA */}
+          {ctaLink && ctaLink !== '#' && (
+            <motion.div className="text-center" variants={cardVariants}>
+              <a
+                href={ctaLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-8 py-3 bg-[#C8501F] hover:bg-[#A83F18] text-white font-semibold rounded-md shadow-[0_8px_20px_-6px_rgba(200,80,31,0.45)] hover:shadow-[0_12px_26px_-6px_rgba(200,80,31,0.5)] transition-all duration-300 transform hover:-translate-y-0.5"
+              >
+                {ctaText}
+              </a>
+            </motion.div>
+          )}
         </motion.div>
       </section>
 
-      {/* Video Player Modal */}
       <VideoPlayer isOpen={isVideoOpen} videoUrl={activeVideoUrl} onClose={closeVideoPopup} />
     </>
   );

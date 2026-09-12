@@ -8,6 +8,7 @@ import BCAPageContent from '@/models/BCAPageContent';
 import IpsSutraPageContent from '@/models/IpsSutraPageContent';
 import AboutPageContent from '@/models/AboutPageContent';
 import BoardOfAdvisorsPageContent from '@/models/BoardOfAdvisorsPageContent';
+import PlacementsPageContent from '@/models/PlacementsPageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -333,5 +334,39 @@ export async function getBoardOfAdvisorsPageContent() {
   } catch (error) {
     console.error('[GET BOARD OF ADVISORS PAGE CONTENT ERROR]:', error);
     return {};
+  }
+}
+
+/**
+ * Fetch all Placements page section documents and return as a keyed object.
+ * Falls back to an empty object so components use their static defaults.
+ */
+export async function getPlacementsPageContent() {
+  try {
+    await connectDB();
+    const docs = await PlacementsPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET PLACEMENTS PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single Placements page section document.
+ * @param {string} section - 'stats' | 'updates' | 'resumeBook' | 'faq' | 'coordinator'
+ */
+export async function getPlacementsSection(section) {
+  try {
+    await connectDB();
+    const doc = await PlacementsPageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET PLACEMENTS SECTION ERROR] ${section}:`, error);
+    return null;
   }
 }
