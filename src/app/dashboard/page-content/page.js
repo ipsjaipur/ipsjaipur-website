@@ -10,14 +10,14 @@ const PAGES = [
     color: '#eb5905',
     sections: ['Hero Banner', 'Approvals', 'About / Methodology', 'Pathway', 'Programs', 'Placements', 'Video Gallery', 'Achievers', 'Testimonials', 'Apply Now CTA'],
   },
-  {
-    label: 'Placements Page',
-    description: 'Edit all sections of the placements page — sector-wise stats, placement updates grid, resume book videos, FAQ, and coordinator contact.',
-    href: '/dashboard/page-content/placements',
-    icon: TrendingUp,
-    color: '#EF4444',
-    sections: ['Placement Stats', 'Coordinator Contact', 'Placement Updates', 'Resume Book', 'Industry FAQ'],
-  },
+  // {
+  //   label: 'Placements Page',
+  //   description: 'Edit all sections of the placements page — sector-wise stats, placement updates grid, resume book videos, FAQ, and coordinator contact.',
+  //   href: '/dashboard/page-content/placements',
+  //   icon: TrendingUp,
+  //   color: '#EF4444',
+  //   sections: ['Placement Stats', 'Coordinator Contact', 'Placement Updates', 'Resume Book', 'Industry FAQ'],
+  // },
   {
     label: 'About Page',
     description: 'Edit the About (IPS Ideology) page — banner, page heading, opening quote, description paragraphs, Why Choose IPS items, and sidebar videos.',
