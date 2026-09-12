@@ -94,7 +94,7 @@ const FOOTER_DATA = {
         text: 'A 1, Padmawati Colony – B, Pandit T.N. Mishra Marg, Nirman Nagar, Jaipur, Rajasthan, INDIA - 302019',
       },
       {
-        text: 'Rohini Nagar, Phase 3, Chandawas, Sanganer - Rewari Road, Jaipur, Rajasthan, INDIA - 303904',
+        text: 'Rohini Nagar, Phase 3, Chandawas, Sanganer - Renwal Road, Jaipur, Rajasthan, INDIA - 303904',
       },
     ],
     email: 'info@ipsedu.in',
