@@ -9,6 +9,7 @@ import IpsSutraPageContent from '@/models/IpsSutraPageContent';
 import AboutPageContent from '@/models/AboutPageContent';
 import BoardOfAdvisorsPageContent from '@/models/BoardOfAdvisorsPageContent';
 import PlacementsPageContent from '@/models/PlacementsPageContent';
+import FacultyPageContent from '@/models/FacultyPageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -367,6 +368,40 @@ export async function getPlacementsSection(section) {
     return doc || null;
   } catch (error) {
     console.error(`[GET PLACEMENTS SECTION ERROR] ${section}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch all Faculty page section documents and return as a keyed object.
+ * Falls back to an empty object so components use their static defaults.
+ */
+export async function getFacultyPageContent() {
+  try {
+    await connectDB();
+    const docs = await FacultyPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET FACULTY PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single Faculty page section document.
+ * @param {string} section - 'banner' | 'faculty' | 'mentors'
+ */
+export async function getFacultySection(section) {
+  try {
+    await connectDB();
+    const doc = await FacultyPageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET FACULTY SECTION ERROR] ${section}:`, error);
     return null;
   }
 }

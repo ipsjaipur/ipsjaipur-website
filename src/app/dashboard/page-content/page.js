@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users } from 'lucide-react';
 
 const PAGES = [
   {
@@ -10,14 +10,14 @@ const PAGES = [
     color: '#eb5905',
     sections: ['Hero Banner', 'Approvals', 'About / Methodology', 'Pathway', 'Programs', 'Placements', 'Video Gallery', 'Achievers', 'Testimonials', 'Apply Now CTA'],
   },
-  // {
-  //   label: 'Placements Page',
-  //   description: 'Edit all sections of the placements page — sector-wise stats, placement updates grid, resume book videos, FAQ, and coordinator contact.',
-  //   href: '/dashboard/page-content/placements',
-  //   icon: TrendingUp,
-  //   color: '#EF4444',
-  //   sections: ['Placement Stats', 'Coordinator Contact', 'Placement Updates', 'Resume Book', 'Industry FAQ'],
-  // },
+  {
+    label: 'Placements Page',
+    description: 'Edit all sections of the placements page — sector-wise stats, placement updates grid, resume book videos, FAQ, and coordinator contact.',
+    href: '/dashboard/page-content/placements',
+    icon: TrendingUp,
+    color: '#EF4444',
+    sections: ['Placement Stats', 'Coordinator Contact', 'Placement Updates', 'Resume Book', 'Industry FAQ'],
+  },
   {
     label: 'About Page',
     description: 'Edit the About (IPS Ideology) page — banner, page heading, opening quote, description paragraphs, Why Choose IPS items, and sidebar videos.',
@@ -65,6 +65,14 @@ const PAGES = [
     icon: Sparkles,
     color: '#F59E0B',
     sections: ['Page Content', 'IPS Advantages'],
+  },
+  {
+    label: 'Faculty Page',
+    description: 'Edit the Faculty page — banner, Core & Visiting Faculty table rows, and Corporate Speakers / Mentors table rows.',
+    href: '/dashboard/page-content/faculty',
+    icon: Users,
+    color: '#0EA5E9',
+    sections: ['Banner', 'Core & Visiting Faculty', 'Corporate Speakers / Mentors'],
   },
 ];
 
