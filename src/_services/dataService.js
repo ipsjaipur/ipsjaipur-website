@@ -11,6 +11,7 @@ import BoardOfAdvisorsPageContent from '@/models/BoardOfAdvisorsPageContent';
 import PlacementsPageContent from '@/models/PlacementsPageContent';
 import FacultyPageContent from '@/models/FacultyPageContent';
 import StudentLifePageContent from '@/models/StudentLifePageContent';
+import InfrastructurePageContent from '@/models/InfrastructurePageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -437,6 +438,40 @@ export async function getStudentLifeSection(section) {
     return doc || null;
   } catch (error) {
     console.error(`[GET STUDENT LIFE SECTION ERROR] ${section}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch all Infrastructure page section documents and return as a keyed object.
+ * Returns {} on DB error — the page will call notFound() when it receives {}.
+ */
+export async function getInfrastructurePageContent() {
+  try {
+    await connectDB();
+    const docs = await InfrastructurePageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET INFRASTRUCTURE PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single Infrastructure page section document.
+ * @param {string} section - e.g. 'banner' | 'intro' | 'classrooms' | etc.
+ */
+export async function getInfrastructureSection(section) {
+  try {
+    await connectDB();
+    const doc = await InfrastructurePageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET INFRASTRUCTURE SECTION ERROR] ${section}:`, error);
     return null;
   }
 }

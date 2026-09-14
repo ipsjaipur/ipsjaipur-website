@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2 } from 'lucide-react';
 
 const PAGES = [
   {
@@ -81,6 +81,14 @@ const PAGES = [
     icon: HeartHandshake,
     color: '#10B981',
     sections: ['Banner', 'Life at Campus', 'Students Club', 'Sports Club', 'Indoor Games', 'Committees', 'Sidebar Videos'],
+  },
+  {
+    label: 'Infrastructure Page',
+    description: 'Edit the Infrastructure page — banner, campus intro, classrooms, auditorium, labs, library, sports, Wi-Fi, parking, hostels, location, transport, nearby, sidebar videos, and navigation.',
+    href: '/dashboard/page-content/infrastructure',
+    icon: Building2,
+    color: '#eb5905',
+    sections: ['Banner', 'Campus Intro', 'AC Classrooms', 'Auditorium', 'Computer Labs', 'Library', 'Sports', 'Wi-Fi', 'Parking', 'Hostels', 'Location', 'Transport', 'Nearby', 'Ecosystem', 'Navigation', 'Sidebar Videos'],
   },
 ];
 
