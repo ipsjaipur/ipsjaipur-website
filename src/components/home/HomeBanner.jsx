@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
+import { cloudinaryImage } from '@/_utils/cloudinaryImage';
 
 // ── Static fallback data ───────────────────────────────────────────────────────
 const IMG = process.env.NEXT_PUBLIC_IMG_PATH || '/';
@@ -58,10 +59,16 @@ export default function HomeBanner({ data }) {
   }, []);
 
   // Use DB data if available, otherwise fall back to static defaults
-  const slides =
+  const rawSlides =
     data?.bannerSlides?.length > 0
       ? [...data.bannerSlides].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
       : FALLBACK_SLIDES;
+
+  // Inject Cloudinary transforms for every slide (no-op for local /public paths)
+  const slides = rawSlides.map((s) => ({
+    ...s,
+    src: cloudinaryImage(s.src, 'f_auto,q_auto,w_1920'),
+  }));
 
   const seoH1 = data?.bannerSeoH1 || FALLBACK_SEO_H1;
 
@@ -118,8 +125,6 @@ export default function HomeBanner({ data }) {
                   priority={slide.priority || false}
                   className="object-cover object-center sm:object-top"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 100vw"
-                  unoptimized
-                  quality={100}
                   draggable={false}
                 />
               </motion.div>

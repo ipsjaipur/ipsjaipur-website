@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import CourseNavigation from '../courses/CourseNavigation';
 import CommonBanner from '../courses/CommonBanner';
 import CourseQuickLinks from '../courses/CourseQuickLinks';
+import { cloudinaryImage } from '@/_utils/cloudinaryImage';
 
 export default function MainStudent({ pageContent = {} }) {
   // ── Pull sections ────────────────────────────────────────────────────────────
@@ -17,8 +18,10 @@ export default function MainStudent({ pageContent = {} }) {
 
   // ── Banner ───────────────────────────────────────────────────────────────────
   const bannerTitle = bannerData.bannerTitle || 'Student Life';
-  const bannerImageUrl =
-    bannerData.bannerImageUrl || `${process.env.NEXT_PUBLIC_IMG_PATH}images/about/student-img-2.webp`;
+  const bannerImageUrl = cloudinaryImage(
+    bannerData.bannerImageUrl || `${process.env.NEXT_PUBLIC_IMG_PATH}images/about/student-img-2.webp`,
+    'f_auto,q_auto,w_1920',
+  );
   const bannerPosition = bannerData.bannerPosition || 'object-top';
 
   // ── Campus ───────────────────────────────────────────────────────────────────

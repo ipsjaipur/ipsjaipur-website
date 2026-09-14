@@ -1,6 +1,7 @@
 'use client';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
+import { cloudinaryImage } from '@/_utils/cloudinaryImage';
 
 // ── Animation variants ─────────────────────────────────────────────────────
 const containerVariants = {
@@ -73,7 +74,7 @@ export default function CourseBannerSlider({ slides = [], courseName = null, pos
                 variants={imageVariants}
               >
                 <img
-                  src={slide.src}
+                  src={cloudinaryImage(slide.src, 'f_auto,q_auto,w_1920')}
                   alt={slide.alt}
                   className={`object-cover ${(position && position) || ' object-top'} w-full h-full`}
                   style={{ filter: improveContrast && 'contrast(105%)' }}

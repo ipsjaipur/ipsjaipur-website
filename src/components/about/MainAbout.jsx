@@ -2,6 +2,7 @@ import React from 'react';
 import Breadcrumb from '../common/Breadcrumb';
 import CommonBanner from '../courses/CommonBanner';
 import CourseQuickLinks from '../courses/CourseQuickLinks';
+import { cloudinaryImage } from '@/_utils/cloudinaryImage';
 
 export default function MainAbout({ aboutContent = {} }) {
   // ── Pull sections ─────────────────────────────────────────────────────────
@@ -11,11 +12,14 @@ export default function MainAbout({ aboutContent = {} }) {
   // ── Banner ─────────────────────────────────────────────────────────────────
   const imgBase = process.env.NEXT_PUBLIC_IMG_PATH || '';
   const bannerTitle = contentData.bannerTitle || 'IPS Ideology';
-  const bannerImageUrl = contentData.bannerImageUrl
-    ? contentData.bannerImageUrl.startsWith('http')
-      ? contentData.bannerImageUrl
-      : `${imgBase}${contentData.bannerImageUrl}`
-    : `${imgBase}images/about/about-us-image-3.webp`;
+  const bannerImageUrl = cloudinaryImage(
+    contentData.bannerImageUrl
+      ? contentData.bannerImageUrl.startsWith('http')
+        ? contentData.bannerImageUrl
+        : `${imgBase}${contentData.bannerImageUrl}`
+      : `${imgBase}images/about/about-us-image-3.webp`,
+    'f_auto,q_auto,w_1920',
+  );
   const bannerPosition = contentData.bannerPosition || 'object-bottom';
 
   // ── Main content ───────────────────────────────────────────────────────────

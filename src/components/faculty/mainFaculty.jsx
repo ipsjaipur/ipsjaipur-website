@@ -4,6 +4,7 @@ import SidebarLayout from '../common/SidebarLayout';
 import Breadcrumb from '../common/Breadcrumb';
 import CommonBanner from '../courses/CommonBanner';
 import CourseQuickLinks from '../courses/CourseQuickLinks';
+import { cloudinaryImage } from '@/_utils/cloudinaryImage';
 
 export default function MainFaculty({ facultyContent }) {
   const [activeTab, setActiveTab] = useState('visiting-faculty');
@@ -13,7 +14,10 @@ export default function MainFaculty({ facultyContent }) {
   const bannerTitle = bannerData.bannerTitle;
   const bannerPosition = bannerData.bannerPosition;
   const imgBase = process.env.NEXT_PUBLIC_IMG_PATH || '';
-  const bannerImageUrl = bannerData.bannerImageUrl || `${imgBase}${bannerData.bannerImageUrl}`;
+  const bannerImageUrl = cloudinaryImage(
+    bannerData.bannerImageUrl || `${imgBase}${bannerData.bannerImageUrl}`,
+    'f_auto,q_auto,w_1920',
+  );
 
   // ── Faculty section ─────────────────────────────────────────────────────────
   const facultySection = facultyContent.faculty;

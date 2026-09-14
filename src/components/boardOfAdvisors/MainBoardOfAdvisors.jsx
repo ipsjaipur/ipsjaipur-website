@@ -3,6 +3,7 @@ import Breadcrumb from '../common/Breadcrumb';
 import CommonBanner from '../courses/CommonBanner';
 import BoardOfAdvisorsSection from './BoardOfAdvisorsSection';
 import BridgingTheorySection from './BridgingTheorySection';
+import { cloudinaryImage } from '@/_utils/cloudinaryImage';
 
 export default function MainBoardOfAdvisors({ boardContent = {} }) {
   const imgBase = process.env.NEXT_PUBLIC_IMG_PATH || '';
@@ -10,7 +11,10 @@ export default function MainBoardOfAdvisors({ boardContent = {} }) {
   // ── Banner section ─────────────────────────────────────────────────────────
   const bannerData = boardContent?.banner || {};
   const bannerTitle = bannerData.bannerTitle || 'Board of Advisors';
-  const bannerImageUrl = bannerData.bannerImageUrl || `${imgBase}images/about/board-of-advisor-img.webp`;
+  const bannerImageUrl = cloudinaryImage(
+    bannerData.bannerImageUrl || `${imgBase}images/about/board-of-advisor-img.webp`,
+    'f_auto,q_auto,w_1920',
+  );
   const bannerPosition = bannerData.bannerPosition || 'object-center';
 
   // ── Advisors section data ──────────────────────────────────────────────────

@@ -9,12 +9,8 @@ import CourseNavigation from '../courses/CourseNavigation';
 import CourseQuickLinks from '../courses/CourseQuickLinks';
 import CommonBanner from '../courses/CommonBanner';
 import Breadcrumb from '../common/Breadcrumb';
+import { cloudinaryImage } from '@/_utils/cloudinaryImage';
 
-/**
- * Infrastructure page component.
- * All content comes from the `pageContent` prop (MongoDB via server component).
- * No static fallback data — if pageContent is missing the parent page calls notFound().
- */
 export default function MainFaculty({ pageContent }) {
   const [activeGallery, setActiveGallery] = useState(null);
 
@@ -65,7 +61,7 @@ export default function MainFaculty({ pageContent }) {
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
     .map((v) => ({ url: v.url, title: v.title || '' }));
 
-  const bannerImageUrl = banner.bannerImageUrl || '';
+  const bannerImageUrl = cloudinaryImage(banner.bannerImageUrl || '', 'f_auto,q_auto,w_1920');
   const bannerPosition = banner.bannerPosition || 'object-bottom';
   const bannerTitle = banner.bannerTitle || 'Infrastructure';
 
