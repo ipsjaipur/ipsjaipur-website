@@ -10,6 +10,7 @@ import AboutPageContent from '@/models/AboutPageContent';
 import BoardOfAdvisorsPageContent from '@/models/BoardOfAdvisorsPageContent';
 import PlacementsPageContent from '@/models/PlacementsPageContent';
 import FacultyPageContent from '@/models/FacultyPageContent';
+import StudentLifePageContent from '@/models/StudentLifePageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -402,6 +403,40 @@ export async function getFacultySection(section) {
     return doc || null;
   } catch (error) {
     console.error(`[GET FACULTY SECTION ERROR] ${section}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetch all Student Life page section documents and return as a keyed object.
+ * Falls back to an empty object so the page calls notFound().
+ */
+export async function getStudentLifePageContent() {
+  try {
+    await connectDB();
+    const docs = await StudentLifePageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET STUDENT LIFE PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single Student Life page section document.
+ * @param {string} section - 'banner' | 'campus' | 'student-club' | 'sports-club' | 'indoor-games' | 'committees' | 'sidebar'
+ */
+export async function getStudentLifeSection(section) {
+  try {
+    await connectDB();
+    const doc = await StudentLifePageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET STUDENT LIFE SECTION ERROR] ${section}:`, error);
     return null;
   }
 }

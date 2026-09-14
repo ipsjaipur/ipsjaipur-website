@@ -1,7 +1,5 @@
 import React from 'react';
-import SidebarWidgets from '../common/SidebarWidgets';
 import Breadcrumb from '../common/Breadcrumb';
-import Script from 'next/script';
 import CommonBanner from '../courses/CommonBanner';
 import CourseQuickLinks from '../courses/CourseQuickLinks';
 

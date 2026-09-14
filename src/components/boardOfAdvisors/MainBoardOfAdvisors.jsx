@@ -10,11 +10,7 @@ export default function MainBoardOfAdvisors({ boardContent = {} }) {
   // ── Banner section ─────────────────────────────────────────────────────────
   const bannerData = boardContent?.banner || {};
   const bannerTitle = bannerData.bannerTitle || 'Board of Advisors';
-  const bannerImageUrl = bannerData.bannerImageUrl
-    ? bannerData.bannerImageUrl.startsWith('http')
-      ? bannerData.bannerImageUrl
-      : `${imgBase}${bannerData.bannerImageUrl}`
-    : `${imgBase}images/about/board-of-advisor-img.webp`;
+  const bannerImageUrl = bannerData.bannerImageUrl || `${imgBase}images/about/board-of-advisor-img.webp`;
   const bannerPosition = bannerData.bannerPosition || 'object-center';
 
   // ── Advisors section data ──────────────────────────────────────────────────

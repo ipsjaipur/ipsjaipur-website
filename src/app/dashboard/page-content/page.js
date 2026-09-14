@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake } from 'lucide-react';
 
 const PAGES = [
   {
@@ -73,6 +73,14 @@ const PAGES = [
     icon: Users,
     color: '#0EA5E9',
     sections: ['Banner', 'Core & Visiting Faculty', 'Corporate Speakers / Mentors'],
+  },
+  {
+    label: 'Student Life Page',
+    description: 'Edit the Student Life page — banner, life at campus, students clubs, sports club, indoor games, committees, and sidebar videos.',
+    href: '/dashboard/page-content/student-life',
+    icon: HeartHandshake,
+    color: '#10B981',
+    sections: ['Banner', 'Life at Campus', 'Students Club', 'Sports Club', 'Indoor Games', 'Committees', 'Sidebar Videos'],
   },
 ];
 

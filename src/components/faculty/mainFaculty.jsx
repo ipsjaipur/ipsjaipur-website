@@ -13,9 +13,7 @@ export default function MainFaculty({ facultyContent }) {
   const bannerTitle = bannerData.bannerTitle;
   const bannerPosition = bannerData.bannerPosition;
   const imgBase = process.env.NEXT_PUBLIC_IMG_PATH || '';
-  const bannerImageUrl = bannerData.bannerImageUrl.startsWith('http')
-    ? bannerData.bannerImageUrl
-    : `${imgBase}${bannerData.bannerImageUrl}`;
+  const bannerImageUrl = bannerData.bannerImageUrl || `${imgBase}${bannerData.bannerImageUrl}`;
 
   // ── Faculty section ─────────────────────────────────────────────────────────
   const facultySection = facultyContent.faculty;
