@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2 } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare } from 'lucide-react';
 
 const PAGES = [
   {
@@ -89,6 +89,14 @@ const PAGES = [
     icon: Building2,
     color: '#eb5905',
     sections: ['Banner', 'Campus Intro', 'AC Classrooms', 'Auditorium', 'Computer Labs', 'Library', 'Sports', 'Wi-Fi', 'Parking', 'Hostels', 'Location', 'Transport', 'Nearby', 'Ecosystem', 'Navigation', 'Sidebar Videos'],
+  },
+  {
+    label: 'MBA vs PGDM Page',
+    description: 'Edit the MBA vs PGDM page — banner, main content section (headings, paragraphs, approval cards, hybrid CTA), comparison matrix table rows, and feature cards.',
+    href: '/dashboard/page-content/mba-vs-pgdm',
+    icon: GitCompare,
+    color: '#0EA5E9',
+    sections: ['Banner', 'Page Content', 'Comparison Matrix & Features'],
   },
 ];
 

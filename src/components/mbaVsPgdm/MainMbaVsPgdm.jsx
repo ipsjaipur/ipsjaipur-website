@@ -1,21 +1,27 @@
 'use client';
-import React from 'react';
 import Breadcrumb from '../common/Breadcrumb';
 import CommonBanner from '../courses/CommonBanner';
 import MbaVsPgdmContentSection from './MbaVsPgdmContentSection';
-import MbaFeatures from './MbaFeatures';
 import ComparisonMatrix from './ComparisonMatrix';
+import MbaFeatures from './MbaFeatures';
+import { cloudinaryImage } from '@/_utils/cloudinaryImage';
 
-export default function MainMbaVsPgdm() {
-  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/mba-vs-pgdm-bg-2.webp';
+export default function MainMbaVsPgdm({ pageContent = {} }) {
+  const bannerData = pageContent?.banner || {};
+  const contentData = pageContent?.content || {};
+  const comparisonData = pageContent?.comparison || {};
+
+  const bannerTitle = bannerData.bannerTitle || 'MBA vs. PGDM';
+  const bannerPosition = bannerData.bannerPosition || 'object-[50%_35%]';
+  const bannerImageUrl = cloudinaryImage(bannerData.bannerImageUrl || '', 'f_auto,q_auto,w_1920');
 
   return (
     <>
-      <CommonBanner pageTitle="MBA vs. PGDM" bgImageUrl={bannerImageUrl} position=" object-[50%_35%]" />
+      <CommonBanner pageTitle={bannerTitle} bgImageUrl={bannerImageUrl} position={bannerPosition} />
       <Breadcrumb pageName="MBA vs. PGDM" />
-      <MbaVsPgdmContentSection />
-      <ComparisonMatrix />
-      <MbaFeatures />
+      <MbaVsPgdmContentSection data={contentData} />
+      <ComparisonMatrix data={comparisonData} />
+      <MbaFeatures data={comparisonData} />
     </>
   );
 }

@@ -12,6 +12,7 @@ import PlacementsPageContent from '@/models/PlacementsPageContent';
 import FacultyPageContent from '@/models/FacultyPageContent';
 import StudentLifePageContent from '@/models/StudentLifePageContent';
 import InfrastructurePageContent from '@/models/InfrastructurePageContent';
+import MbaVsPgdmPageContent from '@/models/MbaVsPgdmPageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -473,5 +474,24 @@ export async function getInfrastructureSection(section) {
   } catch (error) {
     console.error(`[GET INFRASTRUCTURE SECTION ERROR] ${section}:`, error);
     return null;
+  }
+}
+
+/**
+ * Fetch all MBA vs PGDM page section documents and return as a keyed object.
+ * Falls back to an empty object so the page calls notFound().
+ */
+export async function getMbaVsPgdmPageContent() {
+  try {
+    await connectDB();
+    const docs = await MbaVsPgdmPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET MBA VS PGDM PAGE CONTENT ERROR]:', error);
+    return {};
   }
 }
