@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { cloudinaryImage } from '@/_utils/cloudinaryImage';
 
 // ── Static fallback ────────────────────────────────────────────────────────────
 const FALLBACK_CARDS = [
@@ -32,7 +32,10 @@ const FALLBACK_CENTER_IMAGE = 'images/home/ab-n-1.webp';
 export default function PathwayToExcellence({ data }) {
   const sectionLabel = data?.pathwaySectionLabel || 'IPS COLLEGE';
   const heading = data?.pathwayHeading || 'Your Pathway to Excellence';
-  const centerImage = data?.pathwayCenterImage || `${process.env.NEXT_PUBLIC_IMG_PATH}${FALLBACK_CENTER_IMAGE}`;
+  const centerImage = cloudinaryImage(
+    data?.pathwayCenterImage || `${process.env.NEXT_PUBLIC_IMG_PATH}${FALLBACK_CENTER_IMAGE}`,
+    'f_auto,q_auto,w_600',
+  );
   const allCards =
     data?.pathwayCards?.length > 0
       ? [...data.pathwayCards].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))

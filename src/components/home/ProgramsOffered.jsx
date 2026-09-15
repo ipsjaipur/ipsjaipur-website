@@ -2,6 +2,7 @@
 import { Clock, User, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
+import { cloudinaryImage } from '@/_utils/cloudinaryImage';
 
 // ── Static fallback ────────────────────────────────────────────────────────────
 const FALLBACK_PROGRAMS = [
@@ -92,7 +93,9 @@ export default function ProgramsOffered({ data }) {
   const subHeading = data?.programsSubHeading || 'Discover Your Perfect Program';
   const programs =
     data?.programs?.length > 0
-      ? [...data.programs].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+      ? [...data.programs]
+          .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+          .map((p) => ({ ...p, image: cloudinaryImage(p.image, 'f_auto,q_auto,w_600') }))
       : FALLBACK_PROGRAMS.map((p) => ({
           ...p,
           image: `${process.env.NEXT_PUBLIC_IMG_PATH}${p.image}`,

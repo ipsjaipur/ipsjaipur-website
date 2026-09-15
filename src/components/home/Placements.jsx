@@ -3,6 +3,7 @@ import Marquee from 'react-fast-marquee';
 import Slider from 'react-slick';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { cloudinaryImage } from '@/_utils/cloudinaryImage';
 
 function NextArrow(props) {
   const { onClick } = props;
@@ -91,7 +92,9 @@ export default function Placements({ data }) {
 
   const placementStudents =
     data?.placementStudents?.length > 0
-      ? [...data.placementStudents].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+      ? [...data.placementStudents]
+          .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+          .map((s) => ({ ...s, image: cloudinaryImage(s.image, 'f_auto,q_auto,w_800') }))
       : FALLBACK_STUDENTS.map((s) => ({ ...s, image: `${process.env.NEXT_PUBLIC_IMG_PATH}${s.image}` }));
 
   const sliderSettings = {
