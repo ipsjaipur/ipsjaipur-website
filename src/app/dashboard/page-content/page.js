@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare, PhoneCall } from 'lucide-react';
 
 const PAGES = [
   {
@@ -97,6 +97,14 @@ const PAGES = [
     icon: GitCompare,
     color: '#0EA5E9',
     sections: ['Banner', 'Page Content', 'Comparison Matrix & Features'],
+  },
+  {
+    label: 'Contact Page',
+    description: 'Edit the Contact page — banner, card heading, campus addresses, phone, WhatsApp, email, website, social links, and Google Maps embeds.',
+    href: '/dashboard/page-content/contact',
+    icon: PhoneCall,
+    color: '#10B981',
+    sections: ['Banner', 'Contact Information'],
   },
 ];
 
