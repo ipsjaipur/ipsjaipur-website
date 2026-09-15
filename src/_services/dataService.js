@@ -14,6 +14,7 @@ import StudentLifePageContent from '@/models/StudentLifePageContent';
 import InfrastructurePageContent from '@/models/InfrastructurePageContent';
 import MbaVsPgdmPageContent from '@/models/MbaVsPgdmPageContent';
 import ContactPageContent from '@/models/ContactPageContent';
+import MissionVisionPageContent from '@/models/MissionVisionPageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -512,6 +513,25 @@ export async function getContactPageContent() {
     return map;
   } catch (error) {
     console.error('[GET CONTACT PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch all Mission & Vision page section documents and return as a keyed object.
+ * Falls back to an empty object so the page calls notFound().
+ */
+export async function getMissionVisionPageContent() {
+  try {
+    await connectDB();
+    const docs = await MissionVisionPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET MISSION VISION PAGE CONTENT ERROR]:', error);
     return {};
   }
 }

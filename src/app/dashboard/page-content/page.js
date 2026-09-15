@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare, PhoneCall } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare, PhoneCall, Target } from 'lucide-react';
 
 const PAGES = [
   {
@@ -105,6 +105,14 @@ const PAGES = [
     icon: PhoneCall,
     color: '#10B981',
     sections: ['Banner', 'Contact Information'],
+  },
+  {
+    label: 'Mission & Vision Page',
+    description: 'Edit the Mission & Vision page — banner, institutional section (heading, quote, paragraphs, image), Vision & Mission cards, and Core Values grid.',
+    href: '/dashboard/page-content/mission-vision',
+    icon: Target,
+    color: '#8B5CF6',
+    sections: ['Banner', 'Institutional Section', 'Vision & Mission', 'Core Values'],
   },
 ];
 
