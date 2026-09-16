@@ -15,6 +15,7 @@ import InfrastructurePageContent from '@/models/InfrastructurePageContent';
 import MbaVsPgdmPageContent from '@/models/MbaVsPgdmPageContent';
 import ContactPageContent from '@/models/ContactPageContent';
 import MissionVisionPageContent from '@/models/MissionVisionPageContent';
+import CareerPageContent from '@/models/CareerPageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -533,5 +534,39 @@ export async function getMissionVisionPageContent() {
   } catch (error) {
     console.error('[GET MISSION VISION PAGE CONTENT ERROR]:', error);
     return {};
+  }
+}
+
+/**
+ * Fetch all Career page section documents and return as a keyed object.
+ * Falls back to an empty object so the page uses component-level defaults.
+ */
+export async function getCareerPageContent() {
+  try {
+    await connectDB();
+    const docs = await CareerPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET CAREER PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single Career page section document.
+ * @param {string} section - 'banner' | 'intro' | 'requirements' | 'perks' | 'openings' | 'contact'
+ */
+export async function getCareerSection(section) {
+  try {
+    await connectDB();
+    const doc = await CareerPageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET CAREER SECTION ERROR] ${section}:`, error);
+    return null;
   }
 }

@@ -20,6 +20,7 @@ import {
   GraduationCap,
   Sparkles,
   TrendingUp,
+  Rocket,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import toast from 'react-hot-toast';
@@ -38,7 +39,6 @@ const NAV_ITEMS = [
     prefix: '/dashboard/page-content',
     href: '/dashboard/page-content',
   },
-  // ── Blog & News ────────────────────────────────────────────────────────────
   {
     label: 'Blogs',
     icon: FileText,

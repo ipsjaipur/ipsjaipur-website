@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare, PhoneCall, Target } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare, PhoneCall, Target, Rocket } from 'lucide-react';
 
 const PAGES = [
   {
@@ -113,6 +113,14 @@ const PAGES = [
     icon: Target,
     color: '#8B5CF6',
     sections: ['Banner', 'Institutional Section', 'Vision & Mission', 'Core Values'],
+  },
+  {
+    label: 'Career Page',
+    description: 'Edit the Career page — banner, intro paragraph, requirements list, perks/benefits list, current job openings (departments + roles), and contact/apply details.',
+    href: '/dashboard/page-content/career',
+    icon: Rocket,
+    color: '#eb5905',
+    sections: ['Banner', 'Introduction', 'Requirements', 'Perks / Why Join', 'Current Openings', 'Contact / Apply'],
   },
 ];
 
