@@ -1,6 +1,7 @@
 import React from "react";
 
 const Schema = ({ pathname }) => {
+  console.log('pathname', pathname)
   // Organization schema - critical for showing logo in Google Search
   const organizationSchema = `{
     "@context": "https://schema.org",
@@ -66,7 +67,7 @@ const Schema = ({ pathname }) => {
   let pageSpecificSchema = null;
 
   // Page-specific schemas
-  if (pathname === '/about' || pathname === '/about-us') {
+  if (pathname === '/about') {
     pageSpecificSchema = `{
       "@context": "https://schema.org",
       "@type": "EducationalOrganization",
@@ -99,67 +100,112 @@ const Schema = ({ pathname }) => {
         ]
       }
     }`;
-  } else if (pathname === '/courses/mba' || pathname === '/mba') {
+  } else if (pathname === '/mba') {
     pageSpecificSchema = `{
-      "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "MBA - Master of Business Administration",
-      "description": "2-year full-time MBA program at IPS Business School Jaipur, affiliated with Rajasthan Technical University, offering specializations in various management domains.",
-      "provider": {
-        "@type": "CollegeOrUniversity",
-        "name": "IPS Business School Jaipur",
-        "sameAs": "https://www.ipsedu.in/"
-      },
-      "educationalLevel": "Postgraduate",
-      "timeToComplete": "P2Y",
-      "occupationalCategory": "Business Management",
-      "offers": {
-        "@type": "Offer",
-        "category": "Paid",
-        "availability": "https://schema.org/InStock"
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "@id": "https://www.ipsedu.in/mba#course",
+    "name": "MBA in Jaipur",
+    "description": "MBA at IPS Business School is a postgraduate management program designed to develop students' skills in business management, leadership, marketing, finance, strategic management and other industry-relevant areas through practical and career-oriented learning.",
+    "url": "https://www.ipsedu.in/mba",
+    "provider": {
+      "@type": "EducationalOrganization",
+      "name": "IPS Business School",
+      "url": "https://www.ipsedu.in/"
+    },
+    "educationalLevel": "Postgraduate",
+    "courseMode": "Onsite",
+    "timeRequired": "P2Y",
+    "inLanguage": "en",
+    "occupationalCredentialAwarded": "Master of Business Administration (MBA)",
+    "coursePrerequisites": "Candidates with a bachelor's degree from a recognized university are eligible to apply, subject to the eligibility criteria specified by the institution.",
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "Onsite",
+      "duration": "P2Y",
+      "location": {
+        "@type": "Place",
+        "name": "IPS Business School, Jaipur",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Jaipur",
+          "addressRegion": "Rajasthan",
+          "addressCountry": "IN"
+        }
+      }
       }
     }`;
-  } else if (pathname === '/courses/bba' || pathname === '/bba') {
+  } else if (pathname === '/bba') {
+    pageSpecificSchema = `{
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "@id": "https://www.ipsedu.in/bba#course",
+    "name": "BBA in Jaipur",
+    "description": "BBA at IPS Business School is an undergraduate management program designed to develop students' knowledge and practical skills in business management, marketing, finance, entrepreneurship, leadership and other industry-relevant areas through practical and career-oriented learning.",
+    "url": "https://www.ipsedu.in/bba",
+    "provider": {
+      "@type": "EducationalOrganization",
+      "name": "IPS Business School",
+      "url": "https://www.ipsedu.in/"
+    },
+    "educationalLevel": "Undergraduate",
+    "courseMode": "Onsite",
+    "timeRequired": "P3Y",
+    "inLanguage": "en",
+    "occupationalCredentialAwarded": "Bachelor of Business Administration (BBA)",
+    "coursePrerequisites": "Candidates who have completed or are appearing for their 10+2 or equivalent examination from a recognized board are eligible to apply, subject to the eligibility criteria specified by the institution.",
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "Onsite",
+      "duration": "P3Y",
+      "location": {
+        "@type": "Place",
+        "name": "IPS Business School, Jaipur",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Jaipur",
+          "addressRegion": "Rajasthan",
+          "addressCountry": "IN"
+        }
+       }
+      }
+    }`;
+  } else if (pathname === '/bca') {
     pageSpecificSchema = `{
       "@context": "https://schema.org",
       "@type": "Course",
-      "name": "BBA - Bachelor of Business Administration",
-      "description": "3-year full-time BBA program at IPS Business School Jaipur, affiliated with Rajasthan Technical University, providing foundation in business management.",
+      "@id": "https://www.ipsedu.in/bca#course",
+      "name": "BCA in Jaipur",
+      "description": "BCA at IPS Business School is an undergraduate computer applications program designed to develop students' knowledge and practical skills in programming, computer applications, software development, database management, web technologies and other industry-relevant areas.",
+      "url": "https://www.ipsedu.in/bca",
       "provider": {
-        "@type": "CollegeOrUniversity",
-        "name": "IPS Business School Jaipur",
-        "sameAs": "https://www.ipsedu.in/"
+        "@type": "EducationalOrganization",
+        "name": "IPS Business School",
+        "url": "https://www.ipsedu.in/"
       },
       "educationalLevel": "Undergraduate",
-      "timeToComplete": "P3Y",
-      "occupationalCategory": "Business Management",
-      "offers": {
-        "@type": "Offer",
-        "category": "Paid",
-        "availability": "https://schema.org/InStock"
-      }
-    }`;
-  } else if (pathname === '/courses/bca' || pathname === '/bca') {
-    pageSpecificSchema = `{
-      "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "BCA - Bachelor of Computer Applications",
-      "description": "3-year full-time BCA program at IPS Business School Jaipur, affiliated with Rajasthan Technical University, focusing on computer applications and IT skills.",
-      "provider": {
-        "@type": "CollegeOrUniversity",
-        "name": "IPS Business School Jaipur",
-        "sameAs": "https://www.ipsedu.in/"
-      },
-      "educationalLevel": "Undergraduate",
-      "timeToComplete": "P3Y",
-      "occupationalCategory": "Computer Applications",
-      "offers": {
-        "@type": "Offer",
-        "category": "Paid",
-        "availability": "https://schema.org/InStock"
-      }
-    }`;
-  } else if (pathname === '/contact' || pathname === '/contact-us') {
+      "courseMode": "Onsite",
+      "timeRequired": "P3Y",
+      "inLanguage": "en",
+      "occupationalCredentialAwarded": "Bachelor of Computer Applications (BCA)",
+      "coursePrerequisites": "Candidates who have completed or are appearing for their 10+2 or equivalent examination from a recognized board are eligible to apply, subject to the eligibility criteria specified by the institution.",
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "Onsite",
+        "duration": "P3Y",
+        "location": {
+          "@type": "Place",
+          "name": "IPS Business School, Jaipur",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Jaipur",
+            "addressRegion": "Rajasthan",
+            "addressCountry": "IN"
+          }
+          }
+        }
+      }`;
+  } else if (pathname === '/contact') {
     pageSpecificSchema = `{
       "@context": "https://schema.org",
       "@type": "ContactPage",
