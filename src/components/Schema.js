@@ -2,68 +2,8 @@ import React from "react";
 
 const Schema = ({ pathname }) => {
   console.log('pathname', pathname)
-  // Organization schema - critical for showing logo in Google Search
-  const organizationSchema = `{
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "IPS Business School Jaipur",
-    "alternateName": ["IPS College Jaipur", "Institute of Professional Studies"],
-    "url": "https://www.ipsedu.in/",
-    "logo": "https://www.ipsedu.in/images/ips-logoW.png",
-    "description": "IPS Business School, Jaipur is one of Rajasthan's premier management institutes, dedicated to shaping future business leaders. Affiliated with Rajasthan University, we offer industry-focused MBA, BBA, and BCA programs with emphasis on practical learning and career development.",
-    "contactPoint": [{
-      "@type": "ContactPoint",
-      "telephone": "+91 8233970000",
-      "email": "info@ipsedu.in",
-      "contactType": "customer support",
-      "areaServed": "IN",
-      "availableLanguage": ["English", "Hindi"]
-    }],
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "A 1, Padmawati Colony - B, Pandit T.N. Mishra Marg, Nirman Nagar",
-      "addressLocality": "Jaipur",
-      "addressRegion": "Rajasthan",
-      "postalCode": "302019",
-      "addressCountry": "IN"
-    },
-    "sameAs": [
-      "https://www.facebook.com/ipscollegejaipur",
-      "https://en.wikipedia.org/wiki/IPS_Business_School",
-      "https://www.instagram.com/ips_business_school/",
-      "https://www.linkedin.com/school/ips-business-school-jaipur/"
-    ]
-  }`;
 
-  // Default schema for all pages
-  const defaultSchema = `{
-    "@context": "https://schema.org",
-    "@type": "CollegeOrUniversity",
-    "name": "IPS Business School Jaipur",
-    "alternateName": "IPS College Jaipur",
-    "url": "https://www.ipsedu.in/",
-    "logo": "https://www.ipsedu.in/images/ips-logoW.png",
-    "description": "IPS Business School, Jaipur is one of Rajasthan's premier management institutes, dedicated to shaping future business leaders. AICTE approved and affiliated with Rajasthan Technical University, we offer industry-focused MBA, BBA, and BCA programs with strong placement record and comprehensive student development initiatives.",
-    "contactPoint": [{
-      "@type": "ContactPoint",
-      "telephone": "+91 8233970000",
-      "email": "info@ipsedu.in",
-      "contactType": "Admissions / Enquiry"
-    }],
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "A 1, Padmawati Colony - B, Pandit T.N. Mishra Marg, Nirman Nagar",
-      "addressLocality": "Jaipur",
-      "postalCode": "302019",
-      "addressCountry": "IN"
-    },
-    "foundingDate": "2007",
-    "sameAs": [
-      "https://www.facebook.com/ipscollegejaipur",
-      "https://en.wikipedia.org/wiki/IPS_Business_School"
-    ]
-  }`;
-
+  let organizationSchema = null;
   let pageSpecificSchema = null;
 
   // Page-specific schemas
@@ -226,23 +166,70 @@ const Schema = ({ pathname }) => {
         }
       }
     }`;
+  } else {
+    pageSpecificSchema = `{
+      "@context": "https://schema.org",
+      "@type": "CollegeOrUniversity",
+      "name": "IPS Business School Jaipur",
+      "alternateName": "IPS College Jaipur",
+      "url": "https://www.ipsedu.in/",
+      "logo": "https://www.ipsedu.in/images/ips-logoW.png",
+      "description": "IPS Business School, Jaipur is one of Rajasthan's premier management institutes, dedicated to shaping future business leaders. AICTE approved and affiliated with Rajasthan Technical University, we offer industry-focused MBA, BBA, and BCA programs with strong placement record and comprehensive student development initiatives.",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "telephone": "+91 8233970000",
+        "email": "info@ipsedu.in",
+        "contactType": "Admissions / Enquiry"
+      }],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "A 1, Padmawati Colony - B, Pandit T.N. Mishra Marg, Nirman Nagar",
+        "addressLocality": "Jaipur",
+        "postalCode": "302019",
+        "addressCountry": "IN"
+      },
+      "foundingDate": "2007",
+      "sameAs": [
+        "https://www.facebook.com/ipscollegejaipur",
+        "https://en.wikipedia.org/wiki/IPS_Business_School"
+      ]
+    }`;
+
+    organizationSchema = `{
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "IPS Business School Jaipur",
+      "alternateName": ["IPS College Jaipur", "Institute of Professional Studies"],
+      "url": "https://www.ipsedu.in/",
+      "logo": "https://www.ipsedu.in/images/ips-logoW.png",
+      "description": "IPS Business School, Jaipur is one of Rajasthan's premier management institutes, dedicated to shaping future business leaders. Affiliated with Rajasthan University, we offer industry-focused MBA, BBA, and BCA programs with emphasis on practical learning and career development.",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "telephone": "+91 8233970000",
+        "email": "info@ipsedu.in",
+        "contactType": "customer support",
+        "areaServed": "IN",
+        "availableLanguage": ["English", "Hindi"]
+      }],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "A 1, Padmawati Colony - B, Pandit T.N. Mishra Marg, Nirman Nagar",
+        "addressLocality": "Jaipur",
+        "addressRegion": "Rajasthan",
+        "postalCode": "302019",
+        "addressCountry": "IN"
+      },
+      "sameAs": [
+        "https://www.facebook.com/ipscollegejaipur",
+        "https://en.wikipedia.org/wiki/IPS_Business_School",
+        "https://www.instagram.com/ips_business_school/",
+        "https://www.linkedin.com/school/ips-business-school-jaipur/"
+      ]
+     }`;
   }
 
   return (
     <>
-      {/* Organization Schema - Critical for Google Search logo */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: organizationSchema }}
-      />
-
-      {/* Default Schema for all pages */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: defaultSchema }}
-      />
-
-      {/* Page-specific Schema */}
       {pageSpecificSchema && (
         <script
           type="application/ld+json"
