@@ -213,6 +213,7 @@ export default function LifeCampus() {
                       <img src={src} className="" alt={`${item.title} - slide ${index + 1}`} />
                     </SwiperSlide>
                   ))}
+                  {/* slider image */}
                 </Swiper>
               </div>
               <div
