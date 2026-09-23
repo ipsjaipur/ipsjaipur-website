@@ -77,8 +77,12 @@ export default function LifeCampus() {
     {
       title: 'TREKKING',
       images: [
-        '/images/life-at-ips/38.webp',
-        '/images/life-at-ips/39.webp',
+        '/images/life-at-ips/mini-kedarnath-1.webp',
+        '/images/life-at-ips/mini-kedarnath-2.webp',
+        '/images/life-at-ips/mini-kedarnath-3.webp',
+        '/images/life-at-ips/garh-ganesh-1-img.webp',
+        '/images/life-at-ips/garh-ganesh-2-img.webp',
+        '/images/life-at-ips/garh-ganesh-3-img.webp',
         '/images/life-at-ips/40.webp',
         '/images/life-at-ips/41.webp',
         '/images/life-at-ips/42.webp',
@@ -102,6 +106,9 @@ export default function LifeCampus() {
     {
       title: 'FESTIVALS',
       images: [
+        '/images/life-at-ips/ganesh-chaturthi-img.webp',
+        '/images/life-at-ips/janmasthmi-img-1.webp',
+        '/images/life-at-ips/janmasthmi-img-2.webp',
         '/images/life-at-ips/49.webp',
         '/images/life-at-ips/50.webp',
         '/images/life-at-ips/51.webp',
@@ -203,7 +210,7 @@ export default function LifeCampus() {
                 >
                   {item.images.map((src, index) => (
                     <SwiperSlide key={index} className="relative w-full h-full">
-                      <img src={src} alt={`${item.title} - slide ${index + 1}`} />
+                      <img src={src} className="" alt={`${item.title} - slide ${index + 1}`} />
                     </SwiperSlide>
                   ))}
                 </Swiper>
