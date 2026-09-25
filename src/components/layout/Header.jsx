@@ -184,7 +184,7 @@ export default function Header() {
           <div className="mx-auto max-w-[1202px] px-4 flex items-center h-9">
             {/* Left — contact info */}
             <div className="flex justify-between w-full">
-              <div className="w-full lg:max-w-[463px] sm:max-w-[300px] max-w-[260px]">
+              <div className="w-full lg:max-w-[423px] sm:max-w-[300px] max-w-[260px]">
                 <Marquee gradient={false} speed={70} pauseOnHover={true}>
                   <Link
                     target="_blank"
@@ -246,6 +246,13 @@ export default function Header() {
                       className="img-fluid"
                       alt="Apply Now at IPS Business School"
                     />
+                  </Link>
+                  <Link
+                    href="/ipr-seminar"
+                    className="ml-2 flex items-center gap-1.5 px-3 py-[6px] bg-[#1a2a4a] hover:bg-[#0f1e38] text-white text-[12px] font-semibold rounded-full transition-all duration-200 whitespace-nowrap border border-[#f5c518]/60 hover:border-[#f5c518] shadow-sm"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#f5c518] animate-pulse shrink-0" />
+                    IPR Seminar
                   </Link>
                 </div>
               </div>
@@ -405,6 +412,14 @@ export default function Header() {
 
           {/* Drawer footer */}
           <div className="p-4 border-t space-y-2">
+            <Link
+              href="/ipr-seminar"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-[#1a2a4a] text-white text-sm font-semibold rounded-lg border border-[#f5c518]/60 transition"
+            >
+              <span className="w-2 h-2 rounded-full bg-[#f5c518] animate-pulse" />
+              IPR Seminar — Oct 9, 2026
+            </Link>
             <div className="flex flex-wrap gap-2 justify-center mb-2">
               {topBarLinks.map((link) => (
                 <Link
