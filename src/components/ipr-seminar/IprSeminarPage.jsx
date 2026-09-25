@@ -306,7 +306,7 @@ export default function IprSeminarPage() {
               >
                 <span className="flex items-center gap-2 bg-[#f5c518]/12 border border-[#f5c518]/35 text-[#f5c518] text-[11px] font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#f5c518] animate-pulse" />
-                  IPS Business School &amp; IPS College · 9 October 2026
+                  IPS Business School &amp; IPS College <span className="sm:inline-flex hidden"> · 9 October 2026</span>
                 </span>
               </motion.div>
 
