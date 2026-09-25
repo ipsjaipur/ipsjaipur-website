@@ -910,7 +910,7 @@ export default function IprSeminarPage() {
             <div className="inline-flex items-center gap-2 mb-5 bg-[#f5c518]/10 border border-[#f5c518]/25 rounded-full px-4 py-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#f5c518] animate-pulse" />
               <span className="text-[#f5c518] text-[11px] font-bold uppercase tracking-widest">
-                9 October 2026 · IPS College, Jaipur · 8:00 AM onwards
+                9 October 2026 · IPS College, Jaipur
               </span>
             </div>
             <h2 className="text-white font-rubik font-black text-[30px] sm:text-[44px] lg:text-[52px] leading-tight mb-5">
