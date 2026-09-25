@@ -249,7 +249,7 @@ export default function Header() {
                   </Link>
                   <Link
                     href="/ipr-seminar"
-                    className="ml-2 flex items-center gap-1.5 px-3 py-[6px] bg-[#1a2a4a] hover:bg-[#0f1e38] text-white text-[12px] font-semibold rounded-full transition-all duration-200 whitespace-nowrap border border-[#f5c518]/60 hover:border-[#f5c518] shadow-sm"
+                    className="ml-2 lg:flex hidden items-center gap-1.5 px-3 py-[6px] bg-[#1a2a4a] hover:bg-[#0f1e38] text-white text-[12px] font-semibold rounded-full transition-all duration-200 whitespace-nowrap border border-[#f5c518]/60 hover:border-[#f5c518] shadow-sm"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#f5c518] animate-pulse shrink-0" />
                     IPR Seminar
