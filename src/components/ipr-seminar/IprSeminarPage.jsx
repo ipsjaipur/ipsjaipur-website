@@ -796,7 +796,8 @@ export default function IprSeminarPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#eb5905] hover:bg-[#c94d04] text-white font-bold text-sm rounded-xl transition-all duration-200 shadow-lg shadow-[#eb5905]/30 hover:shadow-[#eb5905]/50 hover:-translate-y-0.5"
             >
-              <ArrowRight size={16} />I Want to Register →
+              {' '}
+              Register now →
             </a>
           </motion.div>
         </div>
