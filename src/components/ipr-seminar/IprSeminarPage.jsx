@@ -424,7 +424,7 @@ export default function IprSeminarPage() {
                   style={{ aspectRatio: '460/640' }}
                 >
                   <Image
-                    src="/images/event-img.webp"
+                    src="/images/poster-img.webp"
                     alt="International IPR Seminar 2026 — IPS Business School Jaipur"
                     fill
                     priority
@@ -438,7 +438,7 @@ export default function IprSeminarPage() {
 
                   {/* Download poster button */}
                   <a
-                    href="/images/event-img.webp"
+                    href="/images/poster-img.webp"
                     download="IPR-Seminar-2026-Poster.webp"
                     className="absolute bottom-5 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 px-5 py-2.5 bg-[#f5c518] hover:bg-[#d4a900] text-[#0d1b2e] font-bold text-[13px] rounded-xl shadow-lg shadow-black/30 transition-all duration-200 hover:-translate-x-1/2 hover:-translate-y-0.5 whitespace-nowrap z-10"
                   >
