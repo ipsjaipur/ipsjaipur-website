@@ -197,7 +197,7 @@ const faqs = [
 ];
 
 // ─── Google Form link ─────────────────────────────────────────────────────────
-const GOOGLE_FORM_URL = 'https://forms.gle/gKvijjLixjP61rmB8';
+const GOOGLE_FORM_URL = 'https://forms.gle/1BjmWr9vKXE5ckx29';
 
 // ─── FAQ list — accordion, default first open ────────────────────────────────
 function FaqList() {

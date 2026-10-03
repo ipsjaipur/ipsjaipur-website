@@ -474,3 +474,94 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   IPR Seminar — Running Border Button ✨
+   Rotating orange beam travels around the button border.
+   Technique: outer wrapper holds the spinning conic bg; inner div is the
+   solid dark background — no z-index conflicts, no clipping issues.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@property --ipr-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes ipr-border-spin {
+  to {
+    --ipr-angle: 360deg;
+  }
+}
+
+/* ── outer wrapper: this IS the animated border ── */
+.ipr-border-wrap {
+  display: inline-flex;
+  padding: 1.5px; /* border thickness */
+  border-radius: 9999px;
+  background: conic-gradient(
+    from var(--ipr-angle),
+    #1a2a4a 0deg,
+    #1a2a4a 300deg,
+    #eb5905 330deg,
+    #ff9e3d 345deg,
+    #eb5905 358deg,
+    #1a2a4a 360deg
+  );
+  box-shadow: 0 0 8px 2px rgba(235, 89, 5, 0.35);
+  animation: ipr-border-spin 2.2s linear infinite;
+}
+
+/* ── mobile variant: rounded-lg ── */
+.ipr-border-wrap-lg {
+  display: flex;
+  width: 100%;
+  padding: 1.5px;
+  border-radius: 0.5rem;
+  background: conic-gradient(
+    from var(--ipr-angle),
+    #1a2a4a 0deg,
+    #1a2a4a 300deg,
+    #eb5905 330deg,
+    #ff9e3d 345deg,
+    #eb5905 358deg,
+    #1a2a4a 360deg
+  );
+  box-shadow: 0 0 8px 2px rgba(235, 89, 5, 0.35);
+  animation: ipr-border-spin 2.2s linear infinite;
+}
+
+/* ── inner dark pill — the actual clickable button face ── */
+.ipr-btn-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: inherit;
+  background: #1a2a4a;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── shimmer sweep bar ── */
+.ipr-shimmer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  animation: ipr-shimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes ipr-shimmer {
+  0% {
+    left: -80%;
+  }
+  100% {
+    left: 130%;
+  }
+}

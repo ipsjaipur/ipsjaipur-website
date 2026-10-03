@@ -247,13 +247,17 @@ export default function Header() {
                       alt="Apply Now at IPS Business School"
                     />
                   </Link>
-                  <Link
-                    href="/ipr-seminar"
-                    className="ml-2 lg:flex hidden items-center gap-1.5 px-3 py-[6px] bg-[#1a2a4a] hover:bg-[#0f1e38] text-white text-[12px] font-semibold rounded-full transition-all duration-200 whitespace-nowrap border border-[#f5c518]/60 hover:border-[#f5c518] shadow-sm"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#f5c518] animate-pulse shrink-0" />
-                    IPR Seminar
-                  </Link>
+                  {/* ── IPR Seminar Running Border Button (desktop) ── */}
+                  <div className="ipr-border-wrap ml-2 lg:inline-flex hidden">
+                    <Link
+                      href="/ipr-seminar"
+                      className="ipr-btn-inner px-3 py-[6px] text-white text-[12px] font-semibold whitespace-nowrap hover:bg-[#0f1e38] transition-colors duration-200"
+                    >
+                      <span className="ipr-shimmer" aria-hidden="true" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#eb5905] animate-pulse shrink-0 relative z-10" />
+                      <span className="relative z-10">IPR Seminar</span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -412,14 +416,18 @@ export default function Header() {
 
           {/* Drawer footer */}
           <div className="p-4 border-t space-y-2">
-            <Link
-              href="/ipr-seminar"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-[#1a2a4a] text-white text-sm font-semibold rounded-lg border border-[#f5c518]/60 transition"
-            >
-              <span className="w-2 h-2 rounded-full bg-[#f5c518] animate-pulse" />
-              IPR Seminar — Oct 9, 2026
-            </Link>
+            {/* ── IPR Seminar Running Border Button (mobile drawer) ── */}
+            <div className="ipr-border-wrap-lg">
+              <Link
+                href="/ipr-seminar"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="ipr-btn-inner rounded-lg px-4 py-2.5 text-white text-sm font-semibold hover:bg-[#0f1e38] transition-colors duration-200"
+              >
+                <span className="ipr-shimmer" aria-hidden="true" />
+                <span className="w-2 h-2 rounded-full bg-[#eb5905] animate-pulse relative z-10" />
+                <span className="relative z-10">IPR Seminar — Oct 9, 2026</span>
+              </Link>
+            </div>
             <div className="flex flex-wrap gap-2 justify-center mb-2">
               {topBarLinks.map((link) => (
                 <Link
