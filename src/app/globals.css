@@ -565,3 +565,127 @@
     left: 130%;
   }
 }
+
+/* ── Schedule page table styling ─────────────────────────────────────────── */
+/* Scope: .schedule-content wraps the parsed HTML on /schedule/[slug] pages  */
+
+.schedule-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 24px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+/* Wrap table in a scrollable div — keeps width:100% intact */
+.schedule-content .table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+  margin: 24px 0;
+}
+
+.schedule-content .table-wrapper table {
+  margin: 0;
+  min-width: 100%;
+}
+
+/* Header — only target thead, never tbody rows */
+.schedule-content table thead tr {
+  background-color: #2a3e61;
+}
+
+.schedule-content table thead th {
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 12px 16px;
+  text-align: left;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* TipTap wraps cell content in <p> tags — reset their margin inside cells */
+.schedule-content table td p,
+.schedule-content table th p {
+  margin: 0;
+  padding: 0;
+}
+.schedule-content table th p {
+  color: white !important;
+}
+
+/* thead row never changes on hover */
+.schedule-content table thead tr:hover {
+  background-color: #2a3e61;
+}
+
+.schedule-content .table-wrapper {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+/* Body rows */
+.schedule-content table tbody tr {
+  border-bottom: 1px solid #e2e8f0;
+  transition: background-color 0.15s;
+}
+
+.schedule-content table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.schedule-content table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.schedule-content table tbody tr:hover {
+  background-color: #f0f4ff;
+}
+
+/* All cells */
+.schedule-content table td,
+.schedule-content table th {
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+.schedule-content table td {
+  color: #333333;
+  line-height: 1.5;
+  min-width: 160px;
+}
+
+/* Other prose elements inside .schedule-content */
+.schedule-content p {
+  color: #444444;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.schedule-content h2,
+.schedule-content h3,
+.schedule-content h4 {
+  color: #2a3e61;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  margin: 20px 0 10px;
+}
+
+.schedule-content ul,
+.schedule-content ol {
+  color: #444444;
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+.schedule-content ul li::marker {
+  color: #eb5905;
+}
+
+.schedule-content strong {
+  color: #222222;
+}

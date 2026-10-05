@@ -20,6 +20,8 @@ module.exports = {
     '/privacy-policy',  // Coming soon page - noindex
     '/terms-conditions', // Coming soon page - noindex
     '/batch-queries',   // Internal query page - noindex
+    '/schedule',        // Schedule index (does not exist)
+    '/schedule/*',      // Schedule detail pages - direct student links only, no indexing
   ],
 
   robotsTxtOptions: {
@@ -42,6 +44,7 @@ module.exports = {
           '/_next/',
           '/admin/',
           '/dashboard/',
+          '/schedule/',   // Student schedule pages — direct link only, no crawling
         ],
       },
     ],
@@ -60,6 +63,8 @@ module.exports = {
       path === '/events' ||
       path.includes('/admin/') ||
       path.includes('/dashboard/') ||
+      path.includes('/schedule/') ||  // Schedule pages — no sitemap entry
+      path === '/schedule' ||
       path === '/faq' ||
       path === '/blogs' ||
       path === '/campus-news' ||

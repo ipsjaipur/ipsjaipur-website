@@ -570,3 +570,32 @@ export async function getCareerSection(section) {
     return null;
   }
 }
+
+// ─── Schedule Services ─────────────────────────────────────────────────────────
+import Schedule from '@/models/Schedule';
+
+export async function getScheduleBySlug(slug) {
+  try {
+    await connectDB();
+    const schedule = await Schedule.findOne({ slug, status: 'published' }).lean();
+    return schedule || null;
+  } catch (error) {
+    console.error('[GET SCHEDULE BY SLUG ERROR]:', error);
+    return null;
+  }
+}
+
+export async function getSchedules(limit = 50) {
+  try {
+    await connectDB();
+    const schedules = await Schedule.find({ status: 'published' })
+      .select('title slug createdAt')
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .lean();
+    return schedules || [];
+  } catch (error) {
+    console.error('[GET SCHEDULES ERROR]:', error);
+    return [];
+  }
+}

@@ -21,6 +21,7 @@ import {
   Sparkles,
   TrendingUp,
   Rocket,
+  CalendarDays,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import toast from 'react-hot-toast';
@@ -64,6 +65,15 @@ const NAV_ITEMS = [
     children: [
       { label: 'All Pages', href: '/dashboard/seo', icon: List },
       { label: 'Add Page SEO', href: '/dashboard/seo/new', icon: PlusCircle },
+    ],
+  },
+  {
+    label: 'Schedules',
+    icon: CalendarDays,
+    prefix: '/dashboard/schedules',
+    children: [
+      { label: 'All Schedules', href: '/dashboard/schedules', icon: List },
+      { label: 'Create Schedule', href: '/dashboard/schedules/create', icon: PlusCircle },
     ],
   },
 ];

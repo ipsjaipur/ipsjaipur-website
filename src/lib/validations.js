@@ -134,3 +134,29 @@ export function validateImageFile(file) {
     errors,
   };
 }
+
+// ─── Schedule Validations ──────────────────────────────────────────────────────
+
+export const scheduleSchema = z.object({
+  title: z
+    .string()
+    .min(1, 'Title is required')
+    .max(200, 'Title cannot exceed 200 characters'),
+  slug: z
+    .string()
+    .min(1, 'Slug is required')
+    .max(200, 'Slug too long')
+    .regex(/^[a-z0-9-]+$/, 'Slug can only contain lowercase letters, numbers, and hyphens'),
+  content: z.string().optional().default(''),
+  metaTitle: z.string().max(70, 'Meta title cannot exceed 70 characters').optional().default(''),
+  status: z.enum(['draft', 'published']).optional().default('draft'),
+});
+
+export const scheduleUpdateSchema = scheduleSchema.partial().extend({
+  slug: z
+    .string()
+    .min(1, 'Slug is required')
+    .max(200, 'Slug too long')
+    .regex(/^[a-z0-9-]+$/, 'Slug can only contain lowercase letters, numbers, and hyphens')
+    .optional(),
+});
