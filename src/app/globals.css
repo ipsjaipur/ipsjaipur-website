@@ -496,7 +496,6 @@
 
 /* ── outer wrapper: this IS the animated border ── */
 .ipr-border-wrap {
-  display: inline-flex;
   padding: 1.5px; /* border thickness */
   border-radius: 9999px;
   background: conic-gradient(
