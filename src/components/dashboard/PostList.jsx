@@ -36,11 +36,16 @@ export default function PostList({ type = 'blog' }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const apiBase = type === 'blog' ? '/api/blog' : '/api/news';
-  const createPath = type === 'blog' ? '/dashboard/blogs/create' : '/dashboard/news/create';
-  const editPath = type === 'blog' ? '/dashboard/blogs' : '/dashboard/news';
-  const frontendBase = type === 'blog' ? '/blogs' : '/campus-news';
-  const typeLabel = type === 'blog' ? 'Blog' : 'News';
+  const apiBase = type === 'blog' ? '/api/blog' : type === 'event' ? '/api/events' : '/api/news';
+  const createPath =
+    type === 'blog'
+      ? '/dashboard/blogs/create'
+      : type === 'event'
+        ? '/dashboard/events/create'
+        : '/dashboard/news/create';
+  const editPath = type === 'blog' ? '/dashboard/blogs' : type === 'event' ? '/dashboard/events' : '/dashboard/news';
+  const frontendBase = type === 'blog' ? '/blogs' : type === 'event' ? '/events' : '/campus-news';
+  const typeLabel = type === 'blog' ? 'Blog' : type === 'event' ? 'Event' : 'News';
 
   // State
   const [docs, setDocs] = useState([]);
@@ -123,11 +128,11 @@ export default function PostList({ type = 'blog' }) {
   };
 
   const deleteOne = async (id) => {
-    if (!confirm('Delete this post permanently?')) return;
+    if (!confirm(`Delete this ${typeLabel.toLowerCase()} permanently?`)) return;
     try {
       const res = await fetch(`${apiBase}/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error();
-      toast.success('Post deleted');
+      toast.success(`${typeLabel} deleted`);
       fetchData();
     } catch {
       toast.error('Failed to delete');
@@ -179,7 +184,7 @@ export default function PostList({ type = 'blog' }) {
       <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
         <div>
           <h1 className="text-[20px] font-bold text-[#222222] font-rubik">
-            {type === 'blog' ? 'Blog Posts' : 'Campus News'}
+            {type === 'blog' ? 'Blog Posts' : type === 'event' ? 'Events' : 'Campus News'}
           </h1>
           <p className="text-[13px] text-[#77838f] mt-0.5">
             {pagination.totalDocs} total · {counts.published} published · {counts.draft} drafts
@@ -310,9 +315,7 @@ export default function PostList({ type = 'blog' }) {
             <AlertCircle className="w-8 h-8 text-[#e2e8f0]" />
             <p className="text-[14px] font-medium text-[#222222]">No posts found</p>
             <p className="text-[13px] text-[#77838f]">
-              {search || statusFilter
-                ? 'Try clearing your filters.'
-                : `Create your first ${typeLabel.toLowerCase()} post.`}
+              {search || statusFilter ? 'Try clearing your filters.' : `Create your first ${typeLabel.toLowerCase()}.`}
             </p>
             {!search && !statusFilter && (
               <Link href={createPath} className="text-[13px] text-[#eb5905] hover:underline mt-1">
@@ -394,7 +397,7 @@ export default function PostList({ type = 'blog' }) {
                               {doc.title}
                             </Link>
                             <p className="text-[11px] text-[#77838f] truncate mt-0.5">
-                              /{type === 'blog' ? 'blogs' : 'campus-news'}/{doc.slug}
+                              /{frontendBase.replace('/', '')}/{doc.slug}
                             </p>
                           </div>
                         </div>

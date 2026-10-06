@@ -1,6 +1,7 @@
 import connectDB from '@/lib/mongodb';
 import News from '@/models/News';
 import Blog from '@/models/Blog';
+import Event from '@/models/Event';
 import HomePageContent from '@/models/HomePageContent';
 import MBAPageContent from '@/models/MBAPageContent';
 import BBAPageContent from '@/models/BBAPageContent';
@@ -596,6 +597,96 @@ export async function getSchedules(limit = 50) {
     return schedules || [];
   } catch (error) {
     console.error('[GET SCHEDULES ERROR]:', error);
+    return [];
+  }
+}
+
+// ─── Events ────────────────────────────────────────────────────────────────────
+
+/**
+ * Fetch a single published event with related events (same category).
+ * Used in server components and generateMetadata().
+ */
+export async function getEventWithRelated(slug) {
+  await connectDB();
+
+  const event = await Event.findOne({ slug, status: 'published' }).lean();
+  if (!event) return null;
+
+  const selectFields =
+    'title slug shortDescription featuredImage eventDate eventEndDate eventTime location category eventStatus publishedAt organizer';
+
+  let related = await Event.find({
+    status: 'published',
+    slug: { $ne: slug },
+    category: event.category,
+  })
+    .sort({ eventDate: -1 })
+    .limit(3)
+    .select(selectFields)
+    .lean();
+
+  // Fallback: fill up with latest events if not enough related
+  if (related.length < 3) {
+    const existingSlugs = [slug, ...related.map((r) => r.slug)];
+    const fallback = await Event.find({
+      status: 'published',
+      slug: { $nin: existingSlugs },
+    })
+      .sort({ eventDate: -1 })
+      .limit(3 - related.length)
+      .select(selectFields)
+      .lean();
+    related = [...related, ...fallback];
+  }
+
+  return {
+    event: JSON.parse(JSON.stringify(event)),
+    related: JSON.parse(JSON.stringify(related)),
+  };
+}
+
+/**
+ * Fetch the latest published events.
+ * Useful for homepage sections or sidebars.
+ */
+export async function getLatestEvents(limit = 4) {
+  try {
+    await connectDB();
+
+    const events = await Event.find({ status: 'published' })
+      .select(
+        'title slug shortDescription featuredImage eventDate eventEndDate eventTime location category eventStatus publishedAt organizer',
+      )
+      .sort({ eventDate: -1 })
+      .limit(limit)
+      .lean();
+
+    return events || [];
+  } catch (error) {
+    console.error('[GET LATEST EVENTS ERROR]:', error);
+    return [];
+  }
+}
+
+/**
+ * Fetch upcoming published events.
+ */
+export async function getUpcomingEvents(limit = 4) {
+  try {
+    await connectDB();
+
+    const events = await Event.find({ status: 'published', eventStatus: 'upcoming' })
+      .select(
+        'title slug shortDescription featuredImage eventDate eventEndDate eventTime location category eventStatus publishedAt organizer registrationLink',
+      )
+      .sort({ eventDate: 1 })
+      .limit(limit)
+      .lean();
+
+    return events || [];
+  } catch (error) {
+    console.error('[GET UPCOMING EVENTS ERROR]:', error);
     return [];
   }
 }

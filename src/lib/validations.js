@@ -160,3 +160,70 @@ export const scheduleUpdateSchema = scheduleSchema.partial().extend({
     .regex(/^[a-z0-9-]+$/, 'Slug can only contain lowercase letters, numbers, and hyphens')
     .optional(),
 });
+
+// ─── Event Validations ─────────────────────────────────────────────────────────
+
+export const eventSchema = z.object({
+  title: z
+    .string()
+    .min(1, 'Title is required')
+    .max(200, 'Title cannot exceed 200 characters'),
+  slug: z
+    .string()
+    .min(1, 'Slug is required')
+    .max(200, 'Slug too long')
+    .regex(/^[a-z0-9-]+$/, 'Slug can only contain lowercase letters, numbers, and hyphens'),
+  shortDescription: z
+    .string()
+    .max(500, 'Short description cannot exceed 500 characters')
+    .optional()
+    .default(''),
+  content: z.string().optional().default(''),
+  featuredImage: z
+    .object({
+      url: z.string().optional().default(''),
+      alt: z.string().optional().default(''),
+    })
+    .optional()
+    .default({}),
+  gallery: z
+    .array(
+      z.object({
+        url: z.string().optional().default(''),
+        alt: z.string().optional().default(''),
+      }),
+    )
+    .optional()
+    .default([]),
+  eventDate: z.string().optional().nullable().default(null),
+  eventEndDate: z.string().optional().nullable().default(null),
+  eventTime: z.string().max(100).optional().default(''),
+  location: z.string().max(300, 'Location cannot exceed 300 characters').optional().default(''),
+  organizer: z.string().max(100).optional().default('IPS Business School'),
+  category: z
+    .enum(['Workshop', 'Seminar', 'Cultural', 'Sports', 'Academic', 'Networking', 'Placement', 'Other'])
+    .optional()
+    .default('Other'),
+  eventStatus: z.enum(['upcoming', 'completed']).optional().default('upcoming'),
+  tags: z.array(z.string()).optional().default([]),
+  registrationLink: z.string().optional().default(''),
+  metaTitle: z.string().max(70, 'Meta title cannot exceed 70 characters').optional().default(''),
+  metaDescription: z
+    .string()
+    .max(160, 'Meta description cannot exceed 160 characters')
+    .optional()
+    .default(''),
+  metaKeywords: z.string().optional().default(''),
+  canonicalUrl: z.string().optional().default(''),
+  ogImage: z.string().optional().default(''),
+  status: z.enum(['draft', 'published']).optional().default('draft'),
+});
+
+export const eventUpdateSchema = eventSchema.partial().extend({
+  slug: z
+    .string()
+    .min(1, 'Slug is required')
+    .max(200, 'Slug too long')
+    .regex(/^[a-z0-9-]+$/, 'Slug can only contain lowercase letters, numbers, and hyphens')
+    .optional(),
+});

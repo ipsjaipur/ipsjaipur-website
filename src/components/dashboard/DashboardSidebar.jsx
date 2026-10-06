@@ -68,6 +68,15 @@ const NAV_ITEMS = [
     ],
   },
   {
+    label: 'Events',
+    icon: CalendarDays,
+    prefix: '/dashboard/events',
+    children: [
+      { label: 'All Events', href: '/dashboard/events', icon: List },
+      { label: 'Create Event', href: '/dashboard/events/create', icon: PlusCircle },
+    ],
+  },
+  {
     label: 'Schedules',
     icon: CalendarDays,
     prefix: '/dashboard/schedules',

@@ -124,6 +124,7 @@ export default function BlogDetailPage({ blog, related = [] }) {
       '@id': `${process.env.NEXT_PUBLIC_SITE_URL}/blogs/${blog.slug}`,
     },
   };
+
   const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/about-us.webp';
 
   return (

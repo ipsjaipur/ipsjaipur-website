@@ -82,6 +82,7 @@ const FOOTER_DATA = {
       { label: 'Career @ IPS BUSINESS SCHOOL', href: '/career-ips-business-school' },
       { label: 'Anti Ragging', href: '/anti-ragging' },
       { label: 'Blogs', href: '/blogs' },
+      { label: 'Events', href: '/events' },
       { label: 'News & Updates', href: '/campus-news' },
       { label: 'Terms & Conditions', href: '/terms-conditions' },
     ],

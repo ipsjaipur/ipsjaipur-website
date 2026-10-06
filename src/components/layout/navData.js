@@ -71,6 +71,7 @@ export const mainNav = [
   },
   { label: "LIFE@IPS", href: '/life-at-ips' },
   { label: 'PLACEMENTS', href: '/placements' },
+  { label: 'EVENTS', href: '/events' },
   { label: 'CONTACT', href: '/contact' },
 ];
 
