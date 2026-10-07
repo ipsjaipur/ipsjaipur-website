@@ -211,6 +211,14 @@ const nextConfig = {
         permanent: true,
         statusCode: 301,
       },
+
+      // IPR Seminar legacy URL → new slug-based URL (301 for Google)
+      {
+        source: '/ipr-seminar',
+        destination: '/seminar/ipr-seminar-2026',
+        permanent: true,
+        statusCode: 301,
+      },
     ];
   },
 };

@@ -452,9 +452,6 @@ export default function IprSeminarPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════════
-          IPR TOPICS STRIP
-      ══════════════════════════════════════════════════════════════════════ */}
       <section className="bg-[#0d1b2e] border-t border-white/8 py-14">
         <div className="mx-auto max-w-[1202px] px-4 sm:px-6 lg:px-8">
           <motion.div

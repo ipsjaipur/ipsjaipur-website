@@ -2,43 +2,35 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronDown, Phone, Menu, X, ChevronRight, PhoneCall, Mail } from 'lucide-react';
-import { topBarContact, topBarLinks, applyButton, announcement, mainNav, helpline, MailBox } from './navData';
+import { ChevronDown, Phone, Menu, X, ChevronRight, Mail } from 'lucide-react';
+import { topBarContact, topBarLinks, applyButton, mainNav, helpline, MailBox } from './navData';
 import { usePathname, useRouter } from 'next/navigation';
 import { handleHashNavigation } from '@/utils/scrollToSection';
-import Slider from 'react-slick';
 import Marquee from 'react-fast-marquee';
 
-// ─── WhatsApp Icon ─────────────────────────────────────────────────────────────
-const WhatsAppIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-    <path
-      d="M8 0C3.58 0 0 3.58 0 8c0 1.4.37 2.72 1.01 3.86L0 16l4.25-1.11A7.96 7.96 0 0 0 8 16c4.42 0 8-3.58 8-8s-3.58-8-8-8zm3.93 11.07c-.17.47-1 .9-1.38.96-.35.05-.8.07-1.28-.08a11.7 11.7 0 0 1-1.16-.43C6.5 10.8 5.3 9.3 5.2 9.17c-.1-.13-.8-1.07-.8-2.04 0-.97.5-1.44.68-1.64.18-.2.39-.25.52-.25h.37c.12 0 .28-.05.44.33l.56 1.4c.05.12.08.26.02.4l-.2.4-.3.3c-.1.1-.2.2-.09.4.12.2.52.86 1.12 1.4.77.68 1.42.9 1.62 1 .2.1.32.08.44-.05l.6-.7c.13-.17.26-.13.44-.08l1.38.65c.2.1.33.14.38.22.05.08.05.47-.12.94z"
-      fill="#25D366"
-    />
-  </svg>
-);
-
-// ─── Email Icon ────────────────────────────────────────────────────────────────
-const MailIcon = () => (
-  <svg
-    width="15"
-    height="15"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <rect x="2" y="4" width="20" height="16" rx="2" />
-    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-  </svg>
-);
-
-// ─── Header Component ──────────────────────────────────────────────────────────
 export default function Header() {
+  const [iprStrip, setIprStrip] = useState({
+    isShow: true,
+    buttonText: 'IPR Seminar',
+    buttonLink: '/ipr-seminar',
+  });
+
+  useEffect(() => {
+    fetch('/api/ipr-seminar-content?section=config')
+      .then((r) => r.json())
+      .then((json) => {
+        if (json?.success && json?.data) {
+          const d = json.data;
+          setIprStrip({
+            isShow: d.topBarIsShow ?? true,
+            buttonText: d.topBarButtonText || 'IPR Seminar',
+            buttonLink: d.topBarButtonLink || '/ipr-seminar',
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileAccordion, setOpenMobileAccordion] = useState(null);
   const [scrolled, setScrolled] = useState(false);
@@ -46,19 +38,10 @@ export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
 
-  // Slick slider settings for announcements
-  const announcementSliderSettings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    arrows: false,
-    fade: true,
-    pauseOnHover: true,
-  };
+  // Derived IPR strip values (from async-loaded state)
+  const stripIsShow = iprStrip.isShow;
+  const stripText = iprStrip.buttonText;
+  const stripLink = iprStrip.buttonLink;
 
   // ── Collapse top bars on scroll ────────────────────────────────────────────
   useEffect(() => {
@@ -248,16 +231,18 @@ export default function Header() {
                     />
                   </Link>
                   {/* ── IPR Seminar Running Border Button (desktop) ── */}
-                  <div className="ipr-border-wrap ml-2 lg:inline-flex hidden">
-                    <Link
-                      href="/ipr-seminar"
-                      className="ipr-btn-inner px-3 py-[6px] text-white text-[12px] font-semibold whitespace-nowrap hover:bg-[#0f1e38] transition-colors duration-200"
-                    >
-                      <span className="ipr-shimmer" aria-hidden="true" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#eb5905] animate-pulse shrink-0 relative z-10" />
-                      <span className="relative z-10">IPR Seminar</span>
-                    </Link>
-                  </div>
+                  {stripIsShow && (
+                    <div className="ipr-border-wrap ml-2 lg:inline-flex hidden">
+                      <Link
+                        href={stripLink}
+                        className="ipr-btn-inner px-3 py-[6px] text-white text-[12px] font-semibold whitespace-nowrap hover:bg-[#0f1e38] transition-colors duration-200"
+                      >
+                        <span className="ipr-shimmer" aria-hidden="true" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#eb5905] animate-pulse shrink-0 relative z-10" />
+                        <span className="relative z-10">{stripText}</span>
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -417,17 +402,19 @@ export default function Header() {
           {/* Drawer footer */}
           <div className="p-4 border-t space-y-2">
             {/* ── IPR Seminar Running Border Button (mobile drawer) ── */}
-            <div className="ipr-border-wrap-lg">
-              <Link
-                href="/ipr-seminar"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="ipr-btn-inner rounded-lg px-4 py-2.5 text-white text-sm font-semibold hover:bg-[#0f1e38] transition-colors duration-200"
-              >
-                <span className="ipr-shimmer" aria-hidden="true" />
-                <span className="w-2 h-2 rounded-full bg-[#eb5905] animate-pulse relative z-10" />
-                <span className="relative z-10">IPR Seminar — Oct 9, 2026</span>
-              </Link>
-            </div>
+            {stripIsShow && (
+              <div className="ipr-border-wrap-lg">
+                <Link
+                  href={stripLink}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="ipr-btn-inner rounded-lg px-4 py-2.5 text-white text-sm font-semibold hover:bg-[#0f1e38] transition-colors duration-200"
+                >
+                  <span className="ipr-shimmer" aria-hidden="true" />
+                  <span className="w-2 h-2 rounded-full bg-[#eb5905] animate-pulse relative z-10" />
+                  <span className="relative z-10">{stripText}</span>
+                </Link>
+              </div>
+            )}
             <div className="flex flex-wrap gap-2 justify-center mb-2">
               {topBarLinks.map((link) => (
                 <Link

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare, PhoneCall, Target, Rocket } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare, PhoneCall, Target, Rocket, CalendarDays } from 'lucide-react';
 
 const PAGES = [
   {
@@ -121,6 +121,14 @@ const PAGES = [
     icon: Rocket,
     color: '#eb5905',
     sections: ['Banner', 'Introduction', 'Requirements', 'Perks / Why Join', 'Current Openings', 'Contact / Apply'],
+  },
+  {
+    label: 'Seminar Page',
+    description: 'Edit the Seminar page — theme (dark/light), header strip button, brochure PDF, hero, topics, about, takeaways, audience, agenda, FAQ, and CTA banner.',
+    href: '/dashboard/page-content/ipr-seminar',
+    icon: CalendarDays,
+    color: '#eb5905',
+    sections: ['Config & Theme', 'Hero', 'Topics Strip', 'About', 'Takeaways', 'Audience', 'Agenda & Highlights', 'FAQ', 'CTA Banner'],
   },
 ];
 
