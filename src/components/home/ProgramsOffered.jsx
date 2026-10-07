@@ -111,7 +111,6 @@ export default function ProgramsOffered({ data }) {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
       }}
     >
       <div className="absolute top-0 left-0 h-full w-full" style={{ background: '#ffffffdc' }}></div>
