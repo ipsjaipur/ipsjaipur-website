@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare, PhoneCall, Target, Rocket, CalendarDays } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare, PhoneCall, Target, Rocket, CalendarDays, Mountain } from 'lucide-react';
 
 const PAGES = [
   {
@@ -81,6 +81,14 @@ const PAGES = [
     icon: HeartHandshake,
     color: '#10B981',
     sections: ['Banner', 'Life at Campus', 'Students Club', 'Sports Club', 'Indoor Games', 'Committees', 'Sidebar Videos'],
+  },
+  {
+    label: 'Life at IPS Page',
+    description: 'Edit the Life@IPS page — banner image and all activity sections (Zephyr, Seminars, Treks, Sports Week, etc.) with titles, descriptions, and slider images.',
+    href: '/dashboard/page-content/life-at-ips',
+    icon: Mountain,
+    color: '#6366F1',
+    sections: ['Banner', 'Activity Sections'],
   },
   {
     label: 'Infrastructure Page',

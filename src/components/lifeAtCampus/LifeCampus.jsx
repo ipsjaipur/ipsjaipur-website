@@ -5,12 +5,38 @@ import Breadcrumb from '../common/Breadcrumb';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import CommonBanner from '../courses/CommonBanner';
+import { cloudinaryImage } from '@/_utils/cloudinaryImage';
 
-export default function LifeCampus() {
-  const sectionsData = [
+// Autoplay delays cycling through preset values per index
+const AUTOPLAY_DELAYS = [2500, 4000, 3000, 5000, 2500, 3500, 4000, 2000, 3500, 4000];
+
+/**
+ * Life@IPS page component.
+ *
+ * Props:
+ *   pageContent — { banner: {...}, activities: {...} } from MongoDB (server-fetched).
+ *                 Falls back to static defaults when not provided (legacy / fallback).
+ */
+export default function LifeCampus({ pageContent }) {
+  // ── Banner data ────────────────────────────────────────────────────────────
+  const bannerData = pageContent?.banner;
+  const bannerTitle = bannerData?.bannerTitle ?? 'Life@ips';
+  const bannerPosition = bannerData?.bannerPosition ?? 'object-center';
+  const rawBannerUrl = bannerData?.bannerImageUrl
+    ? bannerData.bannerImageUrl.startsWith('http') || bannerData.bannerImageUrl.startsWith('/')
+      ? bannerData.bannerImageUrl
+      : process.env.NEXT_PUBLIC_IMG_PATH + bannerData.bannerImageUrl
+    : process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/life-of-ips-img.webp';
+  // Cloudinary-optimised banner (1920px wide, auto format/quality)
+  const bannerImageUrl = cloudinaryImage(rawBannerUrl, 'f_auto,q_auto,w_1920');
+
+  // ── Activity sections data ─────────────────────────────────────────────────
+  const activitiesData = pageContent?.activities;
+
+  // Static fallback (used if DB is not seeded yet — keeps page working)
+  const staticSections = [
     {
       title: 'ZEPHYR Hosted by IPS COLLEGE',
-      delay: 2500,
       images: [
         '/images/life-at-ips/1.webp',
         '/images/life-at-ips/2.webp',
@@ -27,7 +53,7 @@ export default function LifeCampus() {
         '/images/life-at-ips/13.webp',
       ],
       paragraph:
-        'Zephyr is the ultimate Annual Management & Tech Fest, blending cutting-edge competitions, cultural spectacles, and corporate buzz into an unforgettable experience. As Rajasthan’s most sought after youth festival, it draws 40,000+ students for adrenaline-pitched business battles, IT challenges, and electrifying performances. IPS COLLEGE JAIPUR - Where talent meets triumph!',
+        "Zephyr is the ultimate Annual Management & Tech Fest, blending cutting-edge competitions, cultural spectacles, and corporate buzz into an unforgettable experience. As Rajasthan's most sought after youth festival, it draws 40,000+ students for adrenaline-pitched business battles, IT challenges, and electrifying performances. IPS COLLEGE JAIPUR - Where talent meets triumph!",
     },
     {
       title: 'SEMINARS',
@@ -57,7 +83,7 @@ export default function LifeCampus() {
         '/images/life-at-ips/29.webp',
       ],
       paragraph:
-        'At IPS COLLEGE JAIPUR, we believe in working hard and partying harder! Our electrifying DJ Nights, high-energy Dance Parties, and refreshing Pool Parties ensure students experience the ultimate college fun. These events aren’t just about entertainment—they foster camaraderie, stress relief, and life-long memories, making campus life vibrant and balanced.',
+        "At IPS COLLEGE JAIPUR, we believe in working hard and partying harder! Our electrifying DJ Nights, high-energy Dance Parties, and refreshing Pool Parties ensure students experience the ultimate college fun. These events aren't just about entertainment—they foster camaraderie, stress relief, and life-long memories, making campus life vibrant and balanced.",
     },
     {
       title: 'INDUSTRIAL VISITS',
@@ -101,7 +127,7 @@ export default function LifeCampus() {
         '/images/life-at-ips/48.webp',
       ],
       paragraph:
-        "WHERE MEMORIES SPARK - IPS COLLEGE JAIPUR sets the stage for unforgettable beginnings and emotional goodbyes with its electrifying Freshers' and Farewell Parties. From dazzling performances and themed celebrations to nostalgic moments, these events create a high-energy vibe that bonds seniors and juniors. It’s more than a party—it’s where lifelong friendships and college legacies take birth.",
+        "WHERE MEMORIES SPARK - IPS COLLEGE JAIPUR sets the stage for unforgettable beginnings and emotional goodbyes with its electrifying Freshers' and Farewell Parties. From dazzling performances and themed celebrations to nostalgic moments, these events create a high-energy vibe that bonds seniors and juniors. It's more than a party—it's where lifelong friendships and college legacies take birth.",
     },
     {
       title: 'FESTIVALS',
@@ -117,7 +143,7 @@ export default function LifeCampus() {
         '/images/life-at-ips/54.webp',
       ],
       paragraph:
-        "From Independence Day to Christmas, Diwali to New Year, IPS COLLEGE JAIPUR embraces India’s rich cultural tapestry while fostering global unity. Festivals like Holi, Ganesh Chaturthi, Sankranti, and Teachers' Day ignite joy, teamwork, and tradition, keeping students rooted yet globally aware. Every celebration strengthens bonds and creates unforgettable memories!",
+        "From Independence Day to Christmas, Diwali to New Year, IPS COLLEGE JAIPUR embraces India's rich cultural tapestry while fostering global unity. Festivals like Holi, Ganesh Chaturthi, Sankranti, and Teachers' Day ignite joy, teamwork, and tradition, keeping students rooted yet globally aware. Every celebration strengthens bonds and creates unforgettable memories!",
     },
     {
       title: 'ANNUAL SPORTS WEEK',
@@ -131,7 +157,7 @@ export default function LifeCampus() {
         '/images/life-at-ips/61.webp',
       ],
       paragraph:
-        "IPSCOLLEGE JAIPUR's Annual Sports Week fuels passion, teamwork, and resilience! MBA and BBA students master leadership & strategy, learning event management & networking, while BCA techies explore data-driven performance analysis. Beyond medals, it’s a training ground for discipline, collaboration, and winning mindsets—essential for corporate success!",
+        "IPSCOLLEGE JAIPUR's Annual Sports Week fuels passion, teamwork, and resilience! MBA and BBA students master leadership & strategy, learning event management & networking, while BCA techies explore data-driven performance analysis. Beyond medals, it's a training ground for discipline, collaboration, and winning mindsets—essential for corporate success!",
     },
     {
       title: 'FLASH MOBS',
@@ -161,18 +187,26 @@ export default function LifeCampus() {
     },
   ];
 
-  const bannerImageUrl = process.env.NEXT_PUBLIC_IMG_PATH + 'images/about/life-of-ips-img.webp';
+  // Use DB activities if available and non-empty, otherwise fall back to static
+  const rawActivities =
+    activitiesData?.activities && activitiesData.activities.length > 0 ? activitiesData.activities : staticSections;
+
+  // Sort by order field if present
+  const sectionsData = [...rawActivities].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
   return (
     <>
       <div className="flex flex-col justify-center">
-        <CommonBanner pageTitle="Life@ips" normalFont={true} bgImageUrl={bannerImageUrl} position="object-center" />
+        <CommonBanner pageTitle={bannerTitle} normalFont={true} bgImageUrl={bannerImageUrl} position={bannerPosition} />
         <Breadcrumb pageName="Life@ips" />
-        <div className="flex flex-col gap-8 md:gap-12 justify-center py-6 md:py-12 px-6 max-w-330 mx-auto w-full ">
+        <div className="flex flex-col gap-8 md:gap-12 justify-center py-6 md:py-12 px-6 max-w-330 mx-auto w-full">
           {sectionsData.map((item, index) => (
             <div key={index} className="grid grid-cols md:grid-cols-2 items-center gap-8 lg:gap-14">
+              {/* Image carousel */}
               <div
-                className={`w-full md: grid-cols relative rounded-3xl overflow-hidden shadow-md group ${index % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}
+                className={`w-full md:grid-cols relative rounded-3xl overflow-hidden shadow-md group ${
+                  index % 2 === 0 ? 'md:order-1' : 'md:order-2'
+                }`}
               >
                 <Swiper
                   modules={[Autoplay, Pagination]}
@@ -180,44 +214,29 @@ export default function LifeCampus() {
                   slidesPerView={1}
                   loop={true}
                   autoplay={{
-                    delay:
-                      index === 0
-                        ? 2500
-                        : index === 1
-                          ? 4000
-                          : index === 2
-                            ? 3000
-                            : index === 3
-                              ? 5000
-                              : index === 4
-                                ? 2500
-                                : index === 5
-                                  ? 3500
-                                  : index === 6
-                                    ? 4000
-                                    : index === 7
-                                      ? 2000
-                                      : index === 8
-                                        ? 3500
-                                        : 4000,
+                    delay: AUTOPLAY_DELAYS[index % AUTOPLAY_DELAYS.length],
                     disableOnInteraction: false,
                   }}
-                  pagination={{
-                    clickable: true,
-                    dynamicBullets: false,
-                  }}
+                  pagination={{ clickable: true, dynamicBullets: false }}
                   className="w-full h-full max-h-[220px] md:max-h-[360px]"
                 >
-                  {item.images.map((src, index) => (
-                    <SwiperSlide key={index} className="relative w-full h-full">
-                      <img src={src} className="" alt={`${item.title} - slide ${index + 1}`} />
+                  {(item.images || []).map((src, imgIndex) => (
+                    <SwiperSlide key={imgIndex} className="relative w-full h-full">
+                      <img
+                        src={cloudinaryImage(src, 'f_auto,q_auto,w_900')}
+                        className=""
+                        alt={`${item.title} - slide ${imgIndex + 1}`}
+                      />
                     </SwiperSlide>
                   ))}
-                  {/* slider image */}
                 </Swiper>
               </div>
+
+              {/* Text content */}
               <div
-                className={`w-full md: grid-cols flex flex-col justify-center rubik-font ${index % 2 === 0 ? 'md:order-2' : 'md:order-1'}`}
+                className={`w-full md:grid-cols flex flex-col justify-center rubik-font ${
+                  index % 2 === 0 ? 'md:order-2' : 'md:order-1'
+                }`}
               >
                 <h2 className="text-[22px] md:text-[24px] lg:text-[32px] font-bold text-[#111111] md:tracking-tight uppercase">
                   {item.title}

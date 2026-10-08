@@ -2,46 +2,37 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import {
-  FileText,
-  Sidebar,
-  Loader2,
-  ExternalLink,
-  RefreshCw,
-  AlertCircle,
-  ChevronRight,
-  Info,
-} from 'lucide-react';
+import { FileText, Sidebar, Loader2, ExternalLink, RefreshCw, AlertCircle, ChevronRight, Info } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const BASE = '/dashboard/page-content/about';
 
 const SECTIONS = [
   {
-    key:         'content',
-    label:       'Page Content',
+    key: 'content',
+    label: 'Page Content',
     description: 'Banner, page heading, opening quote, description paragraphs, and "Why Choose IPS" items',
-    icon:        FileText,
-    color:       '#F59E0B',
+    icon: FileText,
+    color: '#F59E0B',
   },
   {
-    key:         'sidebar',
-    label:       'Sidebar Videos',
+    key: 'sidebar',
+    label: 'Sidebar Videos',
     description: 'YouTube embed videos shown in the right sidebar of the About page',
-    icon:        Sidebar,
-    color:       '#6366F1',
+    icon: Sidebar,
+    color: '#6366F1',
   },
 ];
 
 export default function AboutPageSectionsPage() {
-  const [status,  setStatus]  = useState({});
+  const [status, setStatus] = useState({});
   const [loading, setLoading] = useState(true);
   const [seeding, setSeeding] = useState(false);
 
   async function fetchStatus() {
     setLoading(true);
     try {
-      const res  = await fetch('/api/about-content', { credentials: 'include' });
+      const res = await fetch('/api/about-content', { credentials: 'include' });
       const data = await res.json();
       if (data.success) {
         const map = {};
@@ -57,21 +48,21 @@ export default function AboutPageSectionsPage() {
     }
   }
 
-  useEffect(() => { fetchStatus(); }, []);
+  useEffect(() => {
+    fetchStatus();
+  }, []);
 
   async function handleSeed(force = false) {
     if (
       force &&
-      !window.confirm(
-        'This will OVERWRITE all About page sections with the original static defaults. Are you sure?'
-      )
+      !window.confirm('This will OVERWRITE all About page sections with the original static defaults. Are you sure?')
     )
       return;
 
     setSeeding(true);
     try {
-      const res  = await fetch(`/api/about-content/seed${force ? '?force=true' : ''}`, {
-        method:      'POST',
+      const res = await fetch(`/api/about-content/seed${force ? '?force=true' : ''}`, {
+        method: 'POST',
         credentials: 'include',
       });
       const data = await res.json();
@@ -131,16 +122,12 @@ export default function AboutPageSectionsPage() {
               disabled={seeding || loading}
               className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-white bg-[#eb5905] rounded-lg px-3 py-2 hover:bg-[#c94f05] transition disabled:opacity-60 cursor-pointer"
             >
-              {seeding ? (
-                <Loader2 className="w-3.5 h-3.5 animate-spin" />
-              ) : (
-                <RefreshCw className="w-3.5 h-3.5" />
-              )}
+              {seeding ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <RefreshCw className="w-3.5 h-3.5" />}
               Seed Missing
             </button>
           )}
 
-          <button
+          {/* <button
             type="button"
             onClick={() => handleSeed(true)}
             disabled={seeding || loading}
@@ -148,7 +135,7 @@ export default function AboutPageSectionsPage() {
           >
             <RefreshCw className="w-3.5 h-3.5" />
             Reset to Defaults
-          </button>
+          </button> */}
         </div>
       </div>
 
@@ -157,12 +144,10 @@ export default function AboutPageSectionsPage() {
         <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
           <AlertCircle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
           <div>
-            <p className="text-[13px] font-semibold text-amber-800">
-              Some sections are not in the database yet
-            </p>
+            <p className="text-[13px] font-semibold text-amber-800">Some sections are not in the database yet</p>
             <p className="text-[12px] text-amber-700 mt-0.5">
-              Click <strong>Seed Missing</strong> to populate them with the current static content.
-              Safe — won&apos;t overwrite existing data.
+              Click <strong>Seed Missing</strong> to populate them with the current static content. Safe — won&apos;t
+              overwrite existing data.
             </p>
           </div>
         </div>
@@ -176,7 +161,7 @@ export default function AboutPageSectionsPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {SECTIONS.map((section) => {
-            const Icon     = section.icon;
+            const Icon = section.icon;
             const isSeeded = status[section.key] === 'seeded';
             return (
               <Link

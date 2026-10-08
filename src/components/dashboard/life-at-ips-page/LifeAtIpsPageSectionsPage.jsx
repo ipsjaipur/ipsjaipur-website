@@ -4,84 +4,45 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   Image,
-  Trees,
-  Users,
-  Trophy,
-  Gamepad2,
-  ClipboardList,
-  Sidebar,
+  LayoutList,
   Loader2,
   ExternalLink,
   RefreshCw,
   AlertCircle,
   ChevronRight,
-  GraduationCap,
+  Mountain,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-const BASE = '/dashboard/page-content/student-life';
+const BASE = '/dashboard/page-content/life-at-ips';
 
 const SECTIONS = [
   {
     key: 'banner',
     label: 'Banner',
-    description: 'Hero banner title, background image, and image position for the Student Life page.',
+    description: 'Hero banner title, background image, and image position for the Life@IPS page.',
     icon: Image,
     color: '#eb5905',
   },
   {
-    key: 'campus',
-    label: 'Life at Campus',
-    description: 'Campus life image and descriptive paragraphs about life at IPS.',
-    icon: Trees,
+    key: 'activities',
+    label: 'Activity Sections',
+    description:
+      'All 10 activity sections (Zephyr, Seminars, Treks, Sports Week, etc.) — title, description, and slider images for each.',
+    icon: LayoutList,
     color: '#10B981',
-  },
-  {
-    key: 'student-club',
-    label: 'Students Club',
-    description: 'Students council intro text and the list of clubs (MARCOS, HCORE, FINNACLE, etc.).',
-    icon: Users,
-    color: '#6366F1',
-  },
-  {
-    key: 'sports-club',
-    label: 'Sports Club',
-    description: 'Sports club heading, image, and descriptive paragraphs.',
-    icon: Trophy,
-    color: '#F59E0B',
-  },
-  {
-    key: 'indoor-games',
-    label: 'Indoor Games',
-    description: 'Indoor games heading, image, and descriptive paragraphs.',
-    icon: Gamepad2,
-    color: '#0EA5E9',
-  },
-  {
-    key: 'committees',
-    label: 'Committees',
-    description: 'List of student committees (Placement, Seminar, Alumni, Sports, Cultural) with descriptions.',
-    icon: ClipboardList,
-    color: '#EF4444',
-  },
-  {
-    key: 'sidebar',
-    label: 'Sidebar Videos',
-    description: 'YouTube embed videos shown in the right sidebar of the Student Life page.',
-    icon: Sidebar,
-    color: '#8B5CF6',
   },
 ];
 
-export default function StudentLifePageSectionsPage() {
-  const [status, setStatus] = useState({});
+export default function LifeAtIpsPageSectionsPage() {
+  const [status,  setStatus]  = useState({});
   const [loading, setLoading] = useState(true);
   const [seeding, setSeeding] = useState(false);
 
   async function fetchStatus() {
     setLoading(true);
     try {
-      const res = await fetch('/api/student-life-content', { credentials: 'include' });
+      const res  = await fetch('/api/life-at-ips-content', { credentials: 'include' });
       const data = await res.json();
       if (data.success) {
         const map = {};
@@ -97,23 +58,21 @@ export default function StudentLifePageSectionsPage() {
     }
   }
 
-  useEffect(() => {
-    fetchStatus();
-  }, []);
+  useEffect(() => { fetchStatus(); }, []);
 
   async function handleSeed(force = false) {
     if (
       force &&
       !window.confirm(
-        'This will OVERWRITE all Student Life page sections with the original static defaults. Are you sure?',
+        'This will OVERWRITE all Life@IPS page sections with the original static defaults. Are you sure?',
       )
     )
       return;
 
     setSeeding(true);
     try {
-      const res = await fetch(`/api/student-life-content/seed${force ? '?force=true' : ''}`, {
-        method: 'POST',
+      const res  = await fetch(`/api/life-at-ips-content/seed${force ? '?force=true' : ''}`, {
+        method:      'POST',
         credentials: 'include',
       });
       const data = await res.json();
@@ -140,24 +99,24 @@ export default function StudentLifePageSectionsPage() {
           Page Content
         </Link>
         <ChevronRight className="w-3.5 h-3.5" />
-        <span className="text-[#222] font-medium">Student Life Page</span>
+        <span className="text-[#222] font-medium">Life at IPS Page</span>
       </div>
 
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-[#eb5905]/10 rounded-xl flex items-center justify-center">
-            <GraduationCap className="w-5 h-5 text-[#eb5905]" />
+            <Mountain className="w-5 h-5 text-[#eb5905]" />
           </div>
           <div>
-            <h1 className="text-[20px] font-bold text-[#222]">Student Life Page</h1>
+            <h1 className="text-[20px] font-bold text-[#222]">Life at IPS Page</h1>
             <p className="text-[12px] text-[#77838f]">Edit each section individually. Changes save per section.</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2 flex-wrap">
           <a
-            href="/student-life"
+            href="/life-at-ips"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#4a5568] border border-[#e2e8f0] rounded-lg px-3 py-2 hover:bg-[#f4f6f9] transition"
@@ -177,6 +136,18 @@ export default function StudentLifePageSectionsPage() {
               Seed Missing
             </button>
           )}
+
+          {!anyEmpty && !loading && (
+            <button
+              type="button"
+              onClick={() => handleSeed(true)}
+              disabled={seeding}
+              className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#4a5568] border border-[#e2e8f0] rounded-lg px-3 py-2 hover:bg-[#f4f6f9] transition disabled:opacity-60 cursor-pointer"
+            >
+              {seeding ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <RefreshCw className="w-3.5 h-3.5" />}
+              Reset to Defaults
+            </button>
+          )}
         </div>
       </div>
 
@@ -187,7 +158,7 @@ export default function StudentLifePageSectionsPage() {
           <div>
             <p className="text-[13px] font-semibold text-amber-800">Some sections are not in the database yet</p>
             <p className="text-[12px] text-amber-700 mt-0.5">
-              Click <strong>Seed Missing</strong> to populate them with the current static content. Safe — won&apos;t
+              Click <strong>Seed Missing</strong> to populate them with the original static content. Safe — won&apos;t
               overwrite existing data.
             </p>
           </div>
@@ -202,7 +173,7 @@ export default function StudentLifePageSectionsPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {SECTIONS.map((section) => {
-            const Icon = section.icon;
+            const Icon     = section.icon;
             const isSeeded = status[section.key] === 'seeded';
             return (
               <Link

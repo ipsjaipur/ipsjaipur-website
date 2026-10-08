@@ -17,6 +17,7 @@ import MbaVsPgdmPageContent from '@/models/MbaVsPgdmPageContent';
 import ContactPageContent from '@/models/ContactPageContent';
 import MissionVisionPageContent from '@/models/MissionVisionPageContent';
 import CareerPageContent from '@/models/CareerPageContent';
+import LifeAtIpsPageContent from '@/models/LifeAtIpsPageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -688,5 +689,39 @@ export async function getUpcomingEvents(limit = 4) {
   } catch (error) {
     console.error('[GET UPCOMING EVENTS ERROR]:', error);
     return [];
+  }
+}
+
+/**
+ * Fetch all Life at IPS page section documents and return as a keyed object.
+ * Falls back to an empty object so the page calls notFound().
+ */
+export async function getLifeAtIpsPageContent() {
+  try {
+    await connectDB();
+    const docs = await LifeAtIpsPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET LIFE AT IPS PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single Life at IPS page section document.
+ * @param {string} section - 'banner' | 'activities'
+ */
+export async function getLifeAtIpsSection(section) {
+  try {
+    await connectDB();
+    const doc = await LifeAtIpsPageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET LIFE AT IPS SECTION ERROR] ${section}:`, error);
+    return null;
   }
 }

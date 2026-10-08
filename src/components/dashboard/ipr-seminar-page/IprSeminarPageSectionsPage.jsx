@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import {
   Settings2,
   ImageIcon,
@@ -13,6 +14,10 @@ import {
   Megaphone,
   ChevronRight,
   ExternalLink,
+  Globe,
+  FileEdit,
+  EyeOff,
+  Loader2,
 } from 'lucide-react';
 
 const BASE = '/dashboard/page-content/ipr-seminar';
@@ -84,7 +89,78 @@ const SECTIONS = [
   },
 ];
 
+const STATUS_CONFIG = {
+  published: {
+    label: 'Published',
+    Icon: Globe,
+    color: '#16a34a',
+    bg: '#f0fdf4',
+    border: '#bbf7d0',
+  },
+  draft: {
+    label: 'Draft',
+    Icon: FileEdit,
+    color: '#d97706',
+    bg: '#fffbeb',
+    border: '#fde68a',
+  },
+  unpublished: {
+    label: 'Unpublished',
+    Icon: EyeOff,
+    color: '#dc2626',
+    bg: '#fef2f2',
+    border: '#fecaca',
+  },
+};
+
+function StatusBadge({ status, loading }) {
+  if (loading) {
+    return (
+      <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#f4f6f9] text-[#77838f]">
+        <Loader2 className="w-3 h-3 animate-spin" />
+        Loading…
+      </span>
+    );
+  }
+
+  const cfg = STATUS_CONFIG[status] ?? STATUS_CONFIG.published;
+  const { Icon, label, color, bg, border } = cfg;
+
+  return (
+    <span
+      className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border"
+      style={{ color, backgroundColor: bg, borderColor: border }}
+    >
+      <Icon className="w-3 h-3" />
+      {label}
+    </span>
+  );
+}
+
 export default function IprSeminarPageSectionsPage() {
+  const [status, setStatus] = useState(null);
+  const [statusLoading, setStatusLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchStatus() {
+      try {
+        const res = await fetch('/api/ipr-seminar-content?section=config', {
+          credentials: 'include',
+        });
+        const json = await res.json();
+        if (json.success && json.data?.status) {
+          setStatus(json.data.status);
+        } else {
+          setStatus('published'); // default — existing docs without the field are live
+        }
+      } catch {
+        setStatus('published');
+      } finally {
+        setStatusLoading(false);
+      }
+    }
+    fetchStatus();
+  }, []);
   return (
     <div className="max-w-[860px] mx-auto">
       {/* Header */}
@@ -94,7 +170,10 @@ export default function IprSeminarPageSectionsPage() {
             <CalendarDays className="w-5 h-5 text-[#eb5905]" />
           </div>
           <div>
-            <h1 className="text-[20px] font-bold text-[#222]">Seminar Page</h1>
+            <div className="flex items-center gap-2 flex-wrap">
+              <h1 className="text-[20px] font-bold text-[#222]">Seminar Page</h1>
+              <StatusBadge status={status} loading={statusLoading} />
+            </div>
             <p className="text-[12px] text-[#77838f]">Select a section to edit</p>
           </div>
         </div>
@@ -111,8 +190,9 @@ export default function IprSeminarPageSectionsPage() {
 
       {/* Info banner */}
       <div className="mt-4 mb-6 bg-[#fffbf5] border border-[#eb5905]/25 rounded-xl px-4 py-3 text-[12px] text-[#77838f]">
-        <strong className="text-[#eb5905]">Tip:</strong> Start with <strong>Config</strong> to choose the theme and
-        upload the brochure PDF — then fill in each section below. Changes take effect on next page load.
+        <strong className="text-[#eb5905]">Tip:</strong> Start with <strong>Config</strong> to set the page status,
+        choose the theme, and upload the brochure PDF — then fill in each section below. Changes take effect on next
+        page load. <strong className="text-[#dc2626]">Draft / Unpublished pages return a 404 to visitors.</strong>
       </div>
 
       <div className="space-y-3">

@@ -24,7 +24,8 @@ export default function Header() {
           setIprStrip({
             isShow: d.topBarIsShow ?? true,
             buttonText: d.topBarButtonText || 'IPR Seminar',
-            buttonLink: d.topBarButtonLink || '/ipr-seminar',
+            // Always derive the link from the slug — never stored separately
+            buttonLink: d.slug ? `/seminar/${d.slug}` : '/seminar/ipr-seminar-2026',
           });
         }
       })

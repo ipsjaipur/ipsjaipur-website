@@ -9,12 +9,18 @@ async function getDataBySlug(slug) {
     await connectDB();
 
     // Validate the slug against the config document first
+    // Also enforce publish status — only 'published' pages are publicly visible.
+    // Missing status (legacy docs) is treated as 'published' via the model default.
     const configDoc = await IprSeminarPageContent.findOne({
       section: 'config',
       slug,
     }).lean();
 
     if (!configDoc) return null;
+
+    // Draft / unpublished → treat as not found for public visitors
+    const status = configDoc.status ?? 'published';
+    if (status !== 'published') return null;
 
     // Merge every section into one flat object
     const docs = await IprSeminarPageContent.find({}).lean();

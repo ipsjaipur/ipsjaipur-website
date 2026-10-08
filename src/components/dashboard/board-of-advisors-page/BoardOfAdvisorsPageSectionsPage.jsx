@@ -145,16 +145,6 @@ export default function BoardOfAdvisorsPageSectionsPage() {
               Seed Missing
             </button>
           )}
-
-          <button
-            type="button"
-            onClick={() => handleSeed(true)}
-            disabled={seeding || loading}
-            className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#ef4444] border border-red-200 rounded-lg px-3 py-2 hover:bg-red-50 transition disabled:opacity-60 cursor-pointer"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-            Reset to Defaults
-          </button>
         </div>
       </div>
 

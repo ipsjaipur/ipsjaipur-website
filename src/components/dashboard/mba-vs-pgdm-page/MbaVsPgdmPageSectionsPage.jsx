@@ -19,37 +19,37 @@ const BASE = '/dashboard/page-content/mba-vs-pgdm';
 
 const SECTIONS = [
   {
-    key:         'banner',
-    label:       'Banner',
+    key: 'banner',
+    label: 'Banner',
     description: 'Hero banner image, page title, and image focal position',
-    icon:        Image,
-    color:       '#eb5905',
+    icon: Image,
+    color: '#eb5905',
   },
   {
-    key:         'content',
-    label:       'Page Content',
+    key: 'content',
+    label: 'Page Content',
     description: 'Main heading, intro text, approval cards (AICTE & RTU), and the IPS Hybrid Solution CTA card',
-    icon:        FileText,
-    color:       '#8B5CF6',
+    icon: FileText,
+    color: '#8B5CF6',
   },
   {
-    key:         'comparison',
-    label:       'Comparison Matrix & Features',
+    key: 'comparison',
+    label: 'Comparison Matrix & Features',
     description: 'Comparison table rows (University MBA vs PGDM vs IPS Hybrid) and the 3 feature cards below',
-    icon:        Table2,
-    color:       '#0EA5E9',
+    icon: Table2,
+    color: '#0EA5E9',
   },
 ];
 
 export default function MbaVsPgdmPageSectionsPage() {
-  const [status,  setStatus]  = useState({});
+  const [status, setStatus] = useState({});
   const [loading, setLoading] = useState(true);
   const [seeding, setSeeding] = useState(false);
 
   async function fetchStatus() {
     setLoading(true);
     try {
-      const res  = await fetch('/api/mba-vs-pgdm-content', { credentials: 'include' });
+      const res = await fetch('/api/mba-vs-pgdm-content', { credentials: 'include' });
       const data = await res.json();
       if (data.success) {
         const map = {};
@@ -65,23 +65,25 @@ export default function MbaVsPgdmPageSectionsPage() {
     }
   }
 
-  useEffect(() => { fetchStatus(); }, []);
+  useEffect(() => {
+    fetchStatus();
+  }, []);
 
   async function handleSeed(force = false) {
     if (
       force &&
       !window.confirm(
-        'This will OVERWRITE all MBA vs PGDM page sections with the original static defaults. Are you sure?'
+        'This will OVERWRITE all MBA vs PGDM page sections with the original static defaults. Are you sure?',
       )
     )
       return;
 
     setSeeding(true);
     try {
-      const res  = await fetch(
-        `/api/mba-vs-pgdm-content/seed${force ? '?force=true' : ''}`,
-        { method: 'POST', credentials: 'include' }
-      );
+      const res = await fetch(`/api/mba-vs-pgdm-content/seed${force ? '?force=true' : ''}`, {
+        method: 'POST',
+        credentials: 'include',
+      });
       const data = await res.json();
       if (data.success) {
         toast.success(force ? 'All sections reset to defaults' : 'Missing sections seeded successfully');
@@ -139,24 +141,10 @@ export default function MbaVsPgdmPageSectionsPage() {
               disabled={seeding || loading}
               className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-white bg-[#eb5905] rounded-lg px-3 py-2 hover:bg-[#c94f05] transition disabled:opacity-60 cursor-pointer"
             >
-              {seeding ? (
-                <Loader2 className="w-3.5 h-3.5 animate-spin" />
-              ) : (
-                <RefreshCw className="w-3.5 h-3.5" />
-              )}
+              {seeding ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <RefreshCw className="w-3.5 h-3.5" />}
               Seed Missing
             </button>
           )}
-
-          <button
-            type="button"
-            onClick={() => handleSeed(true)}
-            disabled={seeding || loading}
-            className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#ef4444] border border-red-200 rounded-lg px-3 py-2 hover:bg-red-50 transition disabled:opacity-60 cursor-pointer"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-            Reset to Defaults
-          </button>
         </div>
       </div>
 
@@ -165,12 +153,10 @@ export default function MbaVsPgdmPageSectionsPage() {
         <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
           <AlertCircle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
           <div>
-            <p className="text-[13px] font-semibold text-amber-800">
-              Some sections are not in the database yet
-            </p>
+            <p className="text-[13px] font-semibold text-amber-800">Some sections are not in the database yet</p>
             <p className="text-[12px] text-amber-700 mt-0.5">
-              Click <strong>Seed Missing</strong> to populate them with the current static content.
-              Safe — won&apos;t overwrite existing data.
+              Click <strong>Seed Missing</strong> to populate them with the current static content. Safe — won&apos;t
+              overwrite existing data.
             </p>
           </div>
         </div>
@@ -184,7 +170,7 @@ export default function MbaVsPgdmPageSectionsPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {SECTIONS.map((section) => {
-            const Icon     = section.icon;
+            const Icon = section.icon;
             const isSeeded = status[section.key] === 'seeded';
             return (
               <Link
@@ -205,9 +191,7 @@ export default function MbaVsPgdmPageSectionsPage() {
                     </p>
                     <span
                       className={`inline-flex items-center text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                        isSeeded
-                          ? 'bg-green-50 text-green-700'
-                          : 'bg-amber-50 text-amber-700'
+                        isSeeded ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700'
                       }`}
                     >
                       {isSeeded ? 'In DB' : 'Not seeded'}

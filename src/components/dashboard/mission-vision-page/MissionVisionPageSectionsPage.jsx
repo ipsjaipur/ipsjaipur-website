@@ -20,44 +20,44 @@ const BASE = '/dashboard/page-content/mission-vision';
 
 const SECTIONS = [
   {
-    key:         'banner',
-    label:       'Banner',
+    key: 'banner',
+    label: 'Banner',
     description: 'Hero banner image, page title, and image focal position',
-    icon:        Image,
-    color:       '#eb5905',
+    icon: Image,
+    color: '#eb5905',
   },
   {
-    key:         'institutional',
-    label:       'Institutional Section',
+    key: 'institutional',
+    label: 'Institutional Section',
     description: 'Heading, opening quote, two body paragraphs, and the right-side image',
-    icon:        BookOpen,
-    color:       '#8B5CF6',
+    icon: BookOpen,
+    color: '#8B5CF6',
   },
   {
-    key:         'vision_mission',
-    label:       'Vision & Mission',
+    key: 'vision_mission',
+    label: 'Vision & Mission',
     description: 'Two cards — Our Vision and Our Mission — with title and description text',
-    icon:        Eye,
-    color:       '#0EA5E9',
+    icon: Eye,
+    color: '#0EA5E9',
   },
   {
-    key:         'core_values',
-    label:       'Core Values',
+    key: 'core_values',
+    label: 'Core Values',
     description: 'Section heading, watermark subtitle, and all four core value cards (title + description)',
-    icon:        Sparkles,
-    color:       '#F59E0B',
+    icon: Sparkles,
+    color: '#F59E0B',
   },
 ];
 
 export default function MissionVisionPageSectionsPage() {
-  const [status,  setStatus]  = useState({});
+  const [status, setStatus] = useState({});
   const [loading, setLoading] = useState(true);
   const [seeding, setSeeding] = useState(false);
 
   async function fetchStatus() {
     setLoading(true);
     try {
-      const res  = await fetch('/api/mission-vision-content', { credentials: 'include' });
+      const res = await fetch('/api/mission-vision-content', { credentials: 'include' });
       const data = await res.json();
       if (data.success) {
         const map = {};
@@ -73,7 +73,9 @@ export default function MissionVisionPageSectionsPage() {
     }
   }
 
-  useEffect(() => { fetchStatus(); }, []);
+  useEffect(() => {
+    fetchStatus();
+  }, []);
 
   async function handleSeed(force = false) {
     if (
@@ -86,10 +88,10 @@ export default function MissionVisionPageSectionsPage() {
 
     setSeeding(true);
     try {
-      const res  = await fetch(
-        `/api/mission-vision-content/seed${force ? '?force=true' : ''}`,
-        { method: 'POST', credentials: 'include' },
-      );
+      const res = await fetch(`/api/mission-vision-content/seed${force ? '?force=true' : ''}`, {
+        method: 'POST',
+        credentials: 'include',
+      });
       const data = await res.json();
       if (data.success) {
         toast.success(force ? 'All sections reset to defaults' : 'Missing sections seeded successfully');
@@ -147,24 +149,10 @@ export default function MissionVisionPageSectionsPage() {
               disabled={seeding || loading}
               className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-white bg-[#eb5905] rounded-lg px-3 py-2 hover:bg-[#c94f05] transition disabled:opacity-60 cursor-pointer"
             >
-              {seeding ? (
-                <Loader2 className="w-3.5 h-3.5 animate-spin" />
-              ) : (
-                <RefreshCw className="w-3.5 h-3.5" />
-              )}
+              {seeding ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <RefreshCw className="w-3.5 h-3.5" />}
               Seed Missing
             </button>
           )}
-
-          <button
-            type="button"
-            onClick={() => handleSeed(true)}
-            disabled={seeding || loading}
-            className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#ef4444] border border-red-200 rounded-lg px-3 py-2 hover:bg-red-50 transition disabled:opacity-60 cursor-pointer"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-            Reset to Defaults
-          </button>
         </div>
       </div>
 
@@ -173,12 +161,10 @@ export default function MissionVisionPageSectionsPage() {
         <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
           <AlertCircle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
           <div>
-            <p className="text-[13px] font-semibold text-amber-800">
-              Some sections are not in the database yet
-            </p>
+            <p className="text-[13px] font-semibold text-amber-800">Some sections are not in the database yet</p>
             <p className="text-[12px] text-amber-700 mt-0.5">
-              Click <strong>Seed Missing</strong> to populate them with the original static content.
-              Safe — won&apos;t overwrite existing data.
+              Click <strong>Seed Missing</strong> to populate them with the original static content. Safe — won&apos;t
+              overwrite existing data.
             </p>
           </div>
         </div>
@@ -192,7 +178,7 @@ export default function MissionVisionPageSectionsPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {SECTIONS.map((section) => {
-            const Icon     = section.icon;
+            const Icon = section.icon;
             const isSeeded = status[section.key] === 'seeded';
             return (
               <Link

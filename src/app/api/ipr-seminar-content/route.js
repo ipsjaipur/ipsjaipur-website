@@ -25,7 +25,12 @@ export async function GET(request) {
         slug: slugParam,
       }).lean();
 
+      // Not found, or status is draft / unpublished → 404 for public callers
       if (!configDoc) {
+        return NextResponse.json({ success: false, data: null }, { status: 404 });
+      }
+      const status = configDoc.status ?? 'published';
+      if (status !== 'published') {
         return NextResponse.json({ success: false, data: null }, { status: 404 });
       }
 

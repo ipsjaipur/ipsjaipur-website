@@ -82,13 +82,26 @@ const IprSeminarPageContentSchema = new mongoose.Schema(
     /** URL slug — e.g. 'ipr-seminar-2026' → page lives at /seminar/ipr-seminar-2026 */
     slug: { type: String, default: 'ipr-seminar-2026' },
 
+    /**
+     * Page publish status.
+     *  'published'   → publicly visible at /seminar/<slug>
+     *  'draft'       → saved in DB but returns 404 for public visitors
+     *  'unpublished' → same as draft; admin intent is "taken down"
+     * Default is 'published' so existing records (which have no status) stay live.
+     */
+    status: {
+      type: String,
+      enum: ['published', 'draft', 'unpublished'],
+      default: 'published',
+    },
+
     /** 'dark' | 'light'  — controls which template is rendered */
     theme: { type: String, enum: ['dark', 'light'], default: 'dark' },
 
     /** Top-bar strip / header button */
     topBarIsShow: { type: Boolean, default: true },
     topBarButtonText: { type: String, default: 'IPR Seminar — Oct 9, 2026' },
-    topBarButtonLink: { type: String, default: '/ipr-seminar' },
+    // topBarButtonLink is intentionally removed — the link is always /seminar/<slug>
 
     /** Brochure PDF for download buttons across the page */
     brochurePdfUrl: { type: String, default: '/images/brochure/IPS_IPR_International_Seminar_Brochure.pdf' },

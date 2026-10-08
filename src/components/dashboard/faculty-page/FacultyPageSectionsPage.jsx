@@ -19,37 +19,37 @@ const BASE = '/dashboard/page-content/faculty';
 
 const SECTIONS = [
   {
-    key:         'banner',
-    label:       'Banner',
+    key: 'banner',
+    label: 'Banner',
     description: 'Hero banner title, background image, and image position',
-    icon:        ImageIcon,
-    color:       '#3B82F6',
+    icon: ImageIcon,
+    color: '#3B82F6',
   },
   {
-    key:         'faculty',
-    label:       'Core & Visiting Faculty',
+    key: 'faculty',
+    label: 'Core & Visiting Faculty',
     description: 'Section title, column labels, and all faculty member rows',
-    icon:        Users,
-    color:       '#eb5905',
+    icon: Users,
+    color: '#eb5905',
   },
   {
-    key:         'mentors',
-    label:       'Corporate Speakers / Mentors',
+    key: 'mentors',
+    label: 'Corporate Speakers / Mentors',
     description: 'Section title, column labels, and all corporate mentor rows',
-    icon:        Briefcase,
-    color:       '#10B981',
+    icon: Briefcase,
+    color: '#10B981',
   },
 ];
 
 export default function FacultyPageSectionsPage() {
-  const [status,  setStatus]  = useState({});
+  const [status, setStatus] = useState({});
   const [loading, setLoading] = useState(true);
   const [seeding, setSeeding] = useState(false);
 
   async function fetchStatus() {
     setLoading(true);
     try {
-      const res  = await fetch('/api/faculty-content', { credentials: 'include' });
+      const res = await fetch('/api/faculty-content', { credentials: 'include' });
       const data = await res.json();
       if (data.success) {
         const map = {};
@@ -65,21 +65,21 @@ export default function FacultyPageSectionsPage() {
     }
   }
 
-  useEffect(() => { fetchStatus(); }, []);
+  useEffect(() => {
+    fetchStatus();
+  }, []);
 
   async function handleSeed(force = false) {
     if (
       force &&
-      !window.confirm(
-        'This will OVERWRITE all Faculty page sections with the original static defaults. Are you sure?',
-      )
+      !window.confirm('This will OVERWRITE all Faculty page sections with the original static defaults. Are you sure?')
     )
       return;
 
     setSeeding(true);
     try {
-      const res  = await fetch(`/api/faculty-content/seed${force ? '?force=true' : ''}`, {
-        method:      'POST',
+      const res = await fetch(`/api/faculty-content/seed${force ? '?force=true' : ''}`, {
+        method: 'POST',
         credentials: 'include',
       });
       const data = await res.json();
@@ -143,16 +143,6 @@ export default function FacultyPageSectionsPage() {
               Seed Missing
             </button>
           )}
-
-          <button
-            type="button"
-            onClick={() => handleSeed(true)}
-            disabled={seeding || loading}
-            className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#ef4444] border border-red-200 rounded-lg px-3 py-2 hover:bg-red-50 transition disabled:opacity-60 cursor-pointer"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-            Reset to Defaults
-          </button>
         </div>
       </div>
 
@@ -178,7 +168,7 @@ export default function FacultyPageSectionsPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {SECTIONS.map((section) => {
-            const Icon     = section.icon;
+            const Icon = section.icon;
             const isSeeded = status[section.key] === 'seeded';
             return (
               <Link

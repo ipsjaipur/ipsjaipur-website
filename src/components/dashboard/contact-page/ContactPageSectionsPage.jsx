@@ -2,46 +2,38 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import {
-  Image,
-  Phone,
-  Loader2,
-  ExternalLink,
-  RefreshCw,
-  AlertCircle,
-  ChevronRight,
-  PhoneCall,
-} from 'lucide-react';
+import { Image, Phone, Loader2, ExternalLink, RefreshCw, AlertCircle, ChevronRight, PhoneCall } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const BASE = '/dashboard/page-content/contact';
 
 const SECTIONS = [
   {
-    key:         'banner',
-    label:       'Banner',
+    key: 'banner',
+    label: 'Banner',
     description: 'Hero banner image, page title, and image focal position',
-    icon:        Image,
-    color:       '#eb5905',
+    icon: Image,
+    color: '#eb5905',
   },
   {
-    key:         'info',
-    label:       'Contact Information',
-    description: 'Card heading, campus addresses, phone, WhatsApp, email, website, social links, and Google Maps embeds',
-    icon:        Phone,
-    color:       '#0EA5E9',
+    key: 'info',
+    label: 'Contact Information',
+    description:
+      'Card heading, campus addresses, phone, WhatsApp, email, website, social links, and Google Maps embeds',
+    icon: Phone,
+    color: '#0EA5E9',
   },
 ];
 
 export default function ContactPageSectionsPage() {
-  const [status,  setStatus]  = useState({});
+  const [status, setStatus] = useState({});
   const [loading, setLoading] = useState(true);
   const [seeding, setSeeding] = useState(false);
 
   async function fetchStatus() {
     setLoading(true);
     try {
-      const res  = await fetch('/api/contact-content', { credentials: 'include' });
+      const res = await fetch('/api/contact-content', { credentials: 'include' });
       const data = await res.json();
       if (data.success) {
         const map = {};
@@ -57,23 +49,23 @@ export default function ContactPageSectionsPage() {
     }
   }
 
-  useEffect(() => { fetchStatus(); }, []);
+  useEffect(() => {
+    fetchStatus();
+  }, []);
 
   async function handleSeed(force = false) {
     if (
       force &&
-      !window.confirm(
-        'This will OVERWRITE all Contact page sections with the original static defaults. Are you sure?'
-      )
+      !window.confirm('This will OVERWRITE all Contact page sections with the original static defaults. Are you sure?')
     )
       return;
 
     setSeeding(true);
     try {
-      const res  = await fetch(
-        `/api/contact-content/seed${force ? '?force=true' : ''}`,
-        { method: 'POST', credentials: 'include' }
-      );
+      const res = await fetch(`/api/contact-content/seed${force ? '?force=true' : ''}`, {
+        method: 'POST',
+        credentials: 'include',
+      });
       const data = await res.json();
       if (data.success) {
         toast.success(force ? 'All sections reset to defaults' : 'Missing sections seeded successfully');
@@ -131,24 +123,10 @@ export default function ContactPageSectionsPage() {
               disabled={seeding || loading}
               className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-white bg-[#eb5905] rounded-lg px-3 py-2 hover:bg-[#c94f05] transition disabled:opacity-60 cursor-pointer"
             >
-              {seeding ? (
-                <Loader2 className="w-3.5 h-3.5 animate-spin" />
-              ) : (
-                <RefreshCw className="w-3.5 h-3.5" />
-              )}
+              {seeding ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <RefreshCw className="w-3.5 h-3.5" />}
               Seed Missing
             </button>
           )}
-
-          <button
-            type="button"
-            onClick={() => handleSeed(true)}
-            disabled={seeding || loading}
-            className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#ef4444] border border-red-200 rounded-lg px-3 py-2 hover:bg-red-50 transition disabled:opacity-60 cursor-pointer"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-            Reset to Defaults
-          </button>
         </div>
       </div>
 
@@ -157,12 +135,10 @@ export default function ContactPageSectionsPage() {
         <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
           <AlertCircle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
           <div>
-            <p className="text-[13px] font-semibold text-amber-800">
-              Some sections are not in the database yet
-            </p>
+            <p className="text-[13px] font-semibold text-amber-800">Some sections are not in the database yet</p>
             <p className="text-[12px] text-amber-700 mt-0.5">
-              Click <strong>Seed Missing</strong> to populate them with the current static content.
-              Safe — won&apos;t overwrite existing data.
+              Click <strong>Seed Missing</strong> to populate them with the current static content. Safe — won&apos;t
+              overwrite existing data.
             </p>
           </div>
         </div>
@@ -176,7 +152,7 @@ export default function ContactPageSectionsPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {SECTIONS.map((section) => {
-            const Icon     = section.icon;
+            const Icon = section.icon;
             const isSeeded = status[section.key] === 'seeded';
             return (
               <Link
