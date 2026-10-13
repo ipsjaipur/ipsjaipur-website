@@ -167,7 +167,7 @@ export default function Header() {
         <div className="bg-[#ffe4cc] lg:rounded-b-[40px] rounded-b-[20px] py-[6px]">
           <div className="mx-auto max-w-[1202px] px-4 flex items-center h-9">
             {/* Left — contact info */}
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between w-full items-center">
               <div className="w-full lg:max-w-[423px] sm:max-w-[300px] max-w-[260px]">
                 <Marquee gradient={false} speed={70} pauseOnHover={true}>
                   <Link
