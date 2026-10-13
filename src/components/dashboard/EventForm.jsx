@@ -105,6 +105,10 @@ function ImageUpload({ value, onChange }) {
 
   const handleFile = async (file) => {
     if (!file) return;
+    if (file.size > 500 * 1024) {
+      toast.error('Image must be under 500 KB');
+      return;
+    }
     setUploading(true);
     const toastId = toast.loading('Uploading image...');
     try {
@@ -161,7 +165,7 @@ function ImageUpload({ value, onChange }) {
           <p className="text-[13px] font-medium text-[#222222]">
             {uploading ? 'Uploading...' : 'Click to upload featured image'}
           </p>
-          <p className="text-[11px] text-[#77838f] mt-1">JPG, PNG, WebP · Max 5MB</p>
+          <p className="text-[11px] text-[#77838f] mt-1">JPG, PNG, WebP · Max 500KB</p>
         </div>
       )}
       <input
@@ -182,11 +186,18 @@ function GalleryUpload({ value = [], onChange }) {
 
   const handleFiles = async (files) => {
     if (!files?.length) return;
+    // Validate size before uploading any file
+    const oversized = Array.from(files).filter((f) => f.size > 500 * 1024);
+    if (oversized.length > 0) {
+      toast.error(`${oversized.length} image(s) exceed 500 KB and were skipped`);
+    }
+    const validFiles = Array.from(files).filter((f) => f.size <= 500 * 1024);
+    if (!validFiles.length) return;
     setUploading(true);
-    const toastId = toast.loading(`Uploading ${files.length} image(s)...`);
+    const toastId = toast.loading(`Uploading ${validFiles.length} image(s)...`);
     try {
       const uploaded = [];
-      for (const file of Array.from(files)) {
+      for (const file of validFiles) {
         const fd = new FormData();
         fd.append('file', file);
         const res = await fetch('/api/upload', { method: 'POST', body: fd });

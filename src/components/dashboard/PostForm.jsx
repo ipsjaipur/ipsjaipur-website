@@ -106,6 +106,10 @@ function ImageUpload({ value, onChange }) {
 
   const handleFile = async (file) => {
     if (!file) return;
+    if (file.size > 500 * 1024) {
+      toast.error('Image must be under 500 KB');
+      return;
+    }
     setUploading(true);
     const toastId = toast.loading('Uploading image...');
     try {
@@ -162,7 +166,7 @@ function ImageUpload({ value, onChange }) {
           <p className="text-[13px] font-medium text-[#222222]">
             {uploading ? 'Uploading...' : 'Click to upload featured image'}
           </p>
-          <p className="text-[11px] text-[#77838f] mt-1">JPG, PNG, WebP · Max 5MB</p>
+          <p className="text-[11px] text-[#77838f] mt-1">JPG, PNG, WebP · Max 500KB</p>
         </div>
       )}
       <input

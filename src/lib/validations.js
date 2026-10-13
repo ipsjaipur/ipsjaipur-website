@@ -111,7 +111,7 @@ export const seoUpdateSchema = seoSchema.partial().extend({
 // ─── Image Upload Validation ───────────────────────────────────────────────────
 
 const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_IMAGE_SIZE = 500 * 1024; // 500KB
 
 export function validateImageFile(file) {
   const errors = [];
@@ -126,7 +126,7 @@ export function validateImageFile(file) {
   }
 
   if (file.size > MAX_IMAGE_SIZE) {
-    errors.push('Image size cannot exceed 5MB');
+    errors.push('Image size cannot exceed 500KB');
   }
 
   return {

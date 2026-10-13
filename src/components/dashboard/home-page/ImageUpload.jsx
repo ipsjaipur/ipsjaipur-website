@@ -49,8 +49,8 @@ export default function ImageUpload({
       toast.error('Only WebP, PNG, JPG, JPEG images are allowed');
       return;
     }
-    if (file.size > 10 * 1024 * 1024) {
-      toast.error('Image must be under 10 MB');
+    if (file.size > 500 * 1024) {
+      toast.error('Image must be under 500 KB');
       return;
     }
 
@@ -157,7 +157,7 @@ export default function ImageUpload({
                 </div>
                 <p className="text-[12px] font-medium text-[#4a5568] text-center px-2">Click or drag & drop</p>
                 {aspectHint && <p className="text-[10px] text-[#77838f] text-center px-2">{aspectHint}</p>}
-                <p className="text-[10px] text-[#77838f]">WebP, PNG, JPG · max 10 MB</p>
+                <p className="text-[10px] text-[#77838f]">WebP, PNG, JPG · max 500 KB</p>
               </>
             )}
           </div>

@@ -26,8 +26,8 @@ function InlineImageRow({ src, index, onUpdate, onRemove }) {
       toast.error('Only WebP, PNG, JPG images are allowed');
       return;
     }
-    if (file.size > 10 * 1024 * 1024) {
-      toast.error('Image must be under 10 MB');
+    if (file.size > 500 * 1024) {
+      toast.error('Image must be under 500 KB');
       return;
     }
     setUploading(true);

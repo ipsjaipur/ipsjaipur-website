@@ -142,6 +142,12 @@ export default function RichTextEditor({ value = '', onChange, placeholder = 'St
     const file = e.target.files?.[0];
     if (!file || !editor) return;
 
+    if (file.size > 500 * 1024) {
+      toast.error('Image must be under 500 KB');
+      e.target.value = '';
+      return;
+    }
+
     const toastId = toast.loading('Uploading image...');
     try {
       const formData = new FormData();
