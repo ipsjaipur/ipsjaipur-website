@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare, PhoneCall, Target, Rocket, CalendarDays, Mountain } from 'lucide-react';
+import { Layers, Home, BookOpen, GraduationCap, ChevronRight, Sparkles, Info, UserCheck, TrendingUp, Monitor, Users, HeartHandshake, Building2, GitCompare, PhoneCall, Target, Rocket, CalendarDays, Mountain, Landmark } from 'lucide-react';
 
 const PAGES = [
   {
@@ -129,6 +129,14 @@ const PAGES = [
     icon: Rocket,
     color: '#eb5905',
     sections: ['Banner', 'Introduction', 'Requirements', 'Perks / Why Join', 'Current Openings', 'Contact / Apply'],
+  },
+  {
+    label: 'Education Loan Page',
+    description: 'Edit the Education Loan page — banner, Education Loan Facilities heading with image, intro paragraphs, loan assistance (key features, eligibility, documents), and sidebar videos.',
+    href: '/dashboard/page-content/education-loan',
+    icon: Landmark,
+    color: '#10B981',
+    sections: ['Banner', 'Page Content', 'Loan Assistance', 'Sidebar Videos'],
   },
   {
     label: 'Seminar Page',

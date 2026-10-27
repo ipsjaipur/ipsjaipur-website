@@ -18,6 +18,7 @@ import ContactPageContent from '@/models/ContactPageContent';
 import MissionVisionPageContent from '@/models/MissionVisionPageContent';
 import CareerPageContent from '@/models/CareerPageContent';
 import LifeAtIpsPageContent from '@/models/LifeAtIpsPageContent';
+import EducationLoanPageContent from '@/models/EducationLoanPageContent';
 
 export async function getNewsByCategory(category, limit = 10) {
   try {
@@ -722,6 +723,43 @@ export async function getLifeAtIpsSection(section) {
     return doc || null;
   } catch (error) {
     console.error(`[GET LIFE AT IPS SECTION ERROR] ${section}:`, error);
+    return null;
+  }
+}
+
+
+// ─── Education Loan Page Content ──────────────────────────────────────────────
+
+/**
+ * Fetch all Education Loan page section documents as { [section]: data }.
+ * Falls back to an empty object so the page uses component-level defaults.
+ */
+export async function getEducationLoanPageContent() {
+  try {
+    await connectDB();
+    const docs = await EducationLoanPageContent.find({}).lean();
+    const map = {};
+    for (const doc of docs) {
+      map[doc.section] = doc;
+    }
+    return map;
+  } catch (error) {
+    console.error('[GET EDUCATION LOAN PAGE CONTENT ERROR]:', error);
+    return {};
+  }
+}
+
+/**
+ * Fetch a single Education Loan page section document.
+ * @param {string} section - 'banner' | 'main' | 'assistance' | 'videos'
+ */
+export async function getEducationLoanSection(section) {
+  try {
+    await connectDB();
+    const doc = await EducationLoanPageContent.findOne({ section }).lean();
+    return doc || null;
+  } catch (error) {
+    console.error(`[GET EDUCATION LOAN SECTION ERROR] ${section}:`, error);
     return null;
   }
 }
