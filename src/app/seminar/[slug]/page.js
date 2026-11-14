@@ -63,9 +63,10 @@ export default async function SeminarSlugPage({ params }) {
   if (!data) notFound();
 
   const theme = data?.theme ?? 'dark';
+  const safeData = JSON.parse(JSON.stringify(data));
 
   if (theme === 'light') {
-    return <IprSeminarPageLight data={data} />;
+    return <IprSeminarPageLight data={safeData} />;
   }
-  return <IprSeminarPageDark data={data} />;
+  return <IprSeminarPageDark data={safeData} />;
 }

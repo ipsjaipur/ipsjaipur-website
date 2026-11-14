@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import {
   Settings2,
   ImageIcon,
@@ -18,6 +19,7 @@ import {
   FileEdit,
   EyeOff,
   Loader2,
+  RefreshCw,
 } from 'lucide-react';
 
 const BASE = '/dashboard/page-content/ipr-seminar';
@@ -140,6 +142,7 @@ function StatusBadge({ status, loading }) {
 export default function IprSeminarPageSectionsPage() {
   const [status, setStatus] = useState(null);
   const [statusLoading, setStatusLoading] = useState(true);
+  const [seeding, setSeeding] = useState(false);
 
   useEffect(() => {
     async function fetchStatus() {
@@ -161,6 +164,30 @@ export default function IprSeminarPageSectionsPage() {
     }
     fetchStatus();
   }, []);
+
+  async function handleSeed() {
+    setSeeding(true);
+    try {
+      const res = await fetch('/api/ipr-seminar-content/seed', {
+        method: 'POST',
+        credentials: 'include',
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success('Zephyr 2026 content loaded — images preserved');
+        // Refresh status badge
+        const res2 = await fetch('/api/ipr-seminar-content?section=config', { credentials: 'include' });
+        const json2 = await res2.json();
+        if (json2.success && json2.data?.status) setStatus(json2.data.status);
+      } else {
+        toast.error(data.message || 'Seed failed');
+      }
+    } catch {
+      toast.error('Request failed');
+    } finally {
+      setSeeding(false);
+    }
+  }
   return (
     <div className="max-w-[860px] mx-auto">
       {/* Header */}
@@ -177,22 +204,33 @@ export default function IprSeminarPageSectionsPage() {
             <p className="text-[12px] text-[#77838f]">Select a section to edit</p>
           </div>
         </div>
-        <a
-          href="/ipr-seminar"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#4a5568] border border-[#e2e8f0] rounded-lg px-3 py-2 hover:bg-[#f4f6f9] transition"
-        >
-          <ExternalLink className="w-3.5 h-3.5" />
-          View Live Page
-        </a>
+        <div className="flex items-center gap-2 flex-wrap">
+          <a
+            href="/seminar/zephyr-2026"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#4a5568] border border-[#e2e8f0] rounded-lg px-3 py-2 hover:bg-[#f4f6f9] transition"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            View Live Page
+          </a>
+          <button
+            type="button"
+            onClick={() => handleSeed()}
+            disabled={seeding}
+            className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-white bg-[#eb5905] rounded-lg px-3 py-2 hover:bg-[#c94f05] transition disabled:opacity-60 cursor-pointer"
+          >
+            {seeding ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <RefreshCw className="w-3.5 h-3.5" />}
+            Load Zephyr 2026 Content
+          </button>
+        </div>
       </div>
 
       {/* Info banner */}
       <div className="mt-4 mb-6 bg-[#fffbf5] border border-[#eb5905]/25 rounded-xl px-4 py-3 text-[12px] text-[#77838f]">
-        <strong className="text-[#eb5905]">Tip:</strong> Start with <strong>Config</strong> to set the page status,
-        choose the theme, and upload the brochure PDF — then fill in each section below. Changes take effect on next
-        page load. <strong className="text-[#dc2626]">Draft / Unpublished pages return a 404 to visitors.</strong>
+        <strong className="text-[#eb5905]">Tip:</strong> Click <strong>Load Zephyr 2026 Content</strong> to overwrite
+        all text with Zephyr 2026 defaults — your uploaded images are always preserved. Then fine-tune each section
+        below. <strong className="text-[#dc2626]">Draft / Unpublished pages return a 404 to visitors.</strong>
       </div>
 
       <div className="space-y-3">
