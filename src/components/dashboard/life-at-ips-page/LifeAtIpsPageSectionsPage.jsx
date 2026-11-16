@@ -2,16 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import {
-  Image,
-  LayoutList,
-  Loader2,
-  ExternalLink,
-  RefreshCw,
-  AlertCircle,
-  ChevronRight,
-  Mountain,
-} from 'lucide-react';
+import { Image, LayoutList, Loader2, ExternalLink, RefreshCw, AlertCircle, ChevronRight, Mountain } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const BASE = '/dashboard/page-content/life-at-ips';
@@ -35,14 +26,14 @@ const SECTIONS = [
 ];
 
 export default function LifeAtIpsPageSectionsPage() {
-  const [status,  setStatus]  = useState({});
+  const [status, setStatus] = useState({});
   const [loading, setLoading] = useState(true);
   const [seeding, setSeeding] = useState(false);
 
   async function fetchStatus() {
     setLoading(true);
     try {
-      const res  = await fetch('/api/life-at-ips-content', { credentials: 'include' });
+      const res = await fetch('/api/life-at-ips-content', { credentials: 'include' });
       const data = await res.json();
       if (data.success) {
         const map = {};
@@ -58,21 +49,21 @@ export default function LifeAtIpsPageSectionsPage() {
     }
   }
 
-  useEffect(() => { fetchStatus(); }, []);
+  useEffect(() => {
+    fetchStatus();
+  }, []);
 
   async function handleSeed(force = false) {
     if (
       force &&
-      !window.confirm(
-        'This will OVERWRITE all Life@IPS page sections with the original static defaults. Are you sure?',
-      )
+      !window.confirm('This will OVERWRITE all Life@IPS page sections with the original static defaults. Are you sure?')
     )
       return;
 
     setSeeding(true);
     try {
-      const res  = await fetch(`/api/life-at-ips-content/seed${force ? '?force=true' : ''}`, {
-        method:      'POST',
+      const res = await fetch(`/api/life-at-ips-content/seed${force ? '?force=true' : ''}`, {
+        method: 'POST',
         credentials: 'include',
       });
       const data = await res.json();
@@ -136,18 +127,6 @@ export default function LifeAtIpsPageSectionsPage() {
               Seed Missing
             </button>
           )}
-
-          {!anyEmpty && !loading && (
-            <button
-              type="button"
-              onClick={() => handleSeed(true)}
-              disabled={seeding}
-              className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#4a5568] border border-[#e2e8f0] rounded-lg px-3 py-2 hover:bg-[#f4f6f9] transition disabled:opacity-60 cursor-pointer"
-            >
-              {seeding ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <RefreshCw className="w-3.5 h-3.5" />}
-              Reset to Defaults
-            </button>
-          )}
         </div>
       </div>
 
@@ -173,7 +152,7 @@ export default function LifeAtIpsPageSectionsPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {SECTIONS.map((section) => {
-            const Icon     = section.icon;
+            const Icon = section.icon;
             const isSeeded = status[section.key] === 'seeded';
             return (
               <Link

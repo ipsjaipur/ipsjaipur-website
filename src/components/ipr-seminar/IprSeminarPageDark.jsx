@@ -289,14 +289,14 @@ export default function IprSeminarPageDark({ data = {} }) {
                 <p className="text-[#f5c518] font-montserrat font-semibold text-sm sm:text-base tracking-[0.2em] uppercase mb-3">
                   {heroSuperText}
                 </p>
-                <h1 className="text-white font-rubik font-black text-[38px] sm:text-[52px] lg:text-[64px] leading-[0.95] tracking-tight mb-4">
+                <h1 className="text-white font-rubik font-black text-[38px] sm:text-[52px] lg:text-[54px] leading-[1] tracking-tight mb-4">
                   {heroTitleLine1}
                   <br />
                   {heroTitleLine2} <span className="text-[#f5c518]">{heroTitleHighlight}</span>
                 </h1>
                 <div className="flex items-center gap-3 mt-5 mb-2">
                   <div className="h-[2px] w-12 bg-gradient-to-r from-[#f5c518] to-transparent rounded-full" />
-                  <p className="text-white/60 font-montserrat font-bold sm:text-xs text-[10px] uppercase tracking-[0.25em]">
+                  <p className="text-white/60 font-montserrat font-bold text-[10px] uppercase tracking-[0.25em]">
                     {heroSubtitle}
                   </p>
                 </div>

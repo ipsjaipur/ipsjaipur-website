@@ -143,18 +143,6 @@ export default function EducationLoanPageSectionsPage() {
               Seed Missing
             </button>
           )}
-
-          {!anyEmpty && !loading && (
-            <button
-              type="button"
-              onClick={() => handleSeed(true)}
-              disabled={seeding}
-              className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#4a5568] border border-[#e2e8f0] rounded-lg px-3 py-2 hover:bg-[#f4f6f9] transition disabled:opacity-60 cursor-pointer"
-            >
-              {seeding ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <RefreshCw className="w-3.5 h-3.5" />}
-              Reset to Defaults
-            </button>
-          )}
         </div>
       </div>
 
