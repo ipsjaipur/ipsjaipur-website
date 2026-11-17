@@ -158,9 +158,29 @@ function FaqList({ faqs = [] }) {
 }
 
 // ─── Main dark-theme component ────────────────────────────────────────────────
+// ─── Zephyr 2026 — 3 static PDF download buttons ─────────────────────────────
+const ZEPHYR_PDFS = [
+  {
+    label: 'Guest Invitation',
+    file: '/guest-invitation-2026.pdf',
+    download: 'Guest-Invitation-Zephyr-2026.pdf',
+  },
+  {
+    label: 'Institutional Invitation',
+    file: '/institutional-invitation.pdf',
+    download: 'Institutional-Invitation-Zephyr-2026.pdf',
+  },
+  {
+    label: 'Sponsorship Proposal',
+    file: '/Sponsorship-Proposal Zephyr_2026.pdf',
+    download: 'Sponsorship-Proposal-Zephyr-2026.pdf',
+  },
+];
+
 export default function IprSeminarPageDark({ data = {} }) {
   const {
     // config
+    slug = '',
     brochurePdfUrl = '/images/brochure/IPS_IPR_International_Seminar_Brochure.pdf',
     brochureDownloadName = 'IPS-IPR-Seminar-Brochure.pdf',
 
@@ -246,6 +266,17 @@ export default function IprSeminarPageDark({ data = {} }) {
     document.body.removeChild(link);
   };
 
+  const handleDownloadFile = (file, download) => {
+    const link = document.createElement('a');
+    link.href = file;
+    link.download = download;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const isZephyr = slug === 'zephyr-2026';
+
   return (
     <div className="bg-white font-rubik">
       {/* ══ HERO ══════════════════════════════════════════════════════════════ */}
@@ -286,7 +317,7 @@ export default function IprSeminarPageDark({ data = {} }) {
               </motion.div>
 
               <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={1}>
-                <p className="text-[#f5c518] font-montserrat font-semibold text-sm sm:text-base tracking-[0.2em] uppercase mb-3">
+                <p className="text-[#f5c518] font-montserrat font-semibold text-sm sm:text-[18px] tracking-[0.2em] uppercase mb-3">
                   {heroSuperText}
                 </p>
                 <h1 className="text-white font-rubik font-black text-[38px] sm:text-[52px] lg:text-[54px] leading-[1] tracking-tight mb-4">
@@ -351,13 +382,26 @@ export default function IprSeminarPageDark({ data = {} }) {
                   <ClipboardList size={16} />
                   {heroRegisterButtonText}
                 </a>
-                <button
-                  onClick={handleDownload}
-                  className="cursor-pointer inline-flex items-center gap-2 sm:w-auto w-full justify-center px-7 py-3.5 bg-white/8 hover:bg-white/15 text-white font-bold text-sm rounded-xl border border-white/18 hover:border-[#f5c518]/40 transition-all duration-200 hover:-translate-y-0.5"
-                >
-                  <Download size={16} />
-                  {heroBrochureButtonText}
-                </button>
+                {isZephyr ? (
+                  ZEPHYR_PDFS.map((pdf) => (
+                    <button
+                      key={pdf.download}
+                      onClick={() => handleDownloadFile(pdf.file, pdf.download)}
+                      className="cursor-pointer inline-flex items-center gap-2 sm:w-auto w-full justify-center px-5 py-3.5 bg-white/8 hover:bg-white/15 text-white font-bold text-sm rounded-xl border border-white/18 hover:border-[#f5c518]/40 transition-all duration-200 hover:-translate-y-0.5"
+                    >
+                      <Download size={15} />
+                      {pdf.label}
+                    </button>
+                  ))
+                ) : (
+                  <button
+                    onClick={handleDownload}
+                    className="cursor-pointer inline-flex items-center gap-2 sm:w-auto w-full justify-center px-7 py-3.5 bg-white/8 hover:bg-white/15 text-white font-bold text-sm rounded-xl border border-white/18 hover:border-[#f5c518]/40 transition-all duration-200 hover:-translate-y-0.5"
+                  >
+                    <Download size={16} />
+                    {heroBrochureButtonText}
+                  </button>
+                )}
               </motion.div>
 
               {/* Trust badges */}
@@ -388,18 +432,18 @@ export default function IprSeminarPageDark({ data = {} }) {
               initial="hidden"
               animate="visible"
             >
-              <div className="relative w-full max-w-[380px] sm:max-w-[420px] lg:max-w-[460px]">
+              <div className="relative w-full max-w-[380px] sm:max-w-[420px] lg:max-w-[480px]">
                 <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-[#f5c518]/10 via-[#eb5905]/5 to-transparent blur-xl pointer-events-none" />
                 <div
                   className="relative w-full rounded-[1.75rem] overflow-hidden border border-white/10 shadow-2xl shadow-black/40"
-                  style={{ aspectRatio: '460/640' }}
+                  style={{ aspectRatio: '504/640' }}
                 >
                   <Image
                     src={heroPosterImageUrl}
                     alt="International IPR Seminar 2026 — IPS Business School Jaipur"
                     fill
                     priority
-                    sizes="(max-width: 640px) 85vw, (max-width: 1024px) 420px, 460px"
+                    sizes="(max-width: 640px) 85vw, (max-width: 1024px) 420px, 480px"
                     quality={90}
                     className="object-cover object-center"
                   />
@@ -518,7 +562,7 @@ export default function IprSeminarPageDark({ data = {} }) {
                   quality={90}
                   className="object-cover object-center"
                 />
-                <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-6 py-5">
+                {/* <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-6 py-5">
                   <div className="flex items-center gap-2">
                     <CalendarDays size={15} className="text-[#f5c518]" />
                     <div>
@@ -528,9 +572,9 @@ export default function IprSeminarPageDark({ data = {} }) {
                       </p>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
-              <motion.div
+              {/* <motion.div
                 className="absolute -top-2 -left-2 sm:-left-6 flex items-center gap-2.5 bg-[#f5c518] rounded-2xl shadow-xl shadow-[#f5c518]/25 px-4 py-2.5"
                 initial={{ opacity: 0, y: -10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -542,24 +586,27 @@ export default function IprSeminarPageDark({ data = {} }) {
                   <p className="text-[#0d1b2e] font-black text-xs leading-tight">AICTE Approved</p>
                   <p className="text-[#0d1b2e]/55 text-[10px]">RTU Affiliated</p>
                 </div>
-              </motion.div>
-              <motion.div
-                className="absolute -bottom-2 -right-2 sm:-right-6 flex items-center gap-2.5 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-2.5"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.65, duration: 0.45 }}
-              >
-                <div className="w-8 h-8 rounded-full bg-[#0d1b2e] flex items-center justify-center shrink-0">
-                  <Users size={14} className="text-[#f5c518]" />
-                </div>
-                <div>
-                  <p className="text-[#0d1b2e] font-black text-sm leading-tight">
-                    {aboutAttendeesCount} {aboutAttendeesLabel}
-                  </p>
-                  <p className="text-[#77838f] text-[11px]">{aboutAttendeesSubLabel}</p>
-                </div>
-              </motion.div>
+              </motion.div> */}
+              {(aboutAttendeesCount && aboutAttendeesLabel && (
+                <motion.div
+                  className="absolute -bottom-2 -right-2 sm:-right-6 flex items-center gap-2.5 bg-white rounded-2xl shadow-xl border border-gray-100 px-4 py-2.5"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.65, duration: 0.45 }}
+                >
+                  <div className="w-8 h-8 rounded-full bg-[#0d1b2e] flex items-center justify-center shrink-0">
+                    <Users size={14} className="text-[#f5c518]" />
+                  </div>
+                  <div>
+                    <p className="text-[#0d1b2e] font-black text-sm leading-tight">
+                      {aboutAttendeesCount} {aboutAttendeesLabel}
+                    </p>
+                    <p className="text-[#77838f] text-[11px]">{aboutAttendeesSubLabel}</p>
+                  </div>
+                </motion.div>
+              )) ||
+                ''}
             </motion.div>
           </div>
         </div>
@@ -851,13 +898,15 @@ export default function IprSeminarPageDark({ data = {} }) {
                 <ClipboardList size={18} />
                 {ctaRegisterButtonText}
               </a>
-              <button
-                onClick={handleDownload}
-                className="cursor-pointer inline-flex items-center gap-2.5 px-9 py-4 bg-white/8 hover:bg-white/14 text-white font-bold text-base rounded-2xl border border-white/15 hover:border-[#f5c518]/40 transition-all duration-200 hover:-translate-y-1 w-full sm:w-auto justify-center"
-              >
-                <Download size={18} />
-                {ctaBrochureButtonText}
-              </button>
+              {ctaBrochureButtonText && (
+                <button
+                  onClick={handleDownload}
+                  className="cursor-pointer inline-flex items-center gap-2.5 px-9 py-4 bg-white/8 hover:bg-white/14 text-white font-bold text-base rounded-2xl border border-white/15 hover:border-[#f5c518]/40 transition-all duration-200 hover:-translate-y-1 w-full sm:w-auto justify-center"
+                >
+                  <Download size={18} />
+                  {ctaBrochureButtonText}
+                </button>
+              )}
             </div>
             {ctaAudienceTags?.length > 0 && (
               <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 mt-10">

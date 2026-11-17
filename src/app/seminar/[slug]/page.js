@@ -45,7 +45,7 @@ export async function generateMetadata({ params }) {
     return { title: 'Seminar Not Found | IPS Business School' };
   }
 
-  const title = data.heroTitleLine1;
+  const title = `Rajasthan's Most Awaited Youth Festival`;
   const description = data.heroDescription;
 
   return {
